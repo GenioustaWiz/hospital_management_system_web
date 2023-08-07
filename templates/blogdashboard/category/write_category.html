@@ -1,0 +1,59 @@
+
+{% extends 'blogdashboard/dashboard_base.html' %}
+
+{% load static %}
+
+{% block title %} write new Category {% endblock title %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/blogdashboard/author/write_new_sub_cate.css' %}"> 
+
+<style>
+  
+</style>
+{% endblock css %}
+{% block content %}
+<section class="item2 section write-A-page">
+  <div class="body" >
+        <h1>Create Category</h1>
+        <form method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              <p class="form-group">
+                <label for="categoryname">Name:</label>
+                {{form.name}}
+              </p>
+              <p class="form-group">
+                  <label for="categoryImage">Image:</label>
+                  {{form.image}}
+              </p>
+              <p class="form-group approve">
+                <label for="id_approved">Approved:</label>
+                {{form.approved}}
+              </p>
+              <button id="category-save" type="submit" class="btn btn-primary">Create</button>
+        </form>
+  </div>
+</section><!-- End Of Write category--> 
+{% endblock %}
+
+{%block js%}
+<script>
+  //////-------------------- POPUP WINDOW --------------///
+  //this on is for closing the category edit POPUP WINDOW///
+  window.addEventListener('DOMContentLoaded', function() {
+    var saveButtonC = document.getElementById('category-save');
+    
+    saveButtonC.addEventListener('click', function(e) {
+      //e.preventDefault();
+      // Perform save operation here
+  
+      // Wait for 2 seconds (2000 milliseconds) before closing the popup window
+      setTimeout(function() {
+        // This code will be executed after the 2000 milliseconds delay
+        window.close();
+      }, 200); // Adjust the delay time as needed (in milliseconds)
+    });
+  });
+  //---------------END ------------///
+
+</script>
+{%endblock js%}

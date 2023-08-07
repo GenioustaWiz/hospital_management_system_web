@@ -1,0 +1,236 @@
+
+{% extends 'blogdashboard/dashboard_base.html' %}
+{% comment %} displays blog detail and category lists {% endcomment %}
+{% comment %}
+    found in blog_detail in article_v.py
+{% endcomment %}
+
+{% load static %}
+
+{% block title %} Blog Detail {% endblock title %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/blog/blog_detail.css' %}">
+<link rel="stylesheet" href="{% static 'css/blog/blog_list.css' %}">
+<link rel="stylesheet" href="{% static 'css/blog/blog.css' %}">
+<link rel="stylesheet" href="{% static 'css/blogdashboard/common.css' %}">
+<style>
+
+  .post-list{
+    display: block;
+  }
+  .p-d-body {
+    margin-bottom: 5px;
+  }
+  .time{
+    display:flex;
+    justify-content: flex-end;
+    margin-bottom: 40px ;
+  }
+  .time .btn{
+    margin-right: 20px;
+    border: 1px solid;
+    background-color: white;
+  }
+  .rejected{
+    color: red;
+    font-weight: 600;
+  }
+  .post-header li .confirm-btn{
+    background-color: white;
+    border: 2px red solid;
+    border-radius: 9px;
+    padding: 0 10px;
+  }
+</style>
+{% endblock css %}
+
+{% block content %}
+<section class="p-detail post-list">
+
+    <div class="p-l-main p-d-main item2 container-xxl">
+        <!-- Geting Category that is holding the Subcategory -->
+        <div>
+        <h5 class="p-d-header p-d-info">
+            <a href="{{category.get_absolute_url }}" style="text-decoration: none;">
+                {{ blog.category }}
+            </a> 
+            <a href="{{subcategory.get_absolute_url }}" style="text-decoration: none;">
+                <span id="span-h">></span> 
+                {{ blog.subcategory }}
+            </a>
+            <span id="span-h">></span>
+            {{ blog.title }}
+
+
+        </h5>
+        </div>
+        <div class="p-d-body">
+            <div class="p-d-container">
+                <div class="p-d-banner">
+                    <img src="{{blog.image.url}}" alt="{{ blog.title }}">
+                </div>
+                <div class="p-d-profile">
+                    <img src="{{ blog.author.profile.image.url}}" alt="Profile image">
+                </div>
+            </div>
+            <div class="p-d-info item2"> 
+            <ol class="post-header">
+                <li>Arthur<i>:</i> <span>{{ blog.author.username }}</span> </li>
+                <li>Created on<i>:</i> <span>{{ blog.date_created|date:"F j, Y" }}</span> </li>
+                <li>Status<i>:</i>  {{ blog.status }}</li>
+                <li><i class="fa fa-comments"></i> {{ blog.comments.count  }}</li>
+                <li><i class="fa fa-eye"></i> {{ blog.formatted_views_count }}</li>
+                {% comment %} if rected is True {% endcomment %}
+                {% if blog.rejected %} 
+                    <li class="rejected">REJECTED <i class="bi bi-x-octagon"></i></li>
+                    {% comment %} if approved is True {% endcomment %}
+                    <li>
+                      <a class="confirm-btn " 
+                         data-title="Reasion for Rejecting {{blog.title}}?"
+                         data-id = "msg"
+                         data-msg="{{ blog.rejection_reason }}" 
+                         data-url="{% url 'blog:blog_edit' slug=blog.slug %}" 
+                         data-button="Edit the article"
+                         data-bs-toggle="modal">
+                         Reason for rejecting
+                      </a>
+                  </li>
+                {% elif blog.approved %}
+                    <li class="text-success">APPROVED <i class="bi bi-check2-square"></i></li>
+                    {% comment %} if none of the above is true {% endcomment %}
+                {% else %}
+                    <li class="text-info">NOT VERIFIED</li>
+                    {% comment %} end {% endcomment %}
+                {% endif %}
+                
+            </ol>
+            </div>
+
+            <div class="card-text content">
+                {{ blog.content|safe }}
+            </div>
+            {% comment %} tags {% endcomment %}
+            <div class="tags--"> 
+              {% comment %} <h6>Tags <i class="bi bi-tags-fill"></i>:</h6> {% endcomment %}
+              {% for tag in blog.tags.all %}
+              <div class="tag"><i class="bi bi-tags-fill"></i> <a href="{% url 'blog:tag_blogs' tag.slug %}">{{ tag.name }}</a></div>
+              {% endfor %}
+          </div>
+            {% comment %} end of tags {% endcomment %}
+        </div>{% comment %}End Of Blog Detail{% endcomment %}
+        
+       {% comment %} dropdown this Part of the code depends on Modal.js to function {% endcomment %}
+       <div class="dropdown time">
+        <button class="btn dropdown-toggle" type="button" id="time-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          {% comment %} <i class="fas fa-chevron-down dropdown-btn"></i> {% endcomment %}
+          Article Options<i class="bi bi-box-arrow-up"></i>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="time-dropdown">
+            <li>
+                <a class="dropdown-item confirm-btn" 
+                   data-title="Are you sure you want to edit {{blog.title}}?"
+                   data-id = "edit"
+                   {% comment %} data-message="Once you edit it, original content will be lost."  {% endcomment %}
+                   data-url="{% url 'blog:blog_edit' slug=blog.slug %}" 
+                   data-button="Edit"
+                   data-bs-toggle="modal">
+                   Edit Article
+                </a>
+            </li>
+            {% if not blog.hidden %}
+          <li><hr class="dropdown-divider"></li>
+          <li>
+            <a class="dropdown-item confirm-btn" 
+               data-title="Are you sure you want to Hide {{blog.title}}?"
+               data-id="hide"
+               {% comment %} data-message="Once you hide it will not be available for other."  {% endcomment %}
+               data-url="{% url 'blog:blog_hide' slug=blog.slug %}" 
+               data-button="Hide"
+               data-bs-toggle="modal">
+               Hide Article
+            </a>
+          </li>
+          {% endif%}
+          <li><hr class="dropdown-divider"></li>
+          <li>
+            <a class="dropdown-item confirm-btn" 
+               data-title="Are you sure you want to delete {{blog.title}}?"
+               data-message="Once you delete this article, it cannot be recovered." 
+               data-url="{% url 'blog:blog_delete' slug=blog.slug %}" 
+               data-button="Delete"
+               data-bs-toggle="modal">
+               Delete
+            </a>
+          </li>  
+          
+          {% if request.user.is_superuser or request.user.is_staff %}
+          {% comment %} If BLOG IS APPROVED DISPLAY REJECT {% endcomment %}
+          {% if blog.approved %}
+          <li><hr class="dropdown-divider"></li>
+          <li>
+            <a class="dropdown-item confirm-btn" 
+               data-title="Are you sure you want to Reject {{blog.title}}?"
+               data-message="You are about to reject {{blog.title}}. The Author will be notified ." 
+               data-url="{% url 'blog:blog_reject' slug=blog.slug %}" 
+               data-button="Reject"
+               data-bs-toggle="modal">
+               Reject
+            </a>
+          </li>  
+          {% comment %} END IF {% endcomment %}
+          {% comment %} else if rejected is True {% endcomment %}
+          {% elif blog.rejected %}      
+          <li><hr class="dropdown-divider"></li>
+          <li>
+            <a class="dropdown-item confirm-btn" 
+               data-title="Are you sure you want to Approve {{blog.title}}?"
+               data-message="You are about to approve {{blog.title}}. The Author will be notified ." 
+               data-url="{% url 'blog:blog_approve' slug=blog.slug %}" 
+               data-button="Approve"
+               data-bs-toggle="modal">
+               Approve
+            </a>
+          </li>   
+          {% comment %} end {% endcomment %}
+          {% comment %} if Blog is not rejected or approved display both buttons {% endcomment %}
+          {% else  %}      
+          <li><hr class="dropdown-divider"></li>
+          <li>
+            <a class="dropdown-item confirm-btn" 
+               data-title="Are you sure you want to Approve {{blog.title}}?"
+               data-message="You are about to approve {{blog.title}}. The Author will be notified ." 
+               data-url="{% url 'blog:blog_approve' slug=blog.slug %}" 
+               data-button="Approve"
+               data-bs-toggle="modal">
+               Approve
+            </a>
+          </li>
+          <li><hr class="dropdown-divider"></li>
+          <li>
+            <a class="dropdown-item confirm-btn" 
+               data-title="Are you sure you want to Reject {{blog.title}}?"
+               data-message="You are about to reject {{blog.title}}. The Author will be notified ." 
+               data-url="{% url 'blog:blog_reject' slug=blog.slug %}" 
+               data-button="Reject"
+               data-bs-toggle="modal">
+               Reject
+            </a>
+          </li> 
+          {% comment %} end of Else {% endcomment %}
+          {% endif %} 
+          {% endif %}
+          <li><hr class="dropdown-divider"></li>
+        </ul>
+        
+    </div>
+      {% comment %}end of dropdown {% endcomment %}
+    </div> 
+    
+    
+    </div>{% comment %}End Of Main Body{% endcomment %}
+
+</section>
+{% endblock content %}
+
+{%block js%}
+{%endblock js%}

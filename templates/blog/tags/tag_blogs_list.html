@@ -1,0 +1,77 @@
+
+{% extends 'base.html' %}
+{% comment %} displays blog detail and category lists {% endcomment %}
+{% comment %}
+    found in blog_detail in article_v.py
+{% endcomment %}
+
+{% load static %}
+
+{% block title %} Blog List {% endblock title %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/blog/blog_list.css' %}">
+
+<style>
+    .post-list{
+        display: block;
+      }
+</style>
+
+{% endblock css %}
+
+{% block content %}
+{% comment %} <div>
+    <h1>Blogs tagged with "{{ tag.name }}"</h1>
+
+    {% for blog in blogs %}
+        <h2><a href="{% url 'blog:blog_detail' blog.slug %}">{{ blog.title }}</a></h2>
+        <p>{{ blog.body }}</p>
+        {% for tag in blog.tags.all %}
+            <a href="{% url 'blog:tag_blogs' tag.slug %}">{{ tag.name }}</a>
+        {% endfor %}
+    {% endfor %}
+</div> {% endcomment %}
+
+<section class="post-list">
+
+    {% comment %} BLOGS LIST DISPLAY {% endcomment %}
+    <div class="p-l-main item2 bg-white">
+            <div class="article-heading">Available Articles Tagged with "{{ tag.name }}" </div>
+            {% if blogs %}
+            <div class="itme2 post-wrapper">
+              {% for article in blogs %}
+              <div>
+                  <div class="post">
+                      <img class="thumbnail" src="{{ article.image.url }}">
+                      <div class="post-preview">
+                          <h6 class="post-title ">
+                            <a href="{{ article.get_absolute_url }}">
+                            <b>{{ article.title }}</b>
+                          </a></h6>
+                          <!-- <p class="post-intro"></p> -->
+                          {{ article.content|safe| truncatechars:50 }}
+                          <a href="{{ article.get_absolute_url }}">Read More</a>
+                      </div>
+                      <ol class="post-footer">
+                        <li><i class="fa fa-truck-clock"></i>{{ article.read_time }} min{{ article.read_time|pluralize }} read</li>
+                        <li>{{ article.comments.count  }}<i class="fa fa-comments"></i></li>
+                        <li>{{ article.view_count }}<i class="fa fa-eye"></i></li>
+                      </ol>
+                  </div> 
+        </div>
+    
+              {% endfor %}
+          </div>
+            {% else %}
+                    <div class="centered alert alert-warning"><b>No Articles</b></div>
+                {% endif %}
+          </div>
+    </div> 
+    {% comment %} END OF BLOGS LIST DISPLAY {% endcomment %}
+ 
+</section>
+
+{% endblock content %}
+
+{%block js%}
+{%endblock js%}

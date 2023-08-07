@@ -1,0 +1,317 @@
+
+{% extends 'blogdashboard/dashboard_base.html' %}
+{% comment %} displays Write  {% endcomment %}
+
+{% load static %}
+
+{% block title %} Blog List Page {% endblock title %}
+{% block css %}
+{{form.media}}
+<link rel="stylesheet" href="{% static 'css/blogdashboard/author/write_new_article.css' %}"> 
+{% comment %} <link rel="stylesheet" type="text/css" href="{% static 'filebrowser/css/filebrowser.css' %}"> {% endcomment %}
+<script type="text/javascript" src="{% static 'tinymce/tinymce.min.js' %}"></script>
+<script src="{% static 'js/tinymce/tinymce_upload.js' %}"></script>
+<style>
+  .cate-s, .btns{
+    display: flex;
+  }
+  .btns a{
+    padding: 0 5px;
+    margin: 0 3px;
+  }
+   
+</style>
+{% endblock css %}
+{% block content %}
+ 
+
+<!-- Write New Articles -->
+<section class="item2 section write-A-page">
+  <div class="write-a-c bg--white">
+      <div id="w-a-heading">
+          <h2> Write a New Article</h2>
+      </div>
+      <div id="w-a-body">
+          <form class="w-a-body" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+              <!-- article title & select category -->
+              <div class="at-sc wa-mb">
+                  <div class="form-group">
+                      <label for="articleTitle">Article Title*</label>
+                      {{ form.title }}
+                      <h6 class="text-danger"></h6>
+                      
+                  </div><!--End of Article Title-->
+                  
+                  {% comment %} Category {% endcomment %}
+                  <div class="article-w-category">
+                    <div class="form-group">
+                      <label for="articleCategory">Category*</label>
+                      <h6 class="text-danger"></h6>
+                      <div class="cate-s">
+                          {{ form.category }}
+                          {% comment %} <div class="dropdown bootstrap-select form-control">
+                            
+                            <button type="button" class="btn dropdown-toggle btn-light bs-placeholder" data-toggle="dropdown"
+                                role="combobox" aria-owns="bs-select-1" aria-haspopup="listbox" aria-expanded="false"
+                                data-id="articleCategory" title="Select Category">
+                                <div class="filter-option">
+                                    <div class="filter-option-inner">
+                                        <div class="filter-option-inner-inner">Select Category</div>
+                                    </div>
+                                </div>
+                            </button>
+                            <div class="dropdown-menu ">
+                                <div class="bs-searchbox">
+                                  <input type="search" class="form-control" placeholder="type here to search" autocomplete="off" role="combobox"
+                                        aria-label="Search" aria-controls="bs-select-1" aria-autocomplete="list"></div>
+                                <div class="inner" role="listbox" id="bs-select-1" tabindex="-1">
+                                    <ul class="dropdown-menu inner" role="presentation"></ul>
+                                </div>
+                            </div> 
+                            
+                          </div> {% endcomment %}
+                          <div class="btns"> 
+                            <a class="edit-C" href=""><i class="bi bi-pencil-fill"></i></a>
+                            <a class="create" href="#" onclick="openPopup('{% url 'blog:category_create' %}')">
+                              <i class="bi bi-journal-plus"></i>
+                            </a>
+                            <a class="view" href="#" onclick="openPopup('{% url 'blog:category_list' %}')">
+                              <i class="active bi bi-eye-fill"></i>
+                            </a>
+                          </div>
+                      </div>
+                  </div>
+                </div><!--End of Select Category-->
+
+                  {% comment %} Subcategory {% endcomment %}
+                  <div class="article-w-subcate">
+                    <div class="form-group">
+                        <label for="articleSubcategory">Select Subcategory*</label>
+                        <h6 class="text-danger"></h6>
+                        <div class="cate-s">
+                            <div class="dropdown bootstrap-select form-control">
+                                {{ form.subcategory }}
+                                <button type="button" class="btn dropdown-toggle btn-light bs-placeholder" data-toggle="dropdown"
+                                    role="combobox" aria-owns="bs-select-1-1" aria-haspopup="listbox" aria-expanded="false"
+                                    data-id="articleCategory" title="Select Category">
+                                    <div class="filter-option">
+                                        <div class="filter-option-inner">
+                                            <div class="filter-option-inner-inner">Click to select</div>
+                                        </div>
+                                    </div>
+                                </button>
+                                <div class="dropdown-menu ">
+                                    <div class="bs-searchbox">
+                                      <input type="search" class="form-control" placeholder="type here to search" autocomplete="off" role="combobox"
+                                            aria-label="Search" aria-controls="bs-select-1-1" aria-autocomplete="list"></div>
+                                    <div class="inner" role="listbox" id="bs-select-1-1" tabindex="-1">
+                                        <ul class="dropdown-menu inner" role="presentation"></ul>
+                                    </div>
+                                </div>
+                            
+                            </div>
+                            {% comment %} editing  button {% endcomment %}
+                            <div class="btns"> 
+                              <a class="edit-S" href=""><i class="bi bi-pencil-fill"></i></a>
+                              <a class="create" href="#" onclick="openPopup('{% url 'blog:subcategory_create' %}')">
+                                <i class="bi bi-journal-plus"></i>
+                              </a>
+                              <a class="view" href="#" onclick="openPopup('{% url 'blog:subcategory_list' %}')">
+                                <i class="active bi bi-eye-fill"></i>
+                              </a>
+                            </div>
+                            {% comment %} end of editing buttons {% endcomment %}
+                        </div>
+                    </div>
+                  </div><!--End of Select Category-->
+              </div><!-- end of at-sc -->
+
+              <!-- upload article image & image credit-->
+              <div class="uai-ic wa-mb">
+                  <div class="form-group">
+                      <label for="articleImage">Upload Article Image*</label>
+                        <h6 class="text-danger"></h6>
+                        {{ form.image }}
+                  </div><!--End of Upload Article Image-->
+                    <div class="form-group">
+                      <label for="image_credit">Image Credit</label>
+                          <h6 class="text-danger"></h6>
+                          {{ form.image_credit }}  
+                    </div><!--End of Image Credit-->
+              </div><!-- end of uai-ic -->
+
+              <!--Write Content -->
+              <div class="w-content wa-mb-1fr">
+                  <div class="form-group">
+                      <label for="article-content">Content*</label>
+                      <h6 class="text-danger"></h6>
+                      {{ form.content }}
+                  </div><!--End of CONTENT Editor-->
+              </div><!-- End of Write content  -->
+
+            
+          <!-- tags & status-->
+            <div class="etags-status wa-mb">
+                <div class="form-group">
+                    <label for="tags">Enter Tags*</label>
+                    <h6 class="text-danger"></h6>
+                    <div class="bootstrap-tagsinput">
+                      <div id="tag-container"></div>
+                      {% if action == "update" %}
+                        <input type="text" name="tags" data-role="tagsinput"
+                        class="form-control tag-input" id="tags" value="{{ tags }}">
+                      {% else %}
+                        {{ form.tags }}
+                      {% endif %}
+                      
+                    </div>
+                    <small id="hint_id_tags" class="form-text text-muted">
+                        A comma-separated list of tags.</small>
+                </div><!--End of Enter Tags-->
+
+                <div class="article--status">
+                  {% comment %} NOT NEEDED {% endcomment %}
+                    {% if request.user.is_superuser or request.user.is_staff %}
+                    <div class="form-group">
+                      <ol>
+                        <li>
+                          <h6>Approve Blog: </h6> 
+                          {{ form.approved }}
+                        </li>
+                        <li>
+                          <h6>Reject Blog:</h6> 
+                          {{ form.rejected }}
+                        </li>
+                        {% comment %} <li>
+                          {{ form.rejection_reason }}</li> {% endcomment %}
+                      </ol>
+                      <!-- rejection  Modal -->
+                        <div class="modal fade" style=" width:100%;" id="rejectionModal" tabindex="-1" aria-labelledby="rejectionModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="rejectionModalLabel">Rejection Reason</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  {{ form.rejection_reason }}
+                                </div>
+                                <div class="modal-footer">
+                                  <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
+                                  {% comment %} <button class="btn btn-primary">Save changes</button> {% endcomment %}
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                        {% comment %} end of rejection modal {% endcomment %}
+                    </div>
+                    {% endif %}
+                    {% comment %} END OF NOT NEEDE {% endcomment %}
+                    <div class="article-w-status">
+                      <div class="form-group">
+                            <label for="articleImage">Status*</label>
+                            <h6 class="text-danger"></h6>
+                            <div class="dropdown bootstrap-select form-control">
+                                {{ form.status }}
+                            <button type="button" class="btn dropdown-toggle btn-light" id="showOptionsButton" data-toggle="dropdown"
+                                role="combobox" aria-owns="bs-select-2" aria-haspopup="listbox" aria-expanded="false"
+                                data-id="articleStatus" title="Select Status" data-dropup-auto>
+                                <div class="filter-option">
+                                    <div class="filter-option-inner">
+                                        <div class="filter-option-inner-inner">Select Status</div>
+                                    </div>
+                                </div>
+                            </button>
+                            <div class="dropdown-menu">
+                                <div class="bs-searchbox">
+                                    <input type="search" class="form-control" placeholder="type here to search" autocomplete="off" role="combobox"
+                                        aria-label="Search" aria-controls="bs-select-2" aria-autocomplete="list">
+                                    </div>
+                                <div class="inner" role="listbox" id="bs-select-2" tabindex="-1">
+                                    <ul class="dropdown-menu inner " role="presentation"></ul>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div><!--End of Status-->
+
+            </div><!-- End of TAGS AND STATUS -->
+
+          <!-- RESET FORM, SAVE AS DRAFT, PUBLISH-->
+          <div class="rf-sd-p wa-mb-1fr wa-buttons">
+            <div class="form-group float-right">
+                <button type="reset" class="btn btn-danger">Reset Form</button>
+                {% if action == "update" %}
+                <button class="btn btn-primary" id="save-button" name="action" value="UPDATE" type="submit">Update</button> 
+                {% else %}
+                <button class="btn btn-primary" id="save-button" type="submit">Submit</button>
+                {% endif %}
+            </div><!--End of Buttons-->
+          </div><!-- END OF reset form,save AS DRAFT, Publish -->
+          </form> <!-- end of Class w-a-body-->
+      </div><!-- end of ID w-a-body-->
+  </div><!-- End of Write-articles-->
+</section><!-- End Of Write Articles --> 
+<script src="{% static 'js/blogdashboard/author/write_new_article.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/blogdashboard/author/tags.js' %}" type="text/javascript"></script>
+{% comment %} END {% endcomment %}
+
+{% endblock %}
+{% block js%} 
+<script>{% comment %} REJECTED MODAL JS CODE {% endcomment %}
+  {% comment %} this code opens the reject Reason modal input
+  when the the rjected modal is selected to true {% endcomment %}
+  $(document).ready(function() {
+    // Hide the modal by default
+    $('#rejectionModal').modal('hide');
+  
+    // Show the modal when the checkbox is checked
+    $('#id_rejected').change(function() {
+      if ($(this).is(':checked')) {
+        $('#rejectionModal').modal('show');
+      } else {
+        $('#rejectionModal').modal('hide');
+      }
+    });
+  });
+  {% comment %} THIS ONE LISTENS TO SAVE BUTTON Click
+  CHECKS WHETHER THE REJECT CHECKBOX IT CHECKED IF ITS not
+  IT CLEARS ANY DATA AVAILABLE IN THE MODAL BODY BEFOR SAVING {% endcomment %}
+  const rejectmodalClear = document.querySelector('#save-button');
+  rejectmodalClear.addEventListener('click', () => {
+      var rejectedCheckbox = document.getElementById("id_rejected");
+      if (!rejectedCheckbox.checked) {
+        var modalBody = document.querySelector("#rejectionModal .modal-body");
+        modalBody.innerHTML = "";
+      }
+    });
+  
+  {% comment %} END OF REJECTED MODAL JS CODE {% endcomment %}
+</script>
+
+  <script>
+    
+    {% comment %} This code selects the approved and rejected checkboxes by 
+    their IDs and adds event listeners that listen for changes to their 
+    checked status. When the approved checkbox is checked, 
+    the rejected checkbox is unchecked, and vice versa.  {% endcomment %}
+    const approvedCheckbox = document.querySelector('#id_approved');
+    const rejectedCheckbox = document.querySelector('#id_rejected');
+
+    approvedCheckbox.addEventListener('change', () => {
+      if (approvedCheckbox.checked) {
+        rejectedCheckbox.checked = false;
+      }
+    });
+
+    rejectedCheckbox.addEventListener('change', () => {
+      if (rejectedCheckbox.checked) {
+        approvedCheckbox.checked = false;
+      }
+    });
+
+  </script>
+
+{% endblock js%}

@@ -1,0 +1,198 @@
+
+{% extends 'blogdashboard/dashboard_base.html' %}
+
+{% load static %}
+
+{% block title %} write new Subcategory {% endblock title %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/blogdashboard/author/write_new_article.css' %}"> 
+<link rel="stylesheet" href="{% static 'css/blogdashboard/author/write_new_sub_cate.css' %}"> 
+<style>
+  
+</style>
+{% endblock css %}
+{% block content %}
+<section class="item2 section write-A-page">
+  <div class="body" >
+      <h1>Create Subcategory</h1>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p class="form-group">
+          <label for="categoryname">Name*:</label>
+          {{form.name}}
+        </p>
+        {% comment %} Category {% endcomment %}
+        <div class="article-w-category">
+          <div class="form-group">
+            <label for="articleCategory">Category*:</label>
+            <h6 class="text-danger"></h6>
+            {{ form.category }}
+            <div class="dropdown bootstrap-select form-control">
+              
+              <button type="button" class="btn dropdown-toggle btn-light bs-placeholder" data-toggle="dropdown"
+                  role="combobox" aria-owns="bs-select-1" aria-haspopup="listbox" aria-expanded="false"
+                  data-id="articleCategory" title="Select Category">
+                  <div class="filter-option">
+                      <div class="filter-option-inner">
+                          <div class="filter-option-inner-inner">Select Category</div>
+                      </div>
+                  </div>
+              </button>
+              <div class="dropdown-menu ">
+                  <div class="bs-searchbox">
+                    <input type="search" class="form-control" placeholder="type here to search" autocomplete="off" role="combobox"
+                          aria-label="Search" aria-controls="bs-select-1" aria-autocomplete="list"></div>
+                  <div class="inner" role="listbox" id="bs-select-1" tabindex="-1">
+                      <ul class="dropdown-menu inner" role="presentation"></ul>
+                  </div>
+              </div> 
+              
+            </div>
+            <div class="btns"> 
+              <a class="edit" href=""><i class="bi bi-pencil-fill"></i></a>
+              <a class="create" href="#" onclick="openPopup('{% url 'blog:category_create' %}')">
+                <i class="bi bi-journal-plus"></i>
+              </a>
+              <a class="view" href="#" onclick="openPopup('{% url 'blog:category_list' %}')">
+                <i class="active bi bi-eye-fill"></i>
+              </a>
+            </div>
+          </div>
+        </div><!--End of Select Category-->
+        <p class="form-group approve">
+          <label for="id_approved">Approved:</label>
+          {{form.approved}}
+        </p>
+        <button id="subcategory-save" type="submit" class="btn btn-primary">Create</button>
+      </form>
+  </div>
+</section><!-- End Of Write Articles --> 
+
+{% endblock %}
+
+{% block js%}
+<script>
+    //-----for the category EDIT BUTTON---------------------/////
+    var editLink = document.querySelector('.edit'); 
+    ///--------------------------------///////////////////////////
+    //----This help exchange of data from select to dropdown and
+    //---- from dropdown back to Select options
+    // Initialisation for Article category Select AND sUBcategory category select
+    const statusDivC = document.querySelector(".article-w-category")
+    const showOptionsButtonC = statusDivC.querySelector(".btn"); 
+    const dropdownMenuC = statusDivC.querySelector(".dropdown-menu");
+    const selectElementC = document.getElementById("subcategoryCategory");
+    const selectOptionsC = selectElementC.querySelectorAll("option");
+    const optionsDivC = document.getElementById("bs-select-1");
+    const optionsListC = optionsDivC.querySelector("ul");
+    const searchBoxC = dropdownMenuC.querySelector(".bs-searchbox input");
+    var filterOptionC = statusDivC.querySelector('.filter-option-inner-inner'); //help replace text inthe button
+
+    let isDropdownVisible = false;
+
+    // ------------- -fOR Category found in the subcategory WRITE pAGE----------//////
+    //  populate dropdown menu with select options
+    selectOptionsC.forEach((option) => {
+      if (option.textContent.trim() !== "") {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.setAttribute("href", "#");
+        a.setAttribute("data-option", option.value);
+        a.textContent = option.textContent;
+        li.appendChild(a);
+        optionsListC.appendChild(li);
+      }
+    });
+
+    // search for options as user types in search box
+    searchBoxC.addEventListener("input", () => {
+      const searchText = searchBoxC.value.toLowerCase();
+      optionsListC.querySelectorAll("li a").forEach((option) => {
+        const optionText = option.textContent.toLowerCase();
+        if (optionText.includes(searchText)) {
+          option.style.display = "";
+        } else {
+          option.style.display = "none";
+        }
+      });
+    });
+    
+    // update select element with chosen option
+    optionsListC.addEventListener("click", (event) => {
+      if (event.target.tagName === "A") {
+        const selectedOptionC = selectElementC.querySelector(`option[value="${event.target.dataset.option}"]`);
+        filterOptionC.textContent = '';
+        filterOptionC.textContent = selectedOptionC.textContent;//replaces the text in the button with the selected content from the dropdown
+        selectedOptionC.selected = true;
+        dropdownMenuC.style.display = "none"; 
+        isDropdownVisible = false;
+        //this code proccess the value of the selected option and gets the slug from it
+        //then feed the slug to the url of the category_edit button.
+        let id = selectedOptionC.value;
+        var popupUrl = "";
+        if (id) {
+          console.log(id); // Print slug value in the console
+          //the url is desgined to take us to the Category Edit Page when the edit button is pressed
+          //editLink.href = "/category/" + slug + "/edit/";//this one update the href on the edit button
+          popupUrl = "/category/edit/" + id + "/";
+          console.log(popupUrl);
+        }
+        //----------------Category Edit POPUP WINDOW ------
+        editLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          if (popupUrl){
+          window.open(popupUrl, 'popupWindow', 'width=600,height=400');
+        } else { // go back to subcategory_create Page
+          editLink.href = "{% url 'blog:subcategory_create' %}";
+        }
+        });
+        ///----------------end of edit button------------///
+        showOptionsButtonC.focus();
+        
+        event.preventDefault(); //this helps stop the page from scrolling up when a status is selected
+        
+      }
+    });
+    
+    showOptionsButtonC.addEventListener("click", () => {
+      if (isDropdownVisible) {
+        dropdownMenuC.style.display = "none";
+        isDropdownVisible = false;
+      } else {
+        dropdownMenuC.style.display = "block";
+        //dropdownMenu.style.top = `${showOptionsButton.offsetTop - dropdownMenu.offsetHeight}px`;
+      // dropdownMenu.style.left = `${showOptionsButton.offsetLeft}px`;
+        isDropdownVisible = true;
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!showOptionsButtonC.contains(event.target) && !dropdownMenuC.contains(event.target)) {
+        dropdownMenuC.style.display = "none";
+        isDropdownVisible = false;
+      }
+    });
+    // .............END CODE FOR CATEGORY SELECT IN SUBCATEGORY PAGE............//
+
+</script>
+<script>
+  //////-------------------- POPUP WINDOW --------------///
+  //this on is for closing the category edit POPUP WINDOW///
+  window.addEventListener('DOMContentLoaded', function() {
+    var saveButtonC = document.getElementById('subcategory-save');
+    
+    saveButtonC.addEventListener('click', function(e) {
+      //e.preventDefault();
+      // Perform save operation here
+  
+      // Wait for 2 seconds (2000 milliseconds) before closing the popup window
+      setTimeout(function() {
+        // This code will be executed after the 2000 milliseconds delay
+        window.close();
+      }, 200); // Adjust the delay time as needed (in milliseconds)
+    });
+  });
+  //---------------END ------------///
+
+</script>
+{% endblock js%}

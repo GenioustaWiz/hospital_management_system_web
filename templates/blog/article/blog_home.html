@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+
+{% comment %} displays blog lists and category lists {% endcomment %}
+
+{% load static %}
+
+{% block title %} Blog {% endblock title %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/blog/blog_home.css' %}">
+{% comment %} <link rel="stylesheet" href="{% static 'css/blog/blog_detail.css' %}"> {% endcomment %}
+
+{% endblock css %}
+
+{% block content %}
+<section class="post-list body-container">
+
+    {% comment %} BLOGS LIST DISPLAY {% endcomment %}
+    <div class="p-l-main item2 bg-white" id="main" >
+            {% comment %} <div class="article-heading">Available Articles </div>
+         {% endcomment %}
+            {% if blogs %}
+            <div class="itme2 post-wrapper">
+              {% for article in blogs %}
+              <div>
+                  <div class="post">
+                      <a href="{{ article.get_absolute_url }}">
+                        <img class="thumbnail" src="{{ article.image.url }}">
+                      </a>
+                      <div class="post-preview">
+                          <p class="post-title ">
+                            <a href="{{ article.get_absolute_url }}">
+                            <b>{{ article.title|safe| truncatechars:50 }}</b>
+                          </a></p>
+                      </div>
+
+                      <ol class="post-footer">
+                        <li><i class="bi bi-clock-fill"></i>{{ article.read_time }}<i class="bi bi-book-half"></i></li>
+                        <li><i class="fa fa-comments"></i>{{ article.comment_count  }}</li>
+                        <li><i class="fa fa-eye"></i>{{ article.formatted_views_count }}</li>
+                      </ol>
+                  </div> 
+              </div>
+    
+              {% endfor %}
+          </div>
+            {% else %}
+                    <div class="centered alert alert-warning"><b>No Articles</b></div>
+                {% endif %}
+    </div> 
+    {% comment %} END OF BLOGS LIST DISPLAY {% endcomment %}
+
+    {% comment %} SIDE BAR {% endcomment %}
+    <div class="sidebar" id="side-bar">
+      <!--SEARCH-BAR -->
+      <div class="sidebar-block">
+        <h3 class="sidebar-title">Search</h3>
+        <form action="#" class="search-form">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Type a keyword and hit enter">
+            <button type="submit" class="btn"><span class="icon mai-search"></span></button>
+          </div>
+        </form>
+      </div>
+      <!--END OF SEARCH-BAR-->
+      <!--DISPLAYING LIST OF Categories-->
+      <div class="sidebar-block">
+        <h3 class="sidebar-title">Categories</h3>
+        <ul class="categories">
+          <li><a href="#">Food <span>12</span></a></li>
+          <li><a href="#">Dish <span>22</span></a></li>
+          <li><a href="#">Desserts <span>37</span></a></li>
+          <li><a href="#">Drinks <span>42</span></a></li>
+          <li><a href="#">Ocassion <span>14</span></a></li>
+        </ul>
+      </div>
+      <!--END OF LIST OF CATEGORIES-->
+      <!--FOR DISPLAYING MOST VIEWED BLOGS-->
+      <div class="sidebar-block">
+        <h3 class="sidebar-title">Recent Blog</h3>
+        <div class="blog-item">
+          <a class="post-thumb" href="">
+            <img src="../assets/img/blog/blog_1.jpg" alt="">
+          </a>
+          <div class="content">
+            <h5 class="post-title"><a href="#">Even the all-powerful Pointing has no control</a></h5>
+            <div class="meta">
+              <a href="#"><span class="mai-calendar"></span> July 12, 2018</a>
+              <a href="#"><span class="mai-person"></span> Admin</a>
+              <a href="#"><span class="mai-chatbubbles"></span> 19</a>
+            </div>
+          </div>
+        </div>
+        <div class="blog-item">
+          <a class="post-thumb" href="">
+            <img src="../assets/img/blog/blog_2.jpg" alt="">
+          </a>
+          <div class="content">
+            <h5 class="post-title"><a href="#">Even the all-powerful Pointing has no control</a></h5>
+            <div class="meta">
+              <a href="#"><span class="mai-calendar"></span> July 12, 2018</a>
+              <a href="#"><span class="mai-person"></span> Admin</a>
+              <a href="#"><span class="mai-chatbubbles"></span> 19</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="blog-item">
+          <a class="post-thumb" href="">
+            <img src="../assets/img/blog/blog_3.jpg" alt="">
+          </a>
+          <div class="content">
+              <h5 class="post-title"><a href="#">Even the all-powerful Pointing has no control</a></h5>
+              <div class="meta">
+                <a href="#"><span class="mai-calendar"></span> July 12, 2018</a>
+                <a href="#"><span class="mai-person"></span> Admin</a>
+                <a href="#"><span class="mai-chatbubbles"></span> 19</a>
+              </div>
+          </div>
+        </div>
+      </div>
+      <!--END OF MOST VIEW-->
+      <!--FOR DISPLAYING AVAILABLE TAGS-->
+      <div class="sidebar-block">
+        <h3 class="sidebar-title">Tag Cloud</h3>
+        <div class="tagcloud">
+          <a href="#" class="tag-cloud-link">dish</a>
+          <a href="#" class="tag-cloud-link">menu</a>
+          <a href="#" class="tag-cloud-link">food</a>
+          <a href="#" class="tag-cloud-link">sweet</a>
+          <a href="#" class="tag-cloud-link">tasty</a>
+          <a href="#" class="tag-cloud-link">delicious</a>
+          <a href="#" class="tag-cloud-link">desserts</a>
+          <a href="#" class="tag-cloud-link">drinks</a>
+        </div>
+      </div>
+      <!--END OF TAGS-->
+      
+    </div>
+  {% comment %} END OF SIDE BAR {% endcomment %}
+</section>
+{% endblock content %}
+
+{%block js%}
+{%endblock js%}
