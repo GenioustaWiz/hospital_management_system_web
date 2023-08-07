@@ -1,0 +1,62 @@
+<!--templates/project_detail.html-->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} 
+  <title>Project-detail</title>
+{% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/project_detail.css' %}" type="text/css">
+{% endblock css %}
+
+{% block content %}
+<section class="p-detail">
+    <div class="p-d-side item2">
+        <!-- <h6> 
+          Projects grouped according to Their Categories and subcategories 
+          <i class="fa fa-hand-o-down" aria-hidden="true"></i>
+        </h6> -->
+        <hr>
+        <hr>
+        <hr>
+        <div class="p-d-filter">
+        {% for category in category_list  %}
+        <div class=" dropend" style="position: unset;">
+            <span class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              {{ category.name }}
+            </span>
+            <ul class="dropdown-menu">
+              {% for item in category.our_categories.all %} 
+              <li>
+                <a class="dropdown-item" href="{{ item.get_absolute_url }}">
+                  {{item.name}}
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endfor %}
+        </div>
+    </div>
+    <div class="p-d-main item2 container-xxl">
+      <!-- Geting Category that is holding the Subcategory -->
+        <h5 class="p-d-header"> {{post.subcategory.categories}} <span id="span-h">></span> 
+          <a href="{% url 'subcategory' post.subcategory.slug %}" style="text-decoration: none;">
+            {{post.subcategory.name}}
+          </a> 
+          <span id="span-h">></span> 
+            {{ post.title }}
+        </h5>
+        <div class="p-d-body">
+            <div>
+                <img class="p-d-img" src="{{post.image.url}}" height="200" width="100%">
+            </div>
+            <div>
+                <p class="card-text">{{ post.body.html|safe }}</p>
+            </div>
+        </div>
+    </div> 
+</div>
+</section>
+{% endblock %} 
