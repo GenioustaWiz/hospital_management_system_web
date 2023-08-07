@@ -1,0 +1,43 @@
+/* .item{
+  /* border: 3px solid red; 
+  height: 90vh;
+  padding-bottom: 10px;
+} */
+ .item2{
+  border: 3px solid rgb(224, 77, 77);
+} 
+.item3{
+  border: 3px solid rgb(34, 10, 10);
+} 
+li{
+  list-style: none;
+}
+body{
+  background-color: #e9ebee;
+  --header-height: 50px;
+  --footer-height: 22px;
+  /* top | right | bottom | left */
+  margin: var(--header-height) 0 var(--footer-height) 0;
+  font-family: sans-serif;
+}
+.preload * { /* IDEA: this is to stop the side navbar from
+   appeating and disappearing fast when page is refreshed */
+  transition: none !important;
+}
+main{
+  height: 89vh;
+}
+.s2{
+  height: inherit;
+}
+/* @media (max-width: 1053px){
+  main{
+    height: 0;
+  }
+} */
+@media (max-width: 900px){
+  main{
+    height: 0;
+  }
+  
+}
