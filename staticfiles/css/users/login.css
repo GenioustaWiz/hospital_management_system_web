@@ -1,0 +1,136 @@
+#side-page{
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.27);
+    max-width: 1000px;
+    margin-top: 0;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1em;
+    padding-top: 0;
+    margin-bottom: 0;
+    height: 89vh;
+      }
+    .company-info  ul{
+        list-style: none;
+        padding:0;
+      }
+    
+      .brand{
+        text-align: center;
+      }
+      .brand span {
+        color: rgb(36, 22, 22);
+      }
+      .wrapper {
+
+        border-radius: 20px;
+        box-shadow: 0 0 20px 0 rgba(72,94, 116, 0.7);
+      }
+      .wrapperD {
+
+        border-radius: 20px;
+        box-shadow: 0 0 20px 0 rgba(72,94, 116, 0.7);
+      }
+      .wrapper > *{
+        padding: 1em;
+      }
+      .wrapperD > *{
+        padding: 1em;
+      }
+      .company-info{
+        background: #c6c9cd;
+        color: azure;
+      }
+      .company-info h3, .company-info ul{
+        text-align: center;
+        margin: 0 0 1rem 0;
+        height: 20px;
+      }
+       /*.contact{
+        background: #8d9597;
+      }
+      
+      IDEA:  FORM STYLES */
+      .form-infor{
+          margin-top: 0;
+      }
+       form{
+        padding: 20px;
+      }
+       form #f{
+        text-align: right;
+      }
+       form label{
+        display: block;
+      }
+       form p{
+          padding-top: 10px;
+        margin: 0 ;
+      }
+       form .full{
+        grid-column: 1/ 3
+      }
+       form button,  form input{
+        width: 100%;
+        padding: 1em;
+        border: 1px solid #c9e6ff;
+      }
+       form button{
+        background: #c9e6ff;
+        border: 0;
+        text-transform: uppercase;
+      }
+       form button:hover,  form button:focus{
+        background: #92bde7;
+        color: #fff;
+        outline: 0;
+        transition: background-color 2s  ease-out; 
+      }
+       p input{
+          height: 10px;
+      }
+      .buttons{
+          text-align: center;
+      }
+      .errorlist{
+        list-style: none;
+          color: red;
+          margin-bottom: 0;
+      }
+      .helptext{
+          display: none;
+        }
+      
+      /* IDEA: LARGE SCREENS */
+      @media(min-width: 700px){
+        .wrapper{
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+        }
+        #bg{
+            background-size: 100%;
+  
+      background-position: center center;
+  
+      background-repeat: no-repeat; 
+        }
+        .wrapper .wrapperD> *{
+          padding: 1em;
+        }
+        
+         form p{
+            padding-top: 30px;
+        }
+         form  .signup p{
+            padding-top: 10px;
+        }
+        .company-infor h3, .company-info ul, .band{
+          text-align: center;
+        }
+        .company-info h3, .company-info ul{
+            text-align: center;
+            margin: 80px 0 1rem 0;
+          }
+      }

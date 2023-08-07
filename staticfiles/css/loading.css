@@ -1,0 +1,19 @@
+/* CSS for the loading animation */
+#preloader {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: #39b49a;
+    z-index: 11000;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.preloader {
+    width: 350px;
+}
+
