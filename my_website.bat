@@ -1,0 +1,1 @@
+start E:\Documents\projects\Python_Projects\Django\hospital_management_system_web\venv\Scripts\activate
