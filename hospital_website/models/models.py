@@ -1,5 +1,12 @@
 
-from asyncio.windows_events import NULL
+import asyncio
+
+try:
+    from asyncio.windows_events import NULL
+except ImportError:
+    # Handle non-Windows platform or provide an alternative solution
+    pass
+
 from django.db import models
 from PIL import Image
 from phonenumber_field.modelfields import PhoneNumberField
