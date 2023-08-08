@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     # for changing adm,in app  side..pip install django-admin-soft-dashboard
     # 'admin_soft.apps.AdminSoftDashboardConfig',
     # pip install django-admin-material-dashboard
-    'admin_material.apps.AdminMaterialDashboardConfig',
+    # 'admin_material.apps.AdminMaterialDashboardConfig',
     """"""
     'django.contrib.admin',
     'django.contrib.auth',
