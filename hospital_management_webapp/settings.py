@@ -26,9 +26,9 @@ SECRET_KEY = '^6&3vnde7#2_*19h4-#t768*nz$52t=qqflcaad#@ce($e*p*b'
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['hospitalmanagementsystemweb-production.up.railway.app']
 
-
+CSRF_TRUSTED_ORIGINS = ['https:hospitalmanagementsystemweb-production.up.railway.app']
 # Application definition
 
 INSTALLED_APPS = [
