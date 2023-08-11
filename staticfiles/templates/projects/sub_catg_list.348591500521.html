@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} 
+  <title>Projects</title>
+{% endblock title %}
+
+{% block css %} 
+<link rel="stylesheet" href="{% static 'css/projects.css' %}" type="text/css">
+
+{% endblock css %}
+<!-- 
+    If you make changes to this [Page] also make sure to make same changes to 
+ projects.html [Page] they  carry same UI Components
+-->
+{% block content %}
+ <section class=" testimony"> <!-- s2 -->
+    <div class=" item container-xxl">
+        <h3 style="text-align: center;background-color: #d6dbe3">
+             {{sub_catg.name}} Projects</h3>
+    
+                <div class="itme2 post-wrapper">
+                    {% for post in sub_catg.project_posts.all %}
+                    <div>
+                        <div class="post">
+                            <img class="thumbnail" src="{{post.image.url}}">
+                            <div class="post-preview">
+                                <h6 class="post-title ">{{ post.title }}</h6>
+                                <!-- <p class="post-intro"></p> -->
+                                {{ post.body.html|safe|truncatechars:150 }}
+                                <a href="{{ post.get_absolute_url }}">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+    
+                    {% endfor %}
+                </div>
+      </div>
+    
+    </section>
+{% endblock content %}

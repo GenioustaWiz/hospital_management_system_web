@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} 
+  <title>About</title>
+{% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/description.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/about.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/extra.css' %}" type="text/css">
+{% endblock css %}
+
+{% block content %}
+ <section class=" description"> <!-- s2 -->
+    <div id="description-page"  class=" container-xxl">
+        <div class="item2 des-p text-center container">
+            <div style="background-color: #d6dbe3; border-radius: 20px;">
+             <h1> {{about.heading}} <!--About us--></h1> 
+        </div>
+            <div class="des-p-p">
+            <p>
+              {{about.body}}
+              <!-- CDT was created with the sole purpose of delivering sustainable, pocket friendly and 
+              secure technologies to all people. Clients satisfaction is our main goal, 
+              as we also advice and guide our clients on the best techonlogies for specific products.
+              We provide different range of products from Web, Desktop, Mobile, Automation, and  Security applications. -->
+            </p>
+        </div> 
+        </div>
+        <div class="dev text-center">
+        <h2 >Developers</h2>
+      </div>
+        <div class=" cards">
+          
+          {% for staff in staff%} 
+          <figure class="card red">
+            <figcaption>
+        <!-- staff.user needed in order to get real User data connected to the Profile -->
+               <h2>{{staff.user.first_name}}</h2> 
+              <p>
+                {{staff.desc}}
+                <!-- Some things don't need the thought people give them. -->
+              </p>
+              	
+            </figcaption>
+            <!-- https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample7.jpg -->
+            <img src="{{staff.image.url}}" width="150" height="150"alt="no image"/>	
+            <div class="position">
+              {{staff.title}}
+              <!-- Photographer -->
+            </div>
+          </figure>
+          {% endfor%} 
+
+
+      </div>           
+    </div>
+    
+  </section>
+{% endblock content %}

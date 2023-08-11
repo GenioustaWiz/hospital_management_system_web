@@ -1,0 +1,26 @@
+
+{% load static %}
+{% block title%}
+<title>Profile-Home</title>
+{% endblock title%}
+{% block content %}
+    <main class="main-container">
+        <div class="container">
+            <div class="profile-photo-container">
+                <img src="{{user.profile.image.url}}" alt="User Image" width="100px" srcset="">
+            </div>
+
+
+            <div class="user-content-container">
+                <label class="username">{{ user.username}}</label>
+                <p class="user-title">{{user.email}}.</p>
+                <p class="user-desc">{{user.profile.desc}}</p>
+                <div class="profile-edit-link-container"> 
+                    <a href="{% url 'profile' %}">Edit</a>
+                </div>
+            </div>
+        </div>
+    </main>
+  </body>
+</html>
+{% endblock content%}

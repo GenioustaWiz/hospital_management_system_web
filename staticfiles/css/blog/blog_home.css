@@ -245,7 +245,7 @@ main{
 /* IDEA: LARGE SCREENS */
 @media(min-width: 720px){
   .post-wrapper{
-	  grid-template-columns: repeat(auto-fit, 250px);
+	grid-template-columns: repeat(auto-fit, 250px);
     justify-content: center;
     padding-left: 0px;
     padding-right: 0px;

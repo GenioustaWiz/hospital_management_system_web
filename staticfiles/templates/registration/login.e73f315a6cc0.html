@@ -1,0 +1,63 @@
+<!--users/templates/registration/login.html-->
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>Login</title>
+{% endblock title %}
+
+{% block css %}
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+<link rel="stylesheet" href="{% static 'css/users/login.css' %}" type="text/css">
+<style>
+  /* Always set the map height explicitly to define the size of the div
+     * element that contains the map. */
+  #map {
+    height: 100%;
+  }
+</style>
+{% endblock css %}
+{% block content %}
+<section class="s2 user_info ">
+  <div id="side-page" class="container">
+    <h1 class="brand"><span>Login Form</span></h1>
+    <div class="wrapper animated bounceInLeft " style="margin-top: 70px;">
+      <div class="company-info" id="bg" style="background-image: url('{% static "
+        images/pexels-thisisengineering-3913025.jpg"%}')";>
+        <h3>{{side_info.name}}</h3>
+        <ul>
+          <li>{{side_info.phone_number}}</li>
+          <li>{{side_info.email}}</li>
+          <li>{{side_info.address}}</li>
+        </ul>
+
+      </div>
+      <div>
+        <div class="form-info">
+          <div class="form">
+            <form method="post">
+              <div>
+                {% csrf_token %}
+                {{ form.as_p }}
+              </div>
+              <div id="f">
+                <a href="{% url 'password_reset' %}">Forgot password?
+                </a>
+
+              </div>
+
+              <p class="full">
+                <button type="submit" value="Login">Login</button>
+              </p>
+            </form>
+          </div>
+          <div class="buttons">
+            <a href="{% url 'signup' %}">Signup</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
