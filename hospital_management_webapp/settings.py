@@ -157,7 +157,7 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # This is the directory where the collected static files will be stored.
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # Directory where uploaded media is saved.
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media', 'company_logo') # Directory where uploaded media is saved.
 MEDIA_URL = '/media/' # Public URL at the browser
 
 # Default primary key field type
