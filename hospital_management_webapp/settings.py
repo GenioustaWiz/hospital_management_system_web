@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '^6&3vnde7#2_*19h4-#t768*nz$52t=qqflcaad#@ce($e*p*b'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['hospitalmanagementsystemweb-production.up.railway.app']
 
