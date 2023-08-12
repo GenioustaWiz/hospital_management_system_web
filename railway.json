@@ -4,7 +4,7 @@
       "builder": "NIXPACKS"
     },
     "env": {
-      "DEBUG": "false"  // Make sure DEBUG is set to false in production
+      "DEBUG": "false"  
     },
     "deploy": {
       "startCommand": "python manage.py migrate && python manage.py collectstatic --noinput && gunicorn hospital_management_webapp.wsgi",
