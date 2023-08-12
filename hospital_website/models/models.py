@@ -49,7 +49,7 @@ class HomePage(models.Model):
 #             img.save(self.image.path) # Save it again and override the larger image
 
 class BaseData(models.Model):
-    logo_img = models.ImageField(default='default.png', upload_to='company_Logo',)
+    logo_img = models.ImageField(default='default.png', upload_to='company_Logo',null=True, blank=True)
     logo_name = models.CharField(default='Chipped', max_length=100, null=False)
     footer = models.CharField(default='Update Footer ', max_length=100, null=False)
     #impliment the  Singleton pattern
