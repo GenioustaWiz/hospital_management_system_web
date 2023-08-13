@@ -12,13 +12,16 @@ from ..models.categories_n_babies_m import Category
 # from ..forms.article_f import BlogForm
 # from ..models.comments_m import Comment
 from ..forms.comments_f import CommentForm
+from hospital_website.models.models import BaseData
 
 def blog_home(request): #displays List of blogs and category
     blogs = Blog.objects.filter(status=Blog.PUBLISHED, hidden=False, approved=True)
     categories = Category.objects.filter(approved=True)
+    base = BaseData.objects.first() #for Base.html
     content = {
         'blogs': blogs,
         'categories' : categories,
+        'base': base,
     }
     return render(request, 'blog/article/blog_home.html', content)
 
@@ -43,6 +46,7 @@ def blog_detail(request, slug):
             return redirect(reverse('blog:blog_detail', kwargs={'slug': blog.slug}))
             # return redirect('blog:blog_detail', slug=blog.slug)
     else:
+        base = BaseData.objects.first() #for Base.html
         comment_form = CommentForm()
     context = {
         'blog': blog,
@@ -51,6 +55,7 @@ def blog_detail(request, slug):
         'new_comment': new_comment, 
         'comment_form': comment_form,
         'categories' : categories,
+        'base': base,
     }
     return render(request, 'blog/article/blog_detail.html', context)
 

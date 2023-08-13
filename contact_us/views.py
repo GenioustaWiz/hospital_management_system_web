@@ -9,7 +9,7 @@ from hospital_website.models.models import BaseData, ContactSidebarCompanyInfo
 
 # Create your views here.
 
-def contact(request):
+def contact(request): 
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():

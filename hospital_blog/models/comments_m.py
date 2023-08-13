@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.utils import timezone
 
 from .article_m import Blog
+
 class Comment(models.Model):
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='comments')
     name = models.CharField(max_length=80)
