@@ -99,9 +99,13 @@
                 <i class="fa fa-question"></i>
                 About
             </a>
+            <a href="{% url 'services' %}" class="nav__link">
+                <i class="fa-solid fa-truck-fast"></i>
+                Services
+            </a>
             <a href="{% url 'blog:blog_home' %}" class="nav__link">
                 <i class="fa fa-blog"></i>
-                Blog
+                News
             </a>
             {% comment %} <a href="{% url 'project_list' %}" class="nav__link">
                 <i class="fa fa-folder-open" aria-hidden="true"></i>
@@ -111,6 +115,12 @@
                 <i class="fa fa-phone-square" aria-hidden="true"></i>
                 Contact
             </a>
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'blog:dashboard_home' %}">
+                    <i class="fa-solid fa-layer-group"></i>
+                    DashBoard
+                </a>
+                {% endif %}
             {% if user.is_authenticated %}
             <a href="{% url 'profile' %}" class="nav__link">
                 <i class="fa fa-address-card" aria-hidden="true"></i>

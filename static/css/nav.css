@@ -65,7 +65,7 @@
   min-width: 200px;
   transform: translate(-250px); /* IDEA: To push navbar off the page by default */
   transition: transform 0.3s;
-  height: 88.6%;
+  height: 95%;
   background: linear-gradient(to right, #2d80c5 0%, #83ddca 100%);
 }
 /* IDEA: For Opening the Navbar */
@@ -103,7 +103,7 @@
   position: fixed;
   top: 50px;
   left: 0;
-  height: 88.6%;
+  height: 95%;
   width: 100vw;
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(2px);
