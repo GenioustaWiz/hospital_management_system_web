@@ -88,41 +88,30 @@
                 <h5 >+Book Appointment</h5>
             </div>
             <div class="form">
-                <form action="">
+                <form method="post">
+                    {% csrf_token %}
                     <div class="form-group">
-                        <input type="text" id="name" placeholder="Your Name">
+                        {{ form.name }}
                     </div>
                     <div class="form-group">
-                        <input type="text" id="name" placeholder="Your Email">
+                        {{ form.email }}
                     </div>
                     <div class="form-group">
-                        <input type="text" id="name" placeholder="Phone No:">
+                        {{ form.phone }}
                     </div>
                     <div style="display: flex;">
                         <div class="form-group" style="width: 50%;margin-right: 5px;">
-                            <select class="form-control">
-                                <option>Day</option>
-                                <option>Sunday</option>
-                                <option>Monday</option>
-                            </select>
+                            {{ form.day }}
                         </div>
                         <div class="form-group" style="width: 50%;margin-left: 5px;">
-                            <select class="form-control">
-                                <option>Time</option>
-                                <option>AM</option>
-                                <option>PM</option>
-                            </select>
+                            {{ form.time }}
                         </div>
                     </div>
                     <div class="form-group">
-                        <select class="form-control">
-                            <option>Department</option>
-                            <option>Eyes checkup</option>
-                            <option>Teeth Checkup</option>
-                        </select>
+                        {{ form.department }}
                     </div>
                     <div class="form-group">
-                        <textarea rows="4" id="textarea_message" class="form-control" placeholder="Your Message..."></textarea>
+                        {{ form.message }}
                     </div>
                     <div class="form-group button">
                         <button type="submit">Submit</button>
