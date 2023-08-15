@@ -44,8 +44,10 @@
   color: #0474bc
 }
 .user{
-  grid-column: 11;
-  padding-top: 5px;
+  grid-column: 9;
+  /* padding-right: 10px; */
+  display: flex;
+  align-items: center;
 }
 .user a{
   color: black;
