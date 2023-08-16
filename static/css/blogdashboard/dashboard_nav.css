@@ -30,6 +30,9 @@
 }
 
 #logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   grid-column: 6;
   /* margin-top:10px; */
   font-family: emoji;
@@ -48,21 +51,21 @@
 }
 
 .user {
-  grid-column: 12;
-  margin-right: 4px;
+  display: flex;
+  align-items: center;
+  grid-column: 9;
 }
 
 .nav__links {
   position: fixed;
-  /* top:0; */
+  /* top: 0; */
   left: 0;
-  z-index: 2;
+  z-index: 1005;
   height: 100vh;
-  width: 200px;
+  width: 250px;
   padding: 0 5px;
-  background: #403535;
+  background: #878686;
   transform: translate(-250px);
-  /* IDEA: To push navbar off the page by default */
   transition: transform 0.3s;
 }
 
@@ -79,10 +82,10 @@
   font-weight: bold;
   font-size: 14px;
   text-decoration: none;
-  padding: 12px 0;
+  padding: 12px 0 12px 6px;
   transition: transform 0.3s;
-  background-color: rgb(73, 57, 57);
-  border: 1px inset #f1dada;
+  /* background-color: rgb(73, 57, 57); */
+  /* border: 1px inset #f1dada; */
   margin: 10px 0 0 0;
   /*top right bottom left */
 }
@@ -93,21 +96,24 @@
 }
 
 /* IDEA: Putting spae btwn icons and text */
-.nav__link>i {
+.nav__link>i, .nav__link span i {
   margin-right: 15px;
+  height: 20px;
+  width: 20px;
 }
 
-.nav__link--active {
+/* .nav__link--active {
   color: #009578;
 
-}
+} */
 
 .nav__link:hover {
-  background: rgb(163 136 136);
+  background: rgb(69 176 78 / 22%);
 }
 
 .nav__overlay {
   position: fixed;
+  z-index: 1000;
   top: 0;
   left: 0;
   height: 100vh;
@@ -142,7 +148,7 @@
   position: relative;
   /* right: 0; */
   margin-top: 10px;
-  background-color: rgb(73, 57, 57);
+  /* background-color: rgb(73, 57, 57); */
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   /* z-index: 1; */
@@ -157,7 +163,8 @@
 }
 
 #nav .dropdown-content a:hover {
-  background-color: #ad8e8e
+  background-color: rgb(161, 249, 174);
+  color: black;
 }
 
 #nav .dropdown:hover .dropdown-content {
@@ -195,6 +202,12 @@
     display: grid;
     align-items: center;
     justify-content: space-around;
+  }
+  .user{
+    grid-column: 12;
+    display: inline-flex;
+    justify-content: right;
+    margin-right: 4px;
   }
 
 }

@@ -42,7 +42,7 @@
 
   /* <<<<<<---------Screen */
 
-@media (max-width: 720px) {
+@media (max-width: 888px) {
   #side-bar, #hide-button{
     display: none;
   }
@@ -54,7 +54,7 @@
 }
 /* Screen------>>>>>>> */
 
-@media (min-width:720px) {
+@media (min-width:888px) {
   #side-bar.hidden {
     transform: translateX(-250px);
   }

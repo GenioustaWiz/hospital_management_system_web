@@ -101,9 +101,9 @@
 .nav__overlay{
   z-index: 1000;
   position: fixed;
-  top: 50px;
+  top: 0;
   left: 0;
-  height: 95%;
+  height: 100%;
   width: 100vw;
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(2px);

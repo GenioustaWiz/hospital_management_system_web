@@ -14,20 +14,16 @@ a {
   padding: 10px 5px;
 }
 
-.side__links {
-  height: inherit;
-  width: 100%;
-  padding-top: 20px;
-  background: #c3c1c1;
-  /* transform: translate(-250px); IDEA: To push sidebar off the page by default */
-  transition: transform 0.3s;
-}
-
 /* IDEA: For the sidebar */
 .side__links {
   /* transform: translate(0); */
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  background: white;
+  height: inherit;
+  width: 100%;
+  padding-top: 20px;
+  /* background: #c3c1c1; */
+  /* transform: translate(-250px); IDEA: To push sidebar off the page by default */
+  transition: transform 0.3s;
 }
 
 .side__link {
@@ -41,8 +37,8 @@ a {
   padding: 12px 15px;
   margin: 0 5px 20px 5px; /*top right bottom left  */
   transition: transform 0.3s;
-  background-color: rgb(26 10 10 / 22%);
-  border: 1px inset #f1dada;
+  /* background-color: rgb(26 10 10 / 22%); */
+  /* border: 1px inset #f1dada; */
   flex-wrap: wrap;
 }
 
@@ -56,15 +52,16 @@ a {
   margin-right: 15px;
 }
 
-.side__link--active {
+/* .side__link--active {
   color: #fff;
 
-}
+} */
 
 .side__link:hover {
   transform: translate(20);
-  border: 1px outset #71797a;
-  color: #bbe7de;
+  /* border: 1px outset #71797a; */
+  background: rgb(69 176 78 / 22%);
+  /* color: #bbe7de; */
 }
 
 /* DropDown  */
@@ -99,7 +96,7 @@ a {
   position: relative;
   /* right: 0; */
   margin-top: 10px;
-  background-color: rgb(88 79 79 / 21%);
+  /* background-color: rgb(88 79 79 / 21%); */
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   /* z-index: 1; */
@@ -114,7 +111,7 @@ a {
 }
 
 #side-bar .dropdown-content a:hover {
-  background-color: rgb(146, 102, 102);
+  background-color: rgb(161, 249, 174);
   color: black;
 }
 
@@ -127,3 +124,4 @@ a {
     width: auto;
   }
 }
+
