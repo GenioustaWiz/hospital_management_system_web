@@ -14,3 +14,12 @@ class TopFooterContent(models.Model):
     
     def save(self, *args, **kwargs):
         super(TopFooterContent, self).save(*args, **kwargs)
+
+class SocialMediaLink(models.Model):
+    facebook_link = models.URLField()
+    whatsapp_link = models.URLField()
+    linkedIn_link = models.URLField()
+    twitter_link = models.URLField()
+
+    def save(self, *args, **kwargs):
+        super(SocialMediaLink, self).save(*args, **kwargs)

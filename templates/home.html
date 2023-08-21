@@ -30,10 +30,10 @@
     height: inherit;
     background: inherit;
     filter: blur(90px);
-}
-.des-p{
-  position: inherit;
-}
+  }
+  .des-p{
+    position: inherit;
+  }
 </style>
 {% endblock css %}
 
@@ -103,18 +103,16 @@
        <div><i class="fa-icon fa-regular fa-clock"></i></div>
          <h4>Working Hours</h4>
          <ul>
-           <li>
-             <span class="left">Monday - Friday</span><span class="right">8.00 – 18.00</span>
-           </li>
-           <hr style="margin: 0.5rem 0; border-top: 3px dashed black; background: none;"> <!-- Solid divider -->
-           <li>
-             <span class="left">Saturday</span><span class="right">8.00 – 16.00</span>
-           </li>
-           <hr style="margin: 0.5rem 0; border-top: 3px dashed black; background: none;"> <!-- Solid divider -->
-           <li>
-             <span class="left">Sunday</span><span class="right">8.00 – 13.00</span>
-           </li>
-           <hr style="margin: 0.5rem 0; border-top: 3px dashed black; background: none;"> <!-- Solid divider -->
+          {% for entry in working_hours %}
+            <hr style="margin: 0.5rem 0; border-top: 3px dashed black; background: none;"> <!-- Solid divider -->
+            <li>
+              <span class="left">{{ entry.day }}</span><span class="right">{{ entry.opening_time|time:"H:i" }} – {{ entry.closing_time|time:"H:i" }}</span>
+            </li>
+            {% if not forloop.last %}
+              <hr style="margin: 0.5rem 0; border-top: 3px dashed black; background: none;">
+            {% endif %}
+          {% endfor %}
+           
          </ul>
       </div>
       <div class="f-card3 blue">

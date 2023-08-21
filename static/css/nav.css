@@ -1,3 +1,18 @@
+/* 
+@import url("../../../../theme.css");
+
+static/
+│
+├── css/
+│   ├── maindashboard/
+│   │   ├── home/
+│   │   │   └── home.css
+│   ├── theme.css
+│
+└── ... 
+*/
+
+ 
  /* Navigation header */
 .header{
   position: fixed;
@@ -43,6 +58,15 @@
 .logo span{
   color: #0474bc
 }
+.dashboard .dropdown-menu{
+  background: linear-gradient(to right, #2d80c5 0%, #83ddca 100%);
+}
+.dashboard .dropdown-menu a{
+  color: azure !important;
+}
+.dashboard .dropdown-menu li:hover > a {
+  color: #0d6efd !important;
+}
 .user{
   grid-column: 9;
   /* padding-right: 10px; */
@@ -50,11 +74,11 @@
   align-items: center;
 }
 .user a{
-  color: black;
+  color: azure;
   font-weight: 600;
 }
 .user a:hover{
-  color: #0d6efd;
+  color: #0d6efd ;
 }
 .nav__links{
   position: fixed;

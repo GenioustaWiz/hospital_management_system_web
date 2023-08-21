@@ -1,7 +1,7 @@
 
 from django.contrib import admin
 from .models.models import *
-from .models.topfooter_M import *
+from .models.information_footer_M import *
 from .models.aboutP_M import *
 from .models.frontP_card_M import *
 
@@ -55,7 +55,7 @@ class FrontPageCard1_Admin(admin.ModelAdmin):
 admin.site.register(FrontPageCard1, FrontPageCard1_Admin)
 
 class workinghours_Admin(admin.ModelAdmin):
-    list_display = ('id', 'day','hours',)
+    list_display = ('id', 'day','opening_time','closing_time')
     list_display_links = ('day',) 
     actions_on_top = True
     actions_on_bottom = True

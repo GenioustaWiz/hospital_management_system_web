@@ -1,4 +1,4 @@
-
+# FOR PRODUCTION PURPOSES
 """
 Django settings for hospital_management_webapp project.
 
@@ -26,9 +26,10 @@ SECRET_KEY = '^6&3vnde7#2_*19h4-#t768*nz$52t=qqflcaad#@ce($e*p*b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['hospitalmanagementsystemweb-production.up.railway.app']
 
-CSRF_TRUSTED_ORIGINS = ['https://hospitalmanagementsystemweb-production.up.railway.app']
+ALLOWED_HOSTS = []
+
+# CSRF_TRUSTED_ORIGINS = ['https://hospitalmanagementsystemweb-production.up.railway.app']
 # Application definition
 
 INSTALLED_APPS = [
@@ -63,7 +64,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware', #new serving static files for production
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -142,23 +142,15 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-STATICFILES_FINDERS = [
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-]
 
-
-STATIC_URL = "/static/"
-# This is where Django will look for static files during development.
+STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
-)
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-# This is the directory where the collected static files will be stored.
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    )
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
 
 MEDIA_URL = '/media/' # Public URL at the browser
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media',) # Directory where uploaded media is saved.
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # Directory where uploaded media is saved.
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
