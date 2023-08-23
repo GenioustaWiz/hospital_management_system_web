@@ -1,0 +1,34 @@
+
+{% extends 'maindashboard/dashboard_base.html' %}
+{% comment %} displays Write  {% endcomment %}
+
+{% load static %}
+
+{% block title %} Blog List Page {% endblock title %}
+{% block css %}
+{{form.media}}
+<link rel="stylesheet" href="{% static 'css/blogdashboard/author/write_new_article.css' %}"> 
+<style>
+   
+</style>
+{% endblock css %}
+{% block content %}
+ 
+
+<!-- Write New Articles -->
+<section class="item2 section write-A-page">
+    <div class="write-a-c bg--white">
+        <div id="w-a-heading">
+            <h2> Write a New Article</h2>
+        </div>
+        <div class="content-body">
+        {% if home_page %}
+            <h1>{{ home_page.heading }}</h1>
+            <p>{{ home_page.body }}</p>
+        {% else %}
+            <p>No home page content available.</p>
+        {% endif %}
+        </div>
+    </div>
+</section>
+        

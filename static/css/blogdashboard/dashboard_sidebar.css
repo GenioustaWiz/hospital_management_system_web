@@ -34,7 +34,7 @@ a {
   font-size: 14px;
   text-decoration: none;
   cursor: pointer;
-  padding: 12px 15px;
+  padding: 12px 3px;
   margin: 0 5px 20px 5px; /*top right bottom left  */
   transition: transform 0.3s;
   /* background-color: rgb(26 10 10 / 22%); */
@@ -105,7 +105,7 @@ a {
 
 #side-bar .dropdown-content a {
   color: rgb(255, 255, 255);
-  padding: 12px 16px;
+  padding: 12px 5px;
   text-decoration: none;
   display: block;
 }

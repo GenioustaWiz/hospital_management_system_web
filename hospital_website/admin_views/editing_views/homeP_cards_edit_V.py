@@ -1,16 +1,19 @@
 from django.shortcuts import render, redirect
-from ..forms.frontP_card_F import FrontPageCard1Form, WorkingHoursForm, FrontPageCard3Form
+from ...forms.homeP_cards_F import HomePageCard1Form, WorkingHoursForm, HomePageCard3Form
 
-def front_page_card1_form(request):
+def home_page_card1_form(request):
     if request.method == 'POST':
-        form = FrontPageCard1Form(request.POST)
+        form = HomePageCard1Form(request.POST)
         if form.is_valid():
             form.save()
             return redirect('success')  # Replace 'success' with the name of your success page
     else:
-        form = FrontPageCard1Form()
+        form = HomePageCard1Form()
     
-    return render(request, 'front_page_card1_form.html', {'form': form})
+    return render(request,
+        'maindashboard/home_page/home_page_card1_form.html',
+        {'form': form}
+    )
 
 def working_hours_form(request):
     if request.method == 'POST':
@@ -21,16 +24,22 @@ def working_hours_form(request):
     else:
         form = WorkingHoursForm()
     
-    return render(request, 'working_hours_form.html', {'form': form})
+    return render(request,
+        'maindashboard/home_page/working_hours_form.html',
+        {'form': form}
+    )
 
-def front_page_card3_form(request):
+def home_page_card3_form(request):
     if request.method == 'POST':
-        form = FrontPageCard3Form(request.POST)
+        form = HomePageCard3Form(request.POST)
         if form.is_valid():
             form.save()
             return redirect('success')  # Replace 'success' with the name of your success page
         # If form is not valid, display errors
     else:
-        form = FrontPageCard3Form()
+        form = HomePageCard3Form()
     
-    return render(request, 'front_page_card3_form.html', {'form': form})
+    return render(request,
+        'maindashboard/home_page/home_page_card3_form.html',
+        {'form': form}
+    )

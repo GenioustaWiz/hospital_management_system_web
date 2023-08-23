@@ -1,0 +1,48 @@
+<footer class="top-footer">
+            <div class="f-company">
+             <h4>Company</h4>
+             <ul>
+                <li>
+                    <a href="">About Us </a>
+                </li>
+                <li>
+                    <a href="">Career </a>
+                </li>
+                <li>
+                    <a href="">Editorial Team</a>
+                </li>
+                <li><a href="">Protection</a>
+                </li>
+             </ul>
+            </div>
+            <div class="f-more">
+                <h4>More</h4>
+                <ul>
+                    <li>
+                        <a href="">Terms & Conditions </a>
+                    </li>
+                    <li>
+                        <a href="">Privacy </a>
+                    </li>
+                    <li> 
+                        <a href="">Advertise </a>
+                    </li>
+                    <li> 
+                        <a href="">Join as Doctors </a> 
+                    </li>
+                </ul>
+            </div>
+            <div class="f-ourpartner">
+                <h4>Our partners </h4>
+                <ul>
+                    <li>
+                        <a href="">Hello-Fitness </a>
+                    </li>
+                    <li>
+                        <a href="">Cemsa-Meds </a>
+                    </li>
+                    <li>
+                        <a href="">Flash-Emergencies </a>
+                    </li>
+                </ul>
+            </div>

@@ -1,9 +1,9 @@
 from django import forms
-from ..models.frontP_card_M import FrontPageCard1, WorkingHours, FrontPageCard3
+from ..models.homeP_cards_M import HomePageCard1, WorkingHours, HomePageCard3
 
-class FrontPageCard1Form(forms.ModelForm):
+class HomePageCard1Form(forms.ModelForm):
     class Meta:
-        model = FrontPageCard1
+        model = HomePageCard1
         fields = ['heading', 'body', 'color', 'iconInput']
 
 class WorkingHoursForm(forms.ModelForm):
@@ -11,7 +11,7 @@ class WorkingHoursForm(forms.ModelForm):
         model = WorkingHours
         fields = ['day', 'opening_time', 'closing_time']
 
-class FrontPageCard3Form(forms.ModelForm):
+class HomePageCard3Form(forms.ModelForm):
     class Meta:
-        model = FrontPageCard3
+        model = HomePageCard3
         fields = ['heading', 'body', 'color', 'iconInput']

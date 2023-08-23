@@ -78,7 +78,7 @@ static/
   font-weight: 600;
 }
 .user a:hover{
-  color: #0d6efd ;
+  color: #0d6efd !important;
 }
 .nav__links{
   position: fixed;

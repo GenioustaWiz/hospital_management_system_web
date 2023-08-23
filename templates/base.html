@@ -68,7 +68,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="{% url 'blog:dashboard_home' %}">Blog Dashboard</a></li>
-                            <li><a class="dropdown-item" href="#">Main Dashboard</a></li>
+                            <li><a class="dropdown-item" href="{% url 'main_dashboard_home' %}">Main Dashboard</a></li>
                         </ul>
                     </div>
                 {% endif %}
@@ -133,7 +133,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="{% url 'blog:dashboard_home' %}">Blog Dashboard</a></li>
-                        <li><a class="dropdown-item" href="#">Main Dashboard</a></li>
+                        <li><a class="dropdown-item" href="{% url 'main_dashboard_home' %}">Main Dashboard</a></li>
                     </ul>
                 </div>
             {% endif %}
@@ -165,53 +165,17 @@
 
 
         <footer class="top-footer">
+            {% for f_content in top_footer_headings %}
             <div class="f-company">
-             <h4>Company</h4>
+             <h4>{{ f_content.heading }}</h4>
              <ul>
                 <li>
-                    <a href="">About Us </a>
+                    <a href="{{ f_content.url }}">{{ f_content.content }}</a>
                 </li>
-                <li>
-                    <a href="">Career </a>
-                </li>
-                <li>
-                    <a href="">Editorial Team</a>
-                </li>
-                <li><a href="">Protection</a>
-                </li>
+                
              </ul>
             </div>
-            <div class="f-more">
-                <h4>More</h4>
-                <ul>
-                    <li>
-                        <a href="">Terms & Conditions </a>
-                    </li>
-                    <li>
-                        <a href="">Privacy </a>
-                    </li>
-                    <li> 
-                        <a href="">Advertise </a>
-                    </li>
-                    <li> 
-                        <a href="">Join as Doctors </a> 
-                    </li>
-                </ul>
-            </div>
-            <div class="f-ourpartner">
-                <h4>Our partners </h4>
-                <ul>
-                    <li>
-                        <a href="">Hello-Fitness </a>
-                    </li>
-                    <li>
-                        <a href="">Cemsa-Meds </a>
-                    </li>
-                    <li>
-                        <a href="">Flash-Emergencies </a>
-                    </li>
-                </ul>
-            </div>
+            {% endfor %}
             <div class="f-contact">
                 <div id="f-contact">
                     <h4>Contact</h4>
@@ -228,22 +192,24 @@
                 <div id="f-socialmedia">
                     <h4>Social Media</h4>
                     <ul>
+                        {% for links in social_media_links %}
                         <li>
-                            <a href=""><i class="fa-brands fa-facebook-f"></i>
+                            <a href="{{ links.facebook_link }}"><i class="fa-brands fa-facebook-f"></i>
                             </a>
                         </li>
                         <li>
-                            <a href=""><i class="fa-brands fa-twitter"></i>
+                            <a href="{{ links.twitter_link }}"><i class="fa-brands fa-twitter"></i>
                             </a>
                         </li>
                         <li>
-                            <a href=""><i class="fa-brands fa-whatsapp"></i>
+                            <a href="{{ links.whatsapp_link }}"><i class="fa-brands fa-whatsapp"></i>
                             </a>
                         </li>
                         <li>
-                            <a href=""><i class="fa-brands fa-linkedin"></i>
+                            <a href="{{ links.linkedIn_link }}"><i class="fa-brands fa-linkedin"></i>
                             </a>
                         </li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
