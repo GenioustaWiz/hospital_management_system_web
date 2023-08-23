@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from ...models.models import HomePage
 
-def home_page(request):
+def home_page_view(request):
     try:
         home_page = HomePage.objects.first()
     except HomePage.DoesNotExist:

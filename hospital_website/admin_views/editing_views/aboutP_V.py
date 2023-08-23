@@ -10,7 +10,10 @@ def about_page_edit(request):
     else:
         form = AboutPageForm()
 
-    return render(request, 'about_page_template.html', {'form': form})
+    return render(request, 
+        'maindashboard/about_page/about_page_template.html', 
+        {'form': form}
+        )
 
 def about_list_edit(request):
     if request.method == 'POST':
@@ -21,4 +24,7 @@ def about_list_edit(request):
     else:
         form = AboutListForm()
 
-    return render(request, 'about_list_template.html', {'form': form})
+    return render(request, 
+        'maindashboard/about_page/about_list_template.html', 
+        {'form': form}
+        )

@@ -1,27 +1,43 @@
 {% extends 'maindashboard/dashboard_base.html' %}
-{% comment %} displays Write  {% endcomment %}
-
 {% load static %}
 
-{% block title %} Blog List Page {% endblock title %}
-{% block css %}
-{{form.media}}
-<link rel="stylesheet" href="{% static 'css/blogdashboard/author/write_new_article.css' %}"> 
-<style>
-   
-</style>
-{% endblock css %}
-{% block content %}
- 
+{% block title %} 
+  About Us
+{% endblock title %}
 
-<!-- Write New Articles -->
-<section class="item2 section write-A-page">
-    <div class="write-a-c bg--white">
-        <div id="w-a-heading">
-            <h2> Write a New Article</h2>
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/description.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/about.css' %}" type="text/css">
+{% comment %} <link rel="stylesheet" href="{% static 'css/extra.css' %}" type="text/css"> {% endcomment %}
+{% endblock css %}
+
+{% block content %}
+ <section class=" description"> <!-- s2 -->
+    <div id="description-page"  class=" container-xxl">
+        <div class="item2 des-p text-center container">
+            <div style="background: linear-gradient(to right, #2d80c5 0%, #83ddca 100%); border-radius: 20px;">
+             <h1> {{about.heading}} <!--About us--></h1> 
         </div>
-        <div class="content-body">
-        
+            <div class="des-p-p">
+            <p>
+              {{about.body}}
+              <!-- CDT was created with the sole purpose of delivering sustainable, pocket friendly and 
+              secure technologies to all people. Clients satisfaction is our main goal, 
+              as we also advice and guide our clients on the best techonlogies for specific products.
+              We provide different range of products from Web, Desktop, Mobile, Automation, and  Security applications. -->
+            </p>
+        </div> 
         </div>
+        <div class="dev text-center">
+        <h2 ><hr style="margin: 0.5rem 0; border-top: 3px dashed black; background: none;"> <!-- Solid divider --></h2>
+      </div>
+        <div class=" about-list">
+          <div class="about--list">
+            <img src="{% static 'images/surgical-room.jpg' %}" width="200" height="200" alt="">
+            <div class="bottom-name">Surgical Room</div>
+          </div>
+        </div>           
     </div>
-</section>
+    
+  </section>
+{% endblock content %}
