@@ -83,67 +83,26 @@
         <div class="nav__links">
             <a href="{% url 'main_dashboard_home' %}" class="nav__link nav__link--active">
                 <i class="bi bi-house-check-fill"></i>
-                Home
+                Dashboard Home
             </a>
-            <div class="nav__link dropdown">
-                <span class="dropdown-btn" aria-expanded="false">
-                    <i class="bi bi-list-task"></i>
-                        Home Page Infor <span style="padding-left: 2px;">&darr;</span>
-                </span>
-
-                <div class="dropdown-content">
-                    <a href="{% url 'blog:written_article_list' %}">
-                        <i class="bi bi-book-fill"></i>
-                            Home Page Description
-                    </a>
-                    <a href="{% url 'blog:published_article_list' %}">
-                       <i class="bi bi-bookmark-check-fill"></i>
-                            Home Page Cards
-                    </a>
-                </div>
-            </div>
-            <div class="nav__link dropdown">
-                <span class="dropdown-btn" aria-expanded="false">
-                    <i class="bi bi-list-task"></i>
-                        About Page Infor <span style="padding-left: 2px;">&darr;</span>
-                </span>
-
-                <div class="dropdown-content">
-                    <a href="{% url 'blog:written_article_list' %}">
-                        <i class="bi bi-book-fill"></i>
-                            About Page Description
-                    </a>
-                    <a href="{% url 'blog:published_article_list' %}">
-                       <i class="bi bi-bookmark-check-fill"></i>
-                            About Page List
-                    </a>
-                </div>
-            </div>
-            <a href="{% url 'blog:blog_create' %}" class="nav__link ">
+            <a href="{% url 'home_page_view' %}" class="nav__link nav__link--active">
+                <i class="bi bi-house-check-fill"></i>
+                Home Page Infor
+            </a>
+            <a href="{% url 'about_page_view' %}" class="nav__link nav__link--active">
+                <i class="bi bi-house-check-fill"></i>
+                About Page Infor
+            </a>
+            
+            <a href="{% url 'companycontact_info_view' %}" class="nav__link ">
                 <i class="bi bi-pencil-fill"></i>
                 Company Contact Infor
             </a>
-            <div class="nav__link dropdown">
-                <span class="dropdown-btn" aria-expanded="false">
-                    <i class="bi bi-list-task"></i>
-                        Top Footer Infor <span style="padding-left: 2px;">&darr;</span>
-                </span>
-
-                <div class="dropdown-content">
-                    <a href="{% url 'blog:written_article_list' %}">
-                        <i class="bi bi-book-fill"></i>
-                            T-Footer Headings
-                    </a>
-                    <a href="{% url 'blog:published_article_list' %}">
-                       <i class="bi bi-bookmark-check-fill"></i>
-                            T-Footer Content
-                    </a>
-                    <a href="{% url 'blog:published_article_list' %}">
-                       <i class="bi bi-bookmark-check-fill"></i>
-                            T-Footer Social Links
-                    </a>
-                </div>
-            </div>
+            <a href="{% url 'blog:blog_create' %}" class="nav__link ">
+                <i class="bi bi-pencil-fill"></i>
+                Top Footer Infor
+            </a>
+            
             <div class="nav__link dropdown">
                 <span class="dropdown-btn" aria-expanded="false">
                     <i class="bi bi-person-lines-fill"></i>
@@ -211,65 +170,25 @@
                     
                 </a>
                 
-                <div class="side__link dropdown">
-                    <span class="dropdown-btn" aria-expanded="false">
-                        <i class="bi bi-list-task"></i>
-                            Home Page Infor <span style="padding-left: 2px;">&darr;</span>
-                    </span>
-    
-                    <div class="dropdown-content">
-                        <a href="{% url 'blog:written_article_list' %}">
-                            <i class="bi bi-book-fill"></i>
-                                Home Page Description
-                        </a>
-                        <a href="{% url 'blog:published_article_list' %}">
-                            <i class="bi bi-bookmark-check-fill"></i>
-                                Home Page Cards
-                        </a>
-                    </div>
-                </div>
-                <div class="side__link dropdown">
-                    <span class="dropdown-btn" aria-expanded="false">
-                        <i class="bi bi-list-task"></i>
-                            About Page Infor <span style="padding-left: 2px;">&darr;</span>
-                    </span>
-    
-                    <div class="dropdown-content">
-                        <a href="{% url 'blog:written_article_list' %}">
-                            <i class="bi bi-book-fill"></i>
-                                About Page Description
-                        </a>
-                        <a href="{% url 'blog:published_article_list' %}">
-                            <i class="bi bi-bookmark-check-fill"></i>
-                                About Page List
-                        </a>
-                    </div>
-                </div>
+                <a href="{% url 'home_page_view' %}" class="side__link side__link--active">
+                    <i class="bi bi-house-check-fill"></i>
+                    Home Page Infor
+                    
+                </a>
+                <a href="{% url 'home_page_view' %}" class="side__link side__link--active">
+                    <i class="bi bi-house-check-fill"></i>
+                    About Page Infor
+                    
+                </a>
                 <a href="{% url 'blog:blog_create' %}" class="side__link ">
                     <i class="bi bi-pencil-fill"></i>
                     Company Contact Infor
                 </a>
-                <div class="side__link dropdown">
-                    <span class="dropdown-btn" aria-expanded="false">
-                        <i class="bi bi-list-task"></i>
-                            Top Footer Infor <span style="padding-left: 2px;">&darr;</span>
-                    </span>
-    
-                    <div class="dropdown-content">
-                        <a href="{% url 'blog:written_article_list' %}">
-                            <i class="bi bi-book-fill"></i>
-                                T-Footer Headings
-                        </a>
-                        <a href="{% url 'blog:published_article_list' %}">
-                            <i class="bi bi-bookmark-check-fill"></i>
-                                T-Footer Content
-                        </a>
-                        <a href="{% url 'blog:published_article_list' %}">
-                            <i class="bi bi-bookmark-check-fill"></i>
-                                T-Footer Social Links
-                        </a>
-                    </div>
-                </div>
+                <a href="{% url 'blog:blog_create' %}" class="side__link ">
+                    <i class="bi bi-pencil-fill"></i>
+                    Top Footer Infor
+                </a>
+                
                 <div class="side__link dropdown">
                     <span class="dropdown-btn" aria-expanded="false">
                         <i class="bi bi-person-lines-fill"></i>
