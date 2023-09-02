@@ -25,7 +25,37 @@
     align-items: center;
     justify-content: center;
 }
-
+/* ------------------FOR EDITING PAGES----------- INFOR */
+#w-a-body{
+    padding: 5px 10px !important;
+}
+.w-a-body{
+    background-color: azure;
+    padding: 20px;
+    border-radius: 10px;
+}
+.w-a-body p{
+    display: flex;
+    flex-direction: column;
+}
+.w-a-body .button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.w-a-body .button button{
+    padding: 2px 20px;
+    border-radius: 10px;
+    border: none;
+    background-color: #65ffff;
+    font-size: large;
+}
+.w-a-body .button button:hover{
+    background-color: #a7afaf;
+}
+label{
+    font-weight: 600;
+  }
 @media (max-width: 768px) {
     .write-a-c {
       padding: 20px;

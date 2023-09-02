@@ -41,16 +41,17 @@
             <div class="heading edit-icon-h">
                 <h1>{{ home_page.heading }}</h1>
                 <div class="edit-icon">
-                    <a href="">
+                    <a href="{% url 'edit_home_page' %}">
                         <i class="fa-solid fa-pen-to-square"></i>
                     </a>
                 </div>
             </div>
-            <p>{{ home_page.body }}</p>
+            {% comment %} <p>{{ home_page.body }}</p> {% endcomment %}
         {% else %}
             <p>No home page content available.</p>
         {% endif %}
         </div>
+        {% comment %} CARD 1 {% endcomment %}
         <div class="frontP-cards">
             <div class="f-card1 blue edit-icon-h">
                 <div><i class="fa-icon fa-solid fa-truck-medical"></i></div>
@@ -60,11 +61,12 @@
                   Quaerat possimus repudiandae ullam, doloremque animi minima fugiat eaque, ducimus voluptas, illo nihil nobis?
                 </p>
                 <div class="edit-icon">
-                  <a href="">
+                  <a href="{% url 'home_page_card1_form' %}">
                       <i class="fa-solid fa-pen-to-square"></i>
                   </a>
                 </div>
             </div>
+            {% comment %} CARD 2 (WORKING HOURS) {% endcomment %}
             <div class="f-card2 red edit-icon-h">
              <div><i class="fa-icon fa-regular fa-clock"></i></div>
                 <h4>Working Hours</h4>
@@ -81,11 +83,12 @@
                   
                 </ul>
                 <div class="edit-icon">
-                  <a href="">
+                  <a href="{% url 'working_hours_form' %}">
                       <i class="fa-solid fa-pen-to-square"></i>
                   </a>
                 </div>
             </div>
+            {% comment %} CARD 3 {% endcomment %}
             <div class="f-card3 blue edit-icon-h">
              <div><i class="fa-icon fa-regular fa-hospital"></i></div>
                 <h4>Clinic Timetable</h4>
@@ -94,7 +97,7 @@
                   Quaerat possimus repudiandae ullam, doloremque animi minima fugiat eaque, ducimus voluptas, illo nihil nobis?
                 </p>
                 <div class="edit-icon">
-                  <a href="">
+                  <a href="{% url 'home_page_card3_form' %}">
                       <i class="fa-solid fa-pen-to-square"></i>
                   </a>
                 </div>
