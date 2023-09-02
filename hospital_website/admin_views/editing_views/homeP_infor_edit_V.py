@@ -25,7 +25,14 @@ def edit_home_page(request):
         form = HomePageForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('home')  # Redirect to the home page or any other appropriate view
+            previous_url = request.META.get('HTTP_REFERER')
+            if previous_url:
+                # return to the previous Url if available
+                return redirect(previous_url)
+            else:
+                # Provide a fallback URL in case the previous URL is not available
+                return redirect('home')  # Redirect to the home page or any other appropriate view
+            
     else:
         form = HomePageForm()
 

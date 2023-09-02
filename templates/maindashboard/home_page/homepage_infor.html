@@ -8,8 +8,23 @@
 {% block css %}
 {{form.media}}
 <link rel="stylesheet" href="{% static 'css/blogdashboard/author/write_new_article.css' %}"> 
+<link rel="stylesheet" href="{% static 'css/home_page.css' %}" type="text/css">
 <style>
-   
+    .heading{
+        font-size: 20px;
+        background-color: azure;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        padding: 10px;
+        padding: 0 25px 0 5px;
+    }
+    .frontP-cards {
+        top: 0;
+        background-color: azure;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        margin: 0 15px;
+        gap: 4px;
+        padding-bottom: 20px;
+    }
 </style>
 {% endblock css %}
 {% block content %}
@@ -19,16 +34,73 @@
 <section class="item2 section write-A-page">
     <div class="write-a-c bg--white">
         <div id="w-a-heading">
-            <h2> Write a New Article</h2>
+            <h2>Information displayed on the Home Page</h2>
         </div>
         <div class="content-body">
         {% if home_page %}
-            <h1>{{ home_page.heading }}</h1>
+            <div class="heading edit-icon-h">
+                <h1>{{ home_page.heading }}</h1>
+                <div class="edit-icon">
+                    <a href="">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+                </div>
+            </div>
             <p>{{ home_page.body }}</p>
         {% else %}
             <p>No home page content available.</p>
         {% endif %}
         </div>
+        <div class="frontP-cards">
+            <div class="f-card1 blue edit-icon-h">
+                <div><i class="fa-icon fa-solid fa-truck-medical"></i></div>
+                <h4>Emergency Case</h4>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro beatae fugiat praesentium eveniet eum libero assumenda.
+                  Quaerat possimus repudiandae ullam, doloremque animi minima fugiat eaque, ducimus voluptas, illo nihil nobis?
+                </p>
+                <div class="edit-icon">
+                  <a href="">
+                      <i class="fa-solid fa-pen-to-square"></i>
+                  </a>
+                </div>
+            </div>
+            <div class="f-card2 red edit-icon-h">
+             <div><i class="fa-icon fa-regular fa-clock"></i></div>
+                <h4>Working Hours</h4>
+                <ul>
+                  {% for entry in working_hours %}
+                    <hr style="margin: 0.5rem 0; border-top: 3px dashed black; background: none;"> <!-- Solid divider -->
+                    <li>
+                      <span class="left">{{ entry.day }}</span><span class="right">{{ entry.opening_time|time:"H:i" }} – {{ entry.closing_time|time:"H:i" }}</span>
+                    </li>
+                    {% if not forloop.last %}
+                      <hr style="margin: 0.5rem 0; border-top: 3px dashed black; background: none;">
+                    {% endif %}
+                  {% endfor %}
+                  
+                </ul>
+                <div class="edit-icon">
+                  <a href="">
+                      <i class="fa-solid fa-pen-to-square"></i>
+                  </a>
+                </div>
+            </div>
+            <div class="f-card3 blue edit-icon-h">
+             <div><i class="fa-icon fa-regular fa-hospital"></i></div>
+                <h4>Clinic Timetable</h4>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro beatae fugiat praesentium eveniet eum libero assumenda.
+                  Quaerat possimus repudiandae ullam, doloremque animi minima fugiat eaque, ducimus voluptas, illo nihil nobis?
+                </p>
+                <div class="edit-icon">
+                  <a href="">
+                      <i class="fa-solid fa-pen-to-square"></i>
+                  </a>
+                </div>
+            </div>
+          </div> 
     </div>
 </section>
         
+{% endblock content%}

@@ -29,6 +29,8 @@
     <link rel="stylesheet" href="{% static 'css/blogdashboard/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/blogdashboard/dashboard_nav.css' %}">
     <link rel="stylesheet" href="{% static 'css/blogdashboard/dashboard_sidebar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/blogdashboard/dashboard_sidebar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboard_all_pages.css' %}">
     
     <link rel="icon" href="./favicon.ico" type="image/x-icon">
     {% block css%} {% endblock css%}
@@ -98,7 +100,7 @@
                 <i class="bi bi-pencil-fill"></i>
                 Company Contact Infor
             </a>
-            <a href="{% url 'blog:blog_create' %}" class="nav__link ">
+            <a href="{% url 'top_footer_view' %}" class="nav__link ">
                 <i class="bi bi-pencil-fill"></i>
                 Top Footer Infor
             </a>
@@ -157,7 +159,7 @@
             </form>
           </div>
         </div>
-      </div>
+    </div>
       
     {% comment %} end modal  {% endcomment %}
 
@@ -175,16 +177,16 @@
                     Home Page Infor
                     
                 </a>
-                <a href="{% url 'home_page_view' %}" class="side__link side__link--active">
+                <a href="{% url 'about_page_view' %}" class="side__link side__link--active">
                     <i class="bi bi-house-check-fill"></i>
                     About Page Infor
                     
                 </a>
-                <a href="{% url 'blog:blog_create' %}" class="side__link ">
+                <a href="{% url 'companycontact_info_view' %}" class="side__link ">
                     <i class="bi bi-pencil-fill"></i>
                     Company Contact Infor
                 </a>
-                <a href="{% url 'blog:blog_create' %}" class="side__link ">
+                <a href="{% url 'top_footer_view' %}" class="side__link ">
                     <i class="bi bi-pencil-fill"></i>
                     Top Footer Infor
                 </a>

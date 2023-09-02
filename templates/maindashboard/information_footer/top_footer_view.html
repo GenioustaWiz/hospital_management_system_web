@@ -1,0 +1,116 @@
+
+{% extends 'maindashboard/dashboard_base.html' %}
+{% comment %} displays Write  {% endcomment %}
+
+{% load static %}
+
+{% block title %} Information Footer {% endblock title %}
+{% block css %}
+{{form.media}}
+<link rel="stylesheet" href="{% static 'css/blogdashboard/author/write_new_article.css' %}"> 
+<style>
+    .f-company, .f-contact{
+        
+        margin: 20px 0;
+    }
+   .f-company, #f-contact, #f-socialmedia{
+    background-color: azure;
+    padding: 5px;
+    }
+   .fa-triangle-exclamation{
+        color: red;
+   }
+</style>
+{% endblock css %}
+{% block content %}
+ 
+<section class="item2 section write-A-page">
+    <div class="write-a-c bg--white">
+        <div id="w-a-heading">
+            <h2> Footer Information</h2>
+            <h6>
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                Click the edit button to edit or save new footer information.
+            </h6>
+        </div>
+        <div class="content-body">
+            <footer class="top-footer">
+                <div class="f-company">
+                        {% if top_footer_headings %}
+                        {% for f_content in top_footer_headings %}
+                    <h4>{{ f_content.heading }}</h4>
+                    <ul>
+                        <li>
+                            <a href="{{ f_content.url }}">{{ f_content.content }}</a>
+                        </li>
+                        
+                    </ul>
+                    {% endfor %}
+                    {% else %}
+                    <div class="edit-icon-h">
+                        <p>No Footer information</p>
+                        <div class="edit-icon">
+                            <a href="">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <div class="f-contact">
+                    <div id="f-contact" class="edit-icon-h">
+                        <h4>Contact</h4>
+                        <ul>
+                            <li>
+                                203 Waithaka, Dagoretti, Nairobi 
+                            </li>
+                            <li> 
+                                bettahealth@temporary.com 
+                            </li>
+                            <li>+254781236749</li>
+                        </ul>
+                        <div class="edit-icon">
+                            <a href="">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div id="f-socialmedia" class="edit-icon-h">
+                        <h4>Social Media</h4>
+                        <ul>
+                            {% if links in social_media_links %}
+                            <li>
+                                <a href="{{ links.facebook_link }}"><i class="fa-brands fa-facebook-f"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ links.twitter_link }}"><i class="fa-brands fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ links.whatsapp_link }}"><i class="fa-brands fa-whatsapp"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ links.linkedIn_link }}"><i class="fa-brands fa-linkedin"></i>
+                                </a>
+                            </li>
+                            {% else %}
+                            <p>No Social Media Accounts Saved</p>
+                            {% endif %}
+                        </ul>
+                        <div class="edit-icon">
+                            <a href="">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+    
+            </footer>
+        </div>
+    </div>
+</section>
+
+{% endblock content%}

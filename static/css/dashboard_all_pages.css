@@ -1,0 +1,35 @@
+
+#w-a-heading, .content-body{
+    padding: 20px;
+}
+#w-a-heading{
+    margin: 0 !important;
+}
+#w-a-heading h2, #w-a-heading h6{
+    text-align: center;
+}
+
+.edit-icon-h{
+    position: relative;
+}
+.edit-icon{
+    position: absolute; 
+    top: 5px; 
+    right: 5px;
+    font-size: 25px;
+    font-weight: 800;
+}
+.edit-icon a{
+    color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .write-a-c {
+      padding: 20px;
+    }
+  }
+  
+

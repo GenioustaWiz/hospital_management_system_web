@@ -11,4 +11,4 @@ def about_page_view(request):
     return render(request,
         'maindashboard/about_page/aboutP_view.html', 
         context
-        )
+        ) 
