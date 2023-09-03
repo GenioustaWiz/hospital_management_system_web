@@ -53,13 +53,16 @@
         </div>
         {% comment %} CARD 1 {% endcomment %}
         <div class="frontP-cards">
-            <div class="f-card1 blue edit-icon-h">
-                <div><i class="fa-icon fa-solid fa-truck-medical"></i></div>
-                <h4>Emergency Case</h4>
+            <div class="f-card1 {{card1.color}} edit-icon-h">
+                {% if card1 %}
+                <div class="fa-icon">{{card1.iconInput|safe}}</div>
+                <h4>{{card1.heading}}</h4>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro beatae fugiat praesentium eveniet eum libero assumenda.
-                  Quaerat possimus repudiandae ullam, doloremque animi minima fugiat eaque, ducimus voluptas, illo nihil nobis?
+                  {{ card1.body }}
                 </p>
+                {%else%}
+                <p> Information for card1 is not available.</p>
+                {%endif%}
                 <div class="edit-icon">
                   <a href="{% url 'home_page_card1_form' %}">
                       <i class="fa-solid fa-pen-to-square"></i>
@@ -71,15 +74,19 @@
              <div><i class="fa-icon fa-regular fa-clock"></i></div>
                 <h4>Working Hours</h4>
                 <ul>
-                  {% for entry in working_hours %}
+                  {% if workinghours %}
+                  {% for entry in workinghours %}
                     <hr style="margin: 0.5rem 0; border-top: 3px dashed black; background: none;"> <!-- Solid divider -->
                     <li>
                       <span class="left">{{ entry.day }}</span><span class="right">{{ entry.opening_time|time:"H:i" }} – {{ entry.closing_time|time:"H:i" }}</span>
                     </li>
-                    {% if not forloop.last %}
+                    
                       <hr style="margin: 0.5rem 0; border-top: 3px dashed black; background: none;">
-                    {% endif %}
+                    
                   {% endfor %}
+                  {% else %}
+                  <p> working hours are not updated</p>
+                  {% endif %}
                   
                 </ul>
                 <div class="edit-icon">
@@ -89,13 +96,16 @@
                 </div>
             </div>
             {% comment %} CARD 3 {% endcomment %}
-            <div class="f-card3 blue edit-icon-h">
-             <div><i class="fa-icon fa-regular fa-hospital"></i></div>
-                <h4>Clinic Timetable</h4>
+            <div class="f-card3 {{card3.color}} edit-icon-h">
+                {% if card3 %}
+                <div class="fa-icon">{{card3.iconInput|safe}}</div>
+                <h4>{{card3.heading}}</h4>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro beatae fugiat praesentium eveniet eum libero assumenda.
-                  Quaerat possimus repudiandae ullam, doloremque animi minima fugiat eaque, ducimus voluptas, illo nihil nobis?
+                  {{ card3.body }}
                 </p>
+                {% else %}
+                <p> Information for card3 is not available.</p>
+                {% endif %}
                 <div class="edit-icon">
                   <a href="{% url 'home_page_card3_form' %}">
                       <i class="fa-solid fa-pen-to-square"></i>

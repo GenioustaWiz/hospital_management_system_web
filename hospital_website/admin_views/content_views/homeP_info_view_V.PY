@@ -5,7 +5,7 @@ def home_page_view(request):
     try:
         home_page = HomePage.objects.first()
         card1 = HomePageCard1.objects.first()
-        workinghours = WorkingHours.objects.first()
+        workinghours = WorkingHours.objects.all()
         card3 = HomePageCard3.objects.first()
     except HomePage.DoesNotExist:
         home_page = None

@@ -6,7 +6,7 @@ def home_page_card1_form(request):
         form = HomePageCard1Form(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('success')  # Replace 'success' with the name of your success page
+            return redirect('home_page_view')  # Replace 'success' with the name of your success page
     else:
         form = HomePageCard1Form()
     
@@ -20,7 +20,7 @@ def working_hours_form(request):
         form = WorkingHoursForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('success')  # Replace 'success' with the name of your success page
+            return redirect('home_page_view')  # Replace 'success' with the name of your success page
     else:
         form = WorkingHoursForm()
     
@@ -34,7 +34,7 @@ def home_page_card3_form(request):
         form = HomePageCard3Form(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('success')  # Replace 'success' with the name of your success page
+            return redirect('home_page_view')  # Replace 'success' with the name of your success page
         # If form is not valid, display errors
     else:
         form = HomePageCard3Form()
