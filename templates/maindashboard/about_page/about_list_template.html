@@ -14,6 +14,7 @@
     #image-preview{
         display: flex;
         flex-direction: column;
+        margin-bottom: 20px;
     }
 </style>
 {% endblock css %}
@@ -36,9 +37,12 @@
                 <div id="image-preview">
                     {{ form.image.label_tag }}
                     <!-- the img section is ment to display the current image during edting -->
+                    {% if image %}
                     <img id="image-display" src="{{ form.instance.image.url }}" width="200" height="200" alt="Image">
+                    {% endif %}
                     {{ form.image }}
                 </div>
+                
                 <div class="button">
                     <button type="submit">Submit</button>
                 </div>

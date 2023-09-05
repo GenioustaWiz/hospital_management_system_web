@@ -19,7 +19,7 @@ class AboutPage(models.Model):
 
 class AboutList(models.Model):
     title = models.CharField(default='default', max_length=100, null=False)
-    image = models.ImageField(default='default.jpg', upload_to='hospital_abt_images',)
+    image = models.ImageField(upload_to='hospital_abt_images',)
     
     def save(self, *args, **kwargs):
         super(AboutList, self).save(*args, **kwargs)

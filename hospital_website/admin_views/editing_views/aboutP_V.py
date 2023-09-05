@@ -23,9 +23,10 @@ def about_list_edit(request, pk=None):
     # If item_id is provided, get the item to edit, otherwise, create a new item
     if pk is not None:
         item = get_object_or_404(AboutList, pk=pk)
+        image= item.image #
     else:
         item = None
-
+        image= None
     if request.method == 'POST':
         form = AboutListForm(request.POST, request.FILES, instance=item)
         if form.is_valid():
@@ -33,8 +34,13 @@ def about_list_edit(request, pk=None):
             return redirect('about_page_view')  # Replace 'about_page' with the actual URL name for your about page
     else:
         form = AboutListForm(instance=item)
+    
+        context={
+            'form': form,
+            'image': image
+            }
 
-    return render(request, 'maindashboard/about_page/about_list_template.html', {'form': form})
+    return render(request, 'maindashboard/about_page/about_list_template.html', context)
 # def about_list_edit(request):
 #     if request.method == 'POST':
 #         form = AboutListForm(request.POST, request.FILES)
