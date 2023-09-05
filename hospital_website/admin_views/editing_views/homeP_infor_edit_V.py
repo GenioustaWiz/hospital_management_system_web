@@ -8,7 +8,7 @@ def edit_home_page(request):
     try:
         home_page = HomePage.objects.first()
     except HomePage.DoesNotExist:
-        home_page = HomePage()
+        home_page = HomePage() 
 
     if request.method == 'POST':
         form = HomePageForm(request.POST, instance=home_page)

@@ -1,0 +1,82 @@
+{% extends 'maindashboard/dashboard_base.html' %}
+{% comment %} displays Write  {% endcomment %}
+
+{% load static %}
+
+{% block title %} Blog List Page {% endblock title %}
+{% block css %}
+{{form.media}}
+<link rel="stylesheet" href="{% static 'css/blogdashboard/author/write_new_article.css' %}"> 
+<style>
+    input {
+        height: fit-content !important;
+    }
+    #image-preview{
+        display: flex;
+        flex-direction: column;
+    }
+</style>
+{% endblock css %}
+{% block content %}
+ 
+
+<!-- Write New Articles -->
+<section class="item2 section write-A-page">
+  <div class="write-a-c bg--white">
+        <div id="w-a-heading">
+            <h2> Write New HomePage Information</h2>
+        </div>
+        <div id="w-a-body">
+            <form class="w-a-body" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <P>
+                    {{ form.title.label_tag }}
+                    {{ form.title }}
+                </P>
+                <div id="image-preview">
+                    {{ form.image.label_tag }}
+                    <!-- the img section is ment to display the current image during edting -->
+                    <img id="image-display" src="{{ form.instance.image.url }}" width="200" height="200" alt="Image">
+                    {{ form.image }}
+                </div>
+                <div class="button">
+                    <button type="submit">Submit</button>
+                </div>
+                
+            </form>
+            
+            <script>
+                // Get references to DOM elements
+                const imageDisplay = document.getElementById('image-display');
+                const imageLink = document.getElementById('image-link');
+                const imageInput = document.getElementById('{{ form.image.id_for_label }}'); // Use the input's ID from the form
+            
+                // When a new image is selected, update the preview
+                imageInput.addEventListener('change', function () {
+                    const file = imageInput.files[0];
+                    if (file) {
+                        // Update the image preview
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            imageDisplay.src = e.target.result;
+                        };
+                        reader.readAsDataURL(file);
+            
+                        // Update the image link
+                        imageLink.textContent = file.name;
+                    }
+                });
+            </script>
+            
+            {% comment %} <form class="w-a-body" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="button">
+                    <button type="submit">Submit</button>
+                </div>
+            </form> <!-- end of Class w-a-body--> {% endcomment %}
+        </div><!-- end of ID w-a-body-->
+    </div><!-- End of Write-articles-->
+</section><!-- End Of Write Articles --> 
+
+{% endblock content%}
