@@ -30,32 +30,39 @@
             <h2> Footer Information</h2>
             <h6>
                 <i class="fa-solid fa-triangle-exclamation"></i>
-                Click the edit button to edit or save new footer information.
+                Click the edit/add button to edit or save new footer information.
             </h6>
         </div>
         <div class="content-body">
             <footer class="top-footer">
-                <div class="f-company">
-                        {% if top_footer_headings %}
-                        {% for f_content in top_footer_headings %}
-                    <h4>{{ f_content.heading }}</h4>
-                    <ul>
-                        <li>
-                            <a href="{{ f_content.url }}">{{ f_content.content }}</a>
-                        </li>
-                        
-                    </ul>
-                    {% endfor %}
-                    {% else %}
+                <div class="f-company edit-icon-h">
+                    {% if top_footer_headings %}
+                    {% for f_content in top_footer_headings %}
                     <div class="edit-icon-h">
-                        <p>No Footer information</p>
+                        <h4>{{ f_content.heading }}</h4>
+                        <ul>
+                            <li>
+                                <a href="{{ f_content.url }}">{{ f_content.content }}</a>
+                            </li>
+                            
+                        </ul>
                         <div class="edit-icon">
-                            <a href="">
+                            <a href="{% url 'create_top_footer_content' pk=f_content.id %}">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </a>
                         </div>
                     </div>
+                    {% endfor %}
+                    {% else %}
+                    <div class="edit-icon-h">
+                        <p>No Footer information</p>
+                    </div>
                     {% endif %}
+                    <div class="edit-icon">
+                        <a href="{% url 'create_top_footer_content' %}">
+                          <i class="bi bi-database-fill-add"></i>
+                        </a>
+                    </div>
                 </div>
                 
                 <div class="f-contact">
@@ -71,7 +78,7 @@
                             <li>+254781236749</li>
                         </ul>
                         <div class="edit-icon">
-                            <a href="">
+                            <a href="{% url 'edit_company_contact_info'%}">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </a>
                         </div>
@@ -101,7 +108,7 @@
                             {% endif %}
                         </ul>
                         <div class="edit-icon">
-                            <a href="">
+                            <a href="{% url 'create_social_media_links' %}">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </a>
                         </div>

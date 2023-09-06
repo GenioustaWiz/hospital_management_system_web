@@ -37,11 +37,11 @@ urlpatterns += [
     path('about-list/', about_list_edit, name='about_list_edit'),
     # ==========EDIT COMPANY CONTACT INFORMATION======================
     path('company-contact/', companycontact_info_view, name='companycontact_info_view'),
-    path('edit-company_contact-info/', edit_company_contact_info, name='edit_company_contact_info'),
+    path('edit-company-contact-info/', edit_company_contact_info, name='edit_company_contact_info'),
     # ============= TOP FOOTER INFORMATION EDIT===========
     path('top-footer-view/', top_footer_view, name='top_footer_view'),
 
-    path('create_top_footer_heading/', create_top_footer_heading, name='create_top_footer_heading'),
-    path('create_top_footer_content/', create_top_footer_content, name='create_top_footer_content'),
-    path('create_social_media_links/', create_social_media_links, name='create_social_media_links'),
+    path('create-top-footer-heading/', create_top_footer_heading, name='create_top_footer_heading'),
+    path('create-top-footer-content/', create_top_footer_content, name='create_top_footer_content'),
+    path('create-social-media-links/', create_social_media_links, name='create_social_media_links'),
 ]
