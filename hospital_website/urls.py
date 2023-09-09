@@ -33,7 +33,7 @@ urlpatterns += [
     path('about-page-view/', about_page_view, name='about_page_view'),
 
     path('about-page-edit/', about_page_edit, name='about_page_edit'),
-    path('about-list/<int:pk>/', about_list_edit, name='about_list_edit'),
+    path('about-list-edit/<int:pk>/', about_list_edit, name='about_list_edit'),
     path('about-list/', about_list_edit, name='about_list_edit'),
     # ==========EDIT COMPANY CONTACT INFORMATION======================
     path('company-contact/', companycontact_info_view, name='companycontact_info_view'),
@@ -42,6 +42,7 @@ urlpatterns += [
     path('top-footer-view/', top_footer_view, name='top_footer_view'),
 
     path('create-top-footer-heading/', create_top_footer_heading, name='create_top_footer_heading'),
-    path('create-top-footer-content/', create_top_footer_content, name='create_top_footer_content'),
+    path('create-top-footer-content/<int:pk>/', create_top_footer, name='create_top_footer_content'),
+    path('create-top-footer-content/', create_top_footer, name='create_top_footer_content'),
     path('create-social-media-links/', create_social_media_links, name='create_social_media_links'),
 ]

@@ -25,7 +25,7 @@ def about_list_edit(request, pk=None):
         item = get_object_or_404(AboutList, pk=pk)
         image= item.image #
     else:
-        item = None
+        item = None 
         image= None
     if request.method == 'POST':
         form = AboutListForm(request.POST, request.FILES, instance=item)

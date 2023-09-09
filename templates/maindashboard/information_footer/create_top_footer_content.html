@@ -8,7 +8,9 @@
 {{form.media}}
 <link rel="stylesheet" href="{% static 'css/blogdashboard/author/write_new_article.css' %}"> 
 <style>
-  
+  select{
+    display: flex !important;
+}
 </style>
 {% endblock css %}
 {% block content %}
@@ -18,16 +20,190 @@
 <section class="item2 section write-A-page">
   <div class="write-a-c bg--white">
         <div id="w-a-heading">
-            <h2> Write New HomePage Information</h2>
+            <h2> Write New Footer Information</h2>
         </div>
         <div id="w-a-body">
-            <form class="w-a-body" method="POST" enctype="multipart/form-data">
+          {% comment %} <form method="post">
+            {% csrf_token %}
+            {{ form_h.as_p }}
+            
+            <table>
+                {{ content_item_formset.management_form }}
+                {% for form in content_item_formset %}
+                <tr class="formset-row">
+                    {{ form.as_table }}
+                </tr>
+                {% endfor %}
+            </table>
+            
+            <button type="button" id="add-form">Add More</button>
+            <input type="submit" value="Save">
+        </form>
+    
+        <script>
+          jQuery(document).ready(function($) {
+            $(document).ready(function() {
+                $('#add-form').click(function() {
+                    const formCount = $('.formset-row').length;
+                    const newForm = $('.formset-row:last').clone();
+                    newForm.find(':input').val('');
+                    newForm.find('input[type="hidden"]').remove();
+                    newForm.insertAfter($('.formset-row:last'));
+                    return false;
+                });
+            });
+          });
+        </script> {% endcomment %}
+          {% comment %} <form class="w-a-body" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="module aligned">
+                <legend>Top Footer Content</legend>
+                <div class="form-row field-heading">
+                    <div>
+                        <label class="required" for="id_heading">Heading:</label>
+                        <input type="text" name="heading" value="default" class="vTextField" maxlength="100" required="" id="id_heading">
+                    </div>
+                </div>
+            </fieldset>
+        
+            <div class="js-inline-admin-formset inline-group" id="content_items-group" data-inline-type="tabular" data-inline-formset="{&quot;name&quot;: &quot;#content_items&quot;, &quot;options&quot;: {&quot;prefix&quot;: &quot;content_items&quot;, &quot;addText&quot;: &quot;Add another Top footer content&quot;, &quot;deleteText&quot;: &quot;Remove&quot;}}">
+                <div class="tabular inline-related last-related">
+                    <input type="hidden" name="content_items-TOTAL_FORMS" value="{{ content_item_formset.total_form_count }}" id="id_content_items-TOTAL_FORMS" autocomplete="off">
+                    <input type="hidden" name="content_items-INITIAL_FORMS" value="0" id="id_content_items-INITIAL_FORMS">
+                    <input type="hidden" name="content_items-MIN_NUM_FORMS" value="0" id="id_content_items-MIN_NUM_FORMS" autocomplete="off">
+                    <input type="hidden" name="content_items-MAX_NUM_FORMS" value="1000" id="id_content_items-MAX_NUM_FORMS" autocomplete="off">
+                    <fieldset class="module">
+                        <h2>Top footer contents</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="original"></th>
+                                    <th class="column-content required">Content</th>
+                                    <th class="column-url">URL</th>
+                                    <th>Delete?</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for form in content_item_formset %}
+                                <tr class="form-row dynamic-content_items">
+                                    <td class="original">
+                                        <input type="hidden" name="{{ form.prefix }}-id" id="id_{{ form.prefix }}-id">
+                                        <input type="hidden" name="{{ form.prefix }}-heading" id="id_{{ form.prefix }}-heading">
+                                    </td>
+                                    <td class="field-content">
+                                        <input type="text" name="{{ form.prefix }}-content" value="{{ form.content.value }}" class="vTextField" maxlength="200" id="id_{{ form.prefix }}-content">
+                                    </td>
+                                    <td class="field-url">
+                                        <input type="text" name="{{ form.prefix }}-url" value="{{ form.url.value }}" class="vTextField" maxlength="1000" id="id_{{ form.prefix }}-url">
+                                    </td>
+                                    <td class="delete">
+                                        <div><a class="inline-deletelink" href="#">Remove</a></div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </fieldset>
+                </div>
+            </div>
+        
+            <div class="submit-row">
+                <input type="submit" value="Save" class="default" name="_save">
+                <input type="submit" value="Save and add another" name="_addanother">
+                <input type="submit" value="Save and continue editing" name="_continue">
+            </div>
+        </form>
+        
+        <script id="django-admin-form-add-constants" src="/static/admin/js/change_form.js" data-model-name="topfooterheading" async=""></script>
+        <script id="django-admin-prepopulated-fields-constants" src="/static/admin/js/prepopulate_init.js" data-prepopulated-fields="[]"></script>
+           {% endcomment %}
+          
+          <form class="w-a-body" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <fieldset>
+                  {{form_h.as_p}}
+                  {{ form_h.errors }}
+                </fieldset>
+                
+                <fieldset>
+                  <legend>Content Items</legend>
+                  {{ content_item_formset.management_form }}
+                  {{ content_item_formset.errors }}
+                  <div id="content-item-formset">
+                    {% for form in content_item_formset %}
+                    <div class="formset-row">
+                      {{ form.id_for_label }} {# This generates a unique ID for form labels #}
+                      <table>
+                          {{ form.as_table }}
+                          {{ form.errors }}
+                      </table>
+                  </div>
+                    {% endfor %}
+                  </div>
+                  <button type="button" id="add-content-item">Add Content Item</button>
+                </fieldset>
+              
+                <input type="submit" value="Save">
+        </form>
+              
+        <script>
+            const contentItemFormset = document.getElementById('content-item-formset');
+            const addContentItemButton = document.getElementById('add-content-item');
+            let formIndex = {{ total_form_count|default:0 }}; // Initialize from the total form count
+        
+            addContentItemButton.addEventListener('click', () => {
+                const newForm = document.createElement('div');
+                newForm.classList.add('formset-row');
+        
+                // Generate unique IDs and 'for' attributes
+                const prefix = `content-${formIndex}-`;
+                newForm.innerHTML = `
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th><label for="${prefix}content">Content:</label></th>
+                                <td>
+                                    <input type="text" name="${prefix}content" value="default" maxlength="200" id="id_${prefix}content">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><label for="${prefix}url">Url:</label></th>
+                                <td>
+                                    <input type="text" name="${prefix}url" maxlength="1000" id="id_${prefix}url">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><label for="${prefix}DELETE">Delete:</label></th>
+                                <td>
+                                    <input type="checkbox" name="${prefix}DELETE" id="id_${prefix}DELETE">
+                                    <input type="hidden" name="${prefix}id" id="id_${prefix}id">
+                                    <input type="hidden" name="${prefix}heading" id="id_${prefix}heading">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                `;
+        
+                contentItemFormset.appendChild(newForm);
+                formIndex++;
+        
+                // Update the TOTAL_FORMS input field
+                const totalFormsInput = document.getElementById('id_content-TOTAL_FORMS');
+                totalFormsInput.value = formIndex; // to account for the newly added form
+            });
+        </script>
+        
+        
+      
+      
+        
+            {% comment %} <form class="w-a-body" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <div class="button">
                     <button type="submit">Submit</button>
                 </div>
-            </form> <!-- end of Class w-a-body-->
+            </form> <!-- end of Class w-a-body--> {% endcomment %}
         </div><!-- end of ID w-a-body-->
     </div><!-- End of Write-articles-->
 </section><!-- End Of Write Articles --> 

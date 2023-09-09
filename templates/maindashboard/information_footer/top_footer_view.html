@@ -36,8 +36,8 @@
         <div class="content-body">
             <footer class="top-footer">
                 <div class="f-company edit-icon-h">
-                    {% if top_footer_headings %}
-                    {% for f_content in top_footer_headings %}
+                    {% if top_footer_contents %}
+                    {% for f_content in top_footer_headings.content_items.all  %}
                     <div class="edit-icon-h">
                         <h4>{{ f_content.heading }}</h4>
                         <ul>

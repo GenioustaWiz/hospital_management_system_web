@@ -68,3 +68,17 @@ class HomePageCard3_Admin(admin.ModelAdmin):
     actions_on_bottom = True
     save_on_top = True
 admin.site.register(HomePageCard3, HomePageCard3_Admin)
+
+
+class TopFooterContentInline(admin.TabularInline):
+    model = TopFooterContent
+    #this will enable the list under the specific heading to be enterd together
+
+class TopFooterHeadingAdmin(admin.ModelAdmin):
+    inlines = [TopFooterContentInline]
+
+class SocialMediaLinkAdmin(admin.ModelAdmin):
+    list_display = ('id', 'facebook_link', 'whatsapp_link', 'linkedIn_link', 'twitter_link')
+
+admin.site.register(TopFooterHeading, TopFooterHeadingAdmin)
+admin.site.register(SocialMediaLink, SocialMediaLinkAdmin)
