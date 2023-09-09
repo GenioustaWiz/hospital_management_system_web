@@ -3,7 +3,7 @@ from ...models.information_footer_M import TopFooterHeading, TopFooterContent, S
 
 def top_footer_view(request):
     # Retrieve data from the models
-    top_footer_headings = TopFooterHeading.objects.all()
+    top_footer_headings = TopFooterHeading.objects.all() 
     top_footer_contents = TopFooterContent.objects.all()
     social_media_links = SocialMediaLink.objects.first()  # Assuming there's only one instance
 

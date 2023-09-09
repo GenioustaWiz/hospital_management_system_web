@@ -8,7 +8,35 @@
 {% block css %}
 {{form.media}}
 <link rel="stylesheet" href="{% static 'css/blogdashboard/author/write_new_article.css' %}"> 
+{% comment %} <link rel="stylesheet" href="{% static 'css/top-footer.css' %}" type="text/css"> {% endcomment %}
 <style>
+    .content-links{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, 200px);
+        gap: 30px;
+        justify-content: center;
+        padding-bottom: 70px;
+        grid-auto-flow: dense;
+        /* background-color: rgb(20, 19, 19); */
+        padding-top: 20px;
+        position: relative;
+        z-index: 2;
+    }
+    .in-heading{
+        text-align: center;
+    }
+    .content-links .edit-icon-h{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #dcefef;
+    }
+    .content-links a{
+        color: black;
+    }
+    .content-links .edit-icon a{
+        color: red;
+    }
     .f-company, .f-contact{
         
         margin: 20px 0;
@@ -28,46 +56,49 @@
     <div class="write-a-c bg--white">
         <div id="w-a-heading">
             <h2> Footer Information</h2>
-            <h6>
+            <h6 class="warning">
                 <i class="fa-solid fa-triangle-exclamation"></i>
                 Click the edit/add button to edit or save new footer information.
             </h6>
         </div>
         <div class="content-body">
-            <footer class="top-footer">
-                <div class="f-company edit-icon-h">
-                    {% if top_footer_contents %}
-                    {% for f_content in top_footer_headings.content_items.all  %}
-                    <div class="edit-icon-h">
-                        <h4>{{ f_content.heading }}</h4>
-                        <ul>
-                            <li>
-                                <a href="{{ f_content.url }}">{{ f_content.content }}</a>
-                            </li>
-                            
-                        </ul>
+            <footer class="top--footer">
+                <div class="f-company">
+                    <h4 class="in-heading">Footer content with links</h4>
+                    <div class=" content-links edit-icon-h">
+                        {% if top_footer_headings %}
+                        {% for heading in top_footer_headings %}
+                        <div class="edit-icon-h">
+                            <h4>{{ heading.heading }}</h4>
+                            <ul>
+                                {% for content_item in heading.content_items.all %}
+                                <li>
+                                    <a href="http://{{ content_item.url|safe }}">{{ content_item.content }}</a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            <div class="edit-icon">
+                                <a href="{% url 'create_top_footer_content' pk=heading.id %}">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <div class="edit-icon-h">
+                            <p>No Footer information. Click the add button to add new</p>
+                        </div>
+                        {% endif %}
                         <div class="edit-icon">
-                            <a href="{% url 'create_top_footer_content' pk=f_content.id %}">
-                                <i class="fa-solid fa-pen-to-square"></i>
+                            <a href="{% url 'create_top_footer_content' %}">
+                            <i class="bi bi-database-fill-add"></i>
                             </a>
                         </div>
                     </div>
-                    {% endfor %}
-                    {% else %}
-                    <div class="edit-icon-h">
-                        <p>No Footer information</p>
-                    </div>
-                    {% endif %}
-                    <div class="edit-icon">
-                        <a href="{% url 'create_top_footer_content' %}">
-                          <i class="bi bi-database-fill-add"></i>
-                        </a>
-                    </div>
                 </div>
-                
                 <div class="f-contact">
                     <div id="f-contact" class="edit-icon-h">
-                        <h4>Contact</h4>
+                        <h4 class="in-heading">Contact</h4>
                         <ul>
                             <li>
                                 203 Waithaka, Dagoretti, Nairobi 
@@ -84,7 +115,7 @@
                         </div>
                     </div>
                     <div id="f-socialmedia" class="edit-icon-h">
-                        <h4>Social Media</h4>
+                        <h4 class="in-heading">Social Media</h4>
                         <ul>
                             {% if links in social_media_links %}
                             <li>

@@ -1,4 +1,6 @@
-
+.warning .fa-triangle-exclamation{
+    font-size: 30px;
+}
 #w-a-heading, .content-body{
     padding: 20px;
 }
