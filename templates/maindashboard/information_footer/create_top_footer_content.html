@@ -36,7 +36,7 @@
             <h2> Write New Footer Information</h2>
             <h6 class="warning">
                 <i class="fa fa-solid fa-triangle-exclamation"></i>
-                Click the dustbin(<i class="fa fa-solid fa-trash"></i>) button to remove the added content form.
+                Click the (<i class="fa bi bi-x-lg"></i>) button to remove the added content form.
             </h6>
         </div>
         <div id="w-a-body">
@@ -51,17 +51,18 @@
                 <fieldset>
                     <legend>Enter Content Items</legend>
                     <div id="content-item-formset">
+                        {{ content_item_formset.management_form }} {# Add the management form here #}
                         {% for form in content_item_formset %}
                         <div class="formset-row edit-icon-h">
                             {{ form.id_for_label }}
                             <table>
                                 {{ form.as_table }}
-                                {{ form.errors }}
+                                {{ form.errors }} 
                             </table>
                         </div>
                         {% endfor %}
                     </div>
-                    <button type="button" id="add-content-item">Add Content Item</button>
+                    <button type="button" id="add-content-item">Click to Add Content</button>
                 </fieldset>
                 <div class="button">
                     <button type="submit">Save</button>
@@ -91,7 +92,7 @@
                                 <tr>
                                     <th><label for="${prefix}url">Url:</label></th>
                                     <td>
-                                        <input type="text" name="${prefix}url" maxlength="1000" id="id_${prefix}url" required>
+                                        <input type="text" name="${prefix}url" maxlength="1000" id="id_${prefix}url" ><!--required not set-->
                                     </td>
                                 </tr>
                                 <tr>
@@ -108,7 +109,7 @@
             
                     const removeButton = document.createElement('div');
                     removeButton.classList.add('remove', 'edit-icon');
-                    removeButton.innerHTML = `<i class="fa fa-solid fa-trash"></i>`;
+                    removeButton.innerHTML = `<i class="fa bi bi-x-lg"></i>`;
                     removeButton.addEventListener('click', () => {
                         // Remove the form on delete button click
                         contentItemFormset.removeChild(newForm);

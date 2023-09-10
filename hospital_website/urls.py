@@ -40,7 +40,7 @@ urlpatterns += [
     path('edit-company-contact-info/', edit_company_contact_info, name='edit_company_contact_info'),
     # ============= TOP FOOTER INFORMATION EDIT===========
     path('top-footer-view/', top_footer_view, name='top_footer_view'),
-    path('create-top-footer-content/<int:pk>/', create_top_footer, name='create_top_footer_content'),
-    path('create-top-footer-content/', create_top_footer, name='create_top_footer_content'),
+    path('create-top-footer-content/<int:pk>/', create_top_footer_content, name='create_top_footer_content'),
+    path('create-top-footer-content/', create_top_footer_content, name='create_top_footer_content'),
     path('create-social-media-links/', create_social_media_links, name='create_social_media_links'),
 ]
