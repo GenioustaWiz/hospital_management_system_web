@@ -26,9 +26,7 @@
         text-align: center;
     }
     .content-links .edit-icon-h{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        padding: 5px;
         background-color: #dcefef;
     }
     .content-links a{
@@ -70,6 +68,7 @@
                         {% for heading in top_footer_headings %}
                         <div class="edit-icon-h">
                             <h4>{{ heading.heading }}</h4>
+                            <hr style="margin: 0.1rem 0; border-top: 1px dashed black; background: none;">
                             <ul>
                                 {% for content_item in heading.content_items.all %}
                                 <li>
@@ -99,15 +98,24 @@
                 <div class="f-contact">
                     <div id="f-contact" class="edit-icon-h">
                         <h4 class="in-heading">Contact</h4>
+                        {% if company_info %}
                         <ul>
                             <li>
-                                203 Waithaka, Dagoretti, Nairobi 
+                                {{company_info.address}}
                             </li>
                             <li> 
-                                bettahealth@temporary.com 
+                                {{company_info.email}} 
                             </li>
-                            <li>+254781236749</li>
+                            <li>{{company_info.phone_number}}</li>
                         </ul>
+                        {% else %}
+                        <p>Click the add button to add contact info</p>
+                        <div class="edit-icon">
+                            <a href="{% url 'edit_company_contact_info' %}">
+                            <i class="bi bi-database-fill-add"></i>
+                            </a>
+                        </div>
+                        {% endif %}
                         <div class="edit-icon">
                             <a href="{% url 'edit_company_contact_info'%}">
                                 <i class="fa-solid fa-pen-to-square"></i>
@@ -116,28 +124,43 @@
                     </div>
                     <div id="f-socialmedia" class="edit-icon-h">
                         <h4 class="in-heading">Social Media</h4>
+                        {% if social_media_links %}
                         <ul>
-                            {% if links in social_media_links %}
+                            
                             <li>
-                                <a href="{{ links.facebook_link }}"><i class="fa-brands fa-facebook-f"></i>
+                                <a href="{{ social_media_links.facebook_link }}">
+                                    <i class="fa-brands fa-facebook-f"></i>
+                                    - {{ social_media_links.facebook_link }}
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ links.twitter_link }}"><i class="fa-brands fa-twitter"></i>
+                                <a href="{{ social_media_links.twitter_link }}">
+                                    <i class="fa-brands fa-twitter"></i>
+                                    - {{ social_media_links.twitter_link }}
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ links.whatsapp_link }}"><i class="fa-brands fa-whatsapp"></i>
+                                <a href="{{ social_media_links.whatsapp_link }}">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                    - {{ social_media_links.whatsapp_link }}
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ links.linkedIn_link }}"><i class="fa-brands fa-linkedin"></i>
+                                <a href="{{ social_media_links.linkedIn_link }}">
+                                    <i class="fa-brands fa-linkedin"></i>
+                                    - {{ social_media_links.linkedIn_link }}
                                 </a>
                             </li>
-                            {% else %}
-                            <p>No Social Media Accounts Saved</p>
-                            {% endif %}
+                            
                         </ul>
+                        {% else %}
+                            <p>No Social Media Accounts Saved</p>
+                            <div class="edit-icon">
+                                <a href="{% url 'create_top_footer_content' %}">
+                                <i class="bi bi-database-fill-add"></i>
+                                </a>
+                            </div>
+                        {% endif %}
                         <div class="edit-icon">
                             <a href="{% url 'create_social_media_links' %}">
                                 <i class="fa-solid fa-pen-to-square"></i>

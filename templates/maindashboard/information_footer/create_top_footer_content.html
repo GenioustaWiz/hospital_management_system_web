@@ -26,7 +26,7 @@
     }
 </style>
 {% endblock css %}
-{% block content %}
+{% block content %} 
  
 
 <!-- Write New Articles -->
@@ -129,87 +129,6 @@
                     totalFormsInput.value = formIndex; // to account for the newly added form
                 });
             </script>
-            
-            {% comment %} <form class="w-a-body" method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <fieldset>
-                        <legend>Enter Heading</legend>
-                    {{form_h.as_p}}
-                    {{ form_h.errors }}
-                    </fieldset>
-                    
-                    <fieldset>
-                    <legend>Enter Content Items</legend>
-                    {{ content_item_formset.management_form }}
-                    {{ content_item_formset.errors }}
-                    <div id="content-item-formset">
-                        {% for form in content_item_formset %}
-                        <div class="formset-row edit-icon-h">
-                        {{ form.id_for_label }} {# This generates a unique ID for form labels #}
-                            <table>
-                                {{ form.as_table }}
-                                {{ form.errors }}
-                            </table>
-                            <div class="remove edit-icon">
-                                <i class="fa-solid fa-trash"></i>
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
-                    <button type="button" id="add-content-item">Add Content Item</button>
-                    </fieldset>
-                    <div class="button">
-                        <button type="submit">Save</button>
-                    </div>
-            </form>
-                
-            <script>
-                const contentItemFormset = document.getElementById('content-item-formset');
-                const addContentItemButton = document.getElementById('add-content-item');
-                let formIndex = {{ total_form_count|default:0 }}; // Initialize from the total form count
-            
-                addContentItemButton.addEventListener('click', () => {
-                    const newForm = document.createElement('div');
-                    newForm.classList.add('formset-row');
-            
-                    // Generate unique IDs and 'for' attributes
-                    const prefix = `content-${formIndex}-`;
-                    newForm.innerHTML = `
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <th><label for="${prefix}content">Content:</label></th>
-                                    <td>
-                                        <input type="text" name="${prefix}content" value="default" maxlength="200" id="id_${prefix}content">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th><label for="${prefix}url">Url:</label></th>
-                                    <td>
-                                        <input type="text" name="${prefix}url" maxlength="1000" id="id_${prefix}url">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th><label for="${prefix}DELETE">Delete:</label></th>
-                                    <td>
-                                        <input type="checkbox" name="${prefix}DELETE" id="id_${prefix}DELETE">
-                                        <input type="hidden" name="${prefix}id" id="id_${prefix}id">
-                                        <input type="hidden" name="${prefix}heading" id="id_${prefix}heading">
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    `;
-            
-                    contentItemFormset.appendChild(newForm);
-                    formIndex++;
-            
-                    // Update the TOTAL_FORMS input field
-                    const totalFormsInput = document.getElementById('id_content-TOTAL_FORMS');
-                    totalFormsInput.value = formIndex; // to account for the newly added form
-                });
-            </script> {% endcomment %}
-        
         </div><!-- end of ID w-a-body-->
     </div><!-- End of Write-articles-->
 </section><!-- End Of Write Articles --> 

@@ -16,6 +16,20 @@
         flex-direction: column;
         margin-bottom: 20px;
     }
+    .formset-row{
+        margin: 10px 0;
+        border: 1px;
+        padding: 4px ;
+        padding-right: 25px;
+        border-style: dotted;
+    }
+    .fa{
+        color: red;
+    }
+    .edit-icon {
+        top: 0 !important;
+        right: 0 !important;
+    }
 </style>
 {% endblock css %}
 {% block content %}
@@ -25,29 +39,130 @@
 <section class="item2 section write-A-page">
   <div class="write-a-c bg--white">
         <div id="w-a-heading">
-            <h2> Write New HomePage Information</h2>
-        </div>
+            <h2> Write New AboutPage List Information</h2>
+            <h6 class="warning">
+                <i class="fa fa-solid fa-triangle-exclamation"></i>
+                Click the (<i class="fa bi bi-x-lg"></i>) button to remove the added content form.
+            </h6>
+        </div> 
         <div id="w-a-body">
+            
             <form class="w-a-body" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                <P>
-                    {{ form.title.label_tag }}
-                    {{ form.title }}
-                </P>
-                <div id="image-preview">
-                    {{ form.image.label_tag }}
-                    <!-- the img section is ment to display the current image during edting -->
-                    {% if image %}
-                    <img id="image-display" src="{{ form.instance.image.url }}" width="200" height="200" alt="Image">
-                    {% endif %}
-                    {{ form.image }}
+                <div id="content-item-formset">
+                    {{ formset.management_form }}
+                    {% for form in formset %}
+                    <div class="formset-row edit-icon-h">
+                        <P>
+                            {{ form.title.label_tag }}
+                            {{ form.title }}
+                            {{ form.title.errors }} 
+                        </P>
+                        <div id="image-preview">
+                            {{ form.image.label_tag }}
+                            <!-- the img section is ment to display the current image during edting -->
+                            {% if image %}
+                            <img id="image-display" src="{{ form.instance.image.url }}" width="200" height="200" alt="Image">
+                            {% endif %}
+                            {{ form.image }}
+                            {{ form.image.errors }} 
+                        </div>
+                    </div>
+                    {% endfor %}
                 </div>
-                
+                <button type="button" id="add-content-item">
+                    Click to Add Content
+                </button>
                 <div class="button">
                     <button type="submit">Submit</button>
                 </div>
                 
             </form>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const addContentButton = document.getElementById('add-content-item');
+                    const contentItemFormset = document.getElementById('content-item-formset');
+                    let formIndex = {{ total_form_count|default:0 }}; // Initialize from the total form count
+            
+                    addContentButton.addEventListener('click', function() {
+                        // Create a new .formset-row
+                        const newFormsetRow = createFormsetRow(formIndex);
+                        
+                        // Append the new .formset-row to the formset
+                        contentItemFormset.appendChild(newFormsetRow);
+            
+                        // Create a remove button for the new .formset-row
+                        const removeButton = createRemoveButton(newFormsetRow);
+                        
+                        // Append the remove button to the new .formset-row
+                        newFormsetRow.appendChild(removeButton);
+            
+                        // Increment the TOTAL_FORMS value by 1
+                        updateTotalForms(1);
+            
+                        // Increment the form index
+                        formIndex++;
+                    });
+            
+                    // Function to create a new .formset-row
+                    function createFormsetRow(index) {
+                        // Create a new .formset-row element
+                        const newRow = document.createElement('div');
+                        newRow.classList.add('formset-row', 'edit-icon-h');
+                        
+                        // Construct the inner HTML for the new .formset-row
+                        newRow.innerHTML = `
+                            <p>
+                                <label for="id_form-${index}-title">Title:</label>
+                                <input type="text" name="form-${index}-title" value="default" maxlength="100" id="id_form-${index}-title">
+                            </p>
+                            <div id="image-preview">
+                                <label for="id_form-${index}-image">Image:</label>
+                                <!-- the img section is meant to display the current image during editing -->
+                                <input type="file" name="form-${index}-image" accept="image/*" id="id_form-${index}-image">
+                            </div>
+                        `;
+                        
+                        return newRow;
+                    }
+            
+                    // Function to create a remove button for a .formset-row
+                    function createRemoveButton(formsetRow) {
+                        // Create a remove button for the given .formset-row
+                        const removeButton = document.createElement('div');
+                        removeButton.classList.add('remove', 'edit-icon');
+                        removeButton.innerHTML = `<i class="fa bi bi-x-lg"></i>`;
+                        
+                        // Add a click event listener to the remove button
+                        removeButton.addEventListener('click', function() {
+                            // Remove the parent .formset-row when the remove button is clicked
+                            formsetRow.remove();
+                            // Reduce the TOTAL_FORMS value by 1
+                            updateTotalForms(-1);
+                        });
+                        
+                        return removeButton;
+                    }
+            
+                    // Function to update the TOTAL_FORMS input field
+                    function updateTotalForms(change) {
+                        const totalFormsInput = document.getElementById('id_form-TOTAL_FORMS');
+            
+                        if (totalFormsInput) {
+                            // Parse the current value and add the change
+                            const currentValue = parseInt(totalFormsInput.value);
+                            if (!isNaN(currentValue)) {
+                                totalFormsInput.value = currentValue + change;
+                            }
+                        } else {
+                            console.log("Element with ID 'id_form-TOTAL_FORMS' not found.");
+                        }
+                    }
+                });
+            </script>
+            
+            
+            
             
             <script>
                 // Get references to DOM elements
@@ -70,15 +185,7 @@
                         imageLink.textContent = file.name;
                     }
                 });
-            </script>
-            
-            {% comment %} <form class="w-a-body" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <div class="button">
-                    <button type="submit">Submit</button>
-                </div>
-            </form> <!-- end of Class w-a-body--> {% endcomment %}
+            </script> 
         </div><!-- end of ID w-a-body-->
     </div><!-- End of Write-articles-->
 </section><!-- End Of Write Articles --> 

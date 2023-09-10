@@ -54,7 +54,7 @@ def create_social_media_links(request):
         form = SocialMediaLinkForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('home')  # Replace 'home' with the appropriate URL
+            return redirect('top_footer_view')  # Replace 'home' with the appropriate URL
     else:
         form = SocialMediaLinkForm()
     
