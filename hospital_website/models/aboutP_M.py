@@ -19,8 +19,7 @@ class AboutPage(models.Model):
 
 class AboutList(models.Model):
     title = models.CharField(default='default', max_length=100, null=False)
-    image = models.ImageField(upload_to='hospital_abt_images',)
-    related_items = models.ManyToManyField('self', blank=True)
+    image = models.ImageField(upload_to='hospital_abt_images',blank=False, null=False)
     
     def save(self, *args, **kwargs):
         super(AboutList, self).save(*args, **kwargs)

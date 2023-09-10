@@ -21,13 +21,21 @@ def about_page_edit(request):
         )
 
 from django.forms import formset_factory
+from django.forms import modelformset_factory
 
-def about_list_edit(request):
+def about_list_edit(request, pk=None):
+    # If item_id is provided, get the item to edit, otherwise, create a new item
+    if pk is not None:
+        item = get_object_or_404(AboutList, pk=pk)
+        image= item.image #
+    else:
+        item = None 
+        image= None 
     # Assuming AboutListForm is your form class
-    AboutListFormSet = formset_factory(AboutListForm, extra=1)  # You can adjust 'extra' as needed
+    AboutListFormSet = modelformset_factory(AboutList, form=AboutListForm, extra=0)  # You can adjust 'extra' as needed
 
     if request.method == 'POST':
-        formset = AboutListFormSet(request.POST, request.FILES)
+        formset = AboutListFormSet(request.POST, request.FILES,)
         print('==============formset================')
         print(formset)
         if formset.is_valid():
@@ -44,13 +52,15 @@ def about_list_edit(request):
         else:
             print('Formset has errors:', formset.errors)
     else:
-        formset = AboutListFormSet()
-    
-    items = AboutList.objects.all()  # Fetch all existing items for display
+        # Fetch the queryset based on the provided primary key (pk)
+        queryset = AboutList.objects.filter(pk=pk) if pk is not None else AboutList.objects.none()
+        formset = AboutListFormSet(queryset=queryset)
+        
     total_form_count = formset.total_form_count()  # Calculate the total number of forms
     context = {
         'formset': formset,
-        'items': items,  # Pass the items to the template for display
+        'image': image,
+        'edit_mode': pk is not None,  # True if in edit mode, False if in create new mode
         'total_form_count': total_form_count,
     }
 

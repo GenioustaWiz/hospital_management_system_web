@@ -31,7 +31,7 @@ class about_Admin(admin.ModelAdmin):
 admin.site.register(AboutPage, about_Admin)
 
 class abtList_Admin(admin.ModelAdmin):
-    list_display = ('id', 'title',)
+    list_display = ('id', 'title', 'image')
     list_display_links = ('title',) 
     actions_on_top = True
     actions_on_bottom = True
