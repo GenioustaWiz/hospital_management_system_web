@@ -32,31 +32,48 @@ def about_list_edit(request, pk=None):
         item = None 
         image= None 
     # Assuming AboutListForm is your form class
+    # WE USE *modelformset_factory* SO THAT WE CAN BE ABLE TO USE QUERYSET ON FORMSET
     AboutListFormSet = modelformset_factory(AboutList, form=AboutListForm, extra=0)  # You can adjust 'extra' as needed
-
+    
     if request.method == 'POST':
-        formset = AboutListFormSet(request.POST, request.FILES,)
-        print('==============formset================')
-        print(formset)
-        if formset.is_valid():
-            # items = formset.save(commit=False)
-            # print('==============items================')
-            # print(items) 
-            for item in formset:
-                itemm = item.save(commit=False)
-                print('==============instance================')
-                print(item)  # Check if the form has valid data
-                itemm.save()  # Save the item to the database
-            # formset.save_m2m()  # Save many-to-many relationships if any
-            return redirect('about_page_view')  # Replace 'about_page' with the actual URL name for your about page
-        else:
-            print('Formset has errors:', formset.errors)
+        print('==============ID================')
+        print(pk)
+        if pk is not None: #FOR SAVING EDITED DATA ONLY
+            formset =  AboutListForm(request.POST, request.FILES, instance=item)
+            if formset.is_valid():
+                formset.save()
+                return redirect('about_page_view')
+            else:
+                print('Formset has errors:', formset.errors)
+        else: #FOR SAVING NEW DATA
+            formset = AboutListFormSet(request.POST, request.FILES,queryset=AboutList.objects.filter(pk=pk))
+            print('==============formset================')
+            print(formset)
+            # Set the 'id' field in the form data before validation
+            
+            if formset.is_valid():
+                # items = formset.save(commit=False)
+                # print('==============items================')
+                # print(items) 
+                for item in formset:
+                    itemm = item.save(commit=False)
+                    print('==============instance================')
+                    print(item)  # Check if the form has valid data
+                    itemm.save()  # Save the item to the database
+                # formset.save_m2m()  # Save many-to-many relationships if any
+                return redirect('about_page_view')  # Replace 'about_page' with the actual URL name for your about page
+            else:
+                print('Formset has errors:', formset.errors)
     else:
-        # Fetch the queryset based on the provided primary key (pk)
-        queryset = AboutList.objects.filter(pk=pk) if pk is not None else AboutList.objects.none()
-        formset = AboutListFormSet(queryset=queryset)
+        if pk is not None: #FOR SAVING EDITED DATA ONLY
+            formset =  AboutListForm(instance=item)
+            total_form_count = None
+        else: #FOR SAVING NEW DATA
+            # Fetch the queryset based on the provided primary key (pk)
+            queryset = AboutList.objects.filter(pk=pk) if pk is not None else AboutList.objects.none()
+            formset = AboutListFormSet(queryset=queryset)
         
-    total_form_count = formset.total_form_count()  # Calculate the total number of forms
+            total_form_count = formset.total_form_count()  # Calculate the total number of forms
     context = {
         'formset': formset,
         'image': image,
@@ -67,39 +84,3 @@ def about_list_edit(request, pk=None):
     return render(request, 'maindashboard/about_page/about_list_template.html', context)
 
 
-# def about_list_edit(request, pk=None):
-#     # If item_id is provided, get the item to edit, otherwise, create a new item
-#     if pk is not None:
-#         item = get_object_or_404(AboutList, pk=pk)
-#         image= item.image #
-#     else:
-#         item = None 
-#         image= None 
-#     if request.method == 'POST':
-#         form = AboutListForm(request.POST, request.FILES, instance=item)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('about_page_view')  # Replace 'about_page' with the actual URL name for your about page
-#     else:
-#         form = AboutListForm(instance=item)
-    
-#         context={
-#             'form': form,
-#             'image': image 
-#             }
-
-#     return render(request, 'maindashboard/about_page/about_list_template.html', context)
-
-# def about_list_edit(request):
-#     if request.method == 'POST':
-#         form = AboutListForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('about_page_view')  # Replace 'about_list' with the actual URL name
-#     else:
-#         form = AboutListForm()
-
-#     return render(request, 
-#         'maindashboard/about_page/about_list_template.html', 
-#         {'form': form}
-#         )

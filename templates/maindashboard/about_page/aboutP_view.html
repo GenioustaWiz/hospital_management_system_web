@@ -13,6 +13,12 @@
   .des-p p {
     padding: 0 25px 0 5px;
   }
+  .about-list{
+    padding-top: 25px;
+  }
+  .add-icon{
+    top: -10px;
+  }
 </style>
 {% endblock css %}
 
@@ -59,7 +65,7 @@
           </div>
         </div>
         {% endfor %}
-        <div class="edit-icon">
+        <div class="edit-icon add-icon">
           <a href="{% url 'about_list_edit' %}">
             <i class="bi bi-database-fill-add"></i>
           </a>

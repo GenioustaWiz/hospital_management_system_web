@@ -9,7 +9,7 @@ class TopFooterHeading(models.Model):
     def save(self, *args, **kwargs):
         super(TopFooterHeading, self).save(*args, **kwargs)
 
-class TopFooterContent(models.Model):
+class TopFooterContent(models.Model): 
     heading = models.ForeignKey(TopFooterHeading, on_delete=models.CASCADE, related_name='content_items')
     content = models.CharField(default='default',max_length=200, null=False)
     url = models.CharField(max_length=1000, null=True, blank=True)

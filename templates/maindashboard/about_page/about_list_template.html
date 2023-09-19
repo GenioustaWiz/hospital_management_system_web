@@ -49,6 +49,8 @@
             
             <form class="w-a-body" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
+                
+                {% if not edit_mode %} 
                 <div id="content-item-formset">
                     {{ formset.management_form }}
                     {% for form in formset %}
@@ -70,9 +72,26 @@
                     </div>
                     {% endfor %}
                 </div>
-                {% if not edit_mode %} 
                 <!--IF IT'S NOT IN EDIT MODE SHOW BUTTON ELSE IF IN EDITING MODE DON'T SHOW BUTTON-->
                     <button type="button" id="add-content-item">Add Content Item</button>
+                {%else%}
+                <div id="content-item-formset">
+                    <div class="formset-row edit-icon-h">
+                        <P>
+                            {{ formset.title.label_tag }}
+                            {{ formset.title }}
+                            {{ formset.title.errors }} 
+                        </P>
+                        <div id="image-preview">
+                            {{ formset.image.label_tag }}
+                            <!-- the img section is ment to display the current image during edting -->
+                            {% if image %}
+                            <img id="image-display" src="{{ formset.instance.image.url }}" width="200" height="200" alt="Image">
+                            {% endif %}
+                            {{ formset.image }}
+                            {{ formset.image.errors }} 
+                        </div>
+                    </div>
                 {% endif %}
                 <div class="button">
                     <button type="submit">Submit</button>
@@ -160,7 +179,7 @@
                         }
                     }
                 });
-            </script>
+            </script> 
             
         </div><!-- end of ID w-a-body-->
     </div><!-- End of Write-articles-->

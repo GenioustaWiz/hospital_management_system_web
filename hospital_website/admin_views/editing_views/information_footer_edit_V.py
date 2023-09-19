@@ -1,14 +1,8 @@
-from django.shortcuts import render, redirect
-from ...forms.information_footer_F import *
-from ...models.information_footer_M import *
-from django.forms import inlineformset_factory
-
-
-
 from django.shortcuts import render, redirect, get_object_or_404
 from ...forms.information_footer_F import *
 from ...models.information_footer_M import *
 from django.forms import inlineformset_factory
+
 
 def create_top_footer_content(request, pk=None):
     # Check if a primary key (pk) is provided in the URL to determine if we are editing an existing instance
@@ -20,7 +14,7 @@ def create_top_footer_content(request, pk=None):
     HeadingFormSet = inlineformset_factory(TopFooterHeading, TopFooterContent, form=TopFooterContentForm, extra=0,)
 
     if request.method == 'POST':
-        heading_form = TopFooterHeadingForm(request.POST, instance=heading, prefix='heading')
+        heading_form = TopFooterHeadingForm(request.POST, instance=heading, prefix='main')
         formset = HeadingFormSet(request.POST, instance=heading, prefix='content')
         print('======================------------headingformset-----------================')
         print(formset)
@@ -29,6 +23,8 @@ def create_top_footer_content(request, pk=None):
             heading.save()  # Save the heading instance first
 
             instances = formset.save(commit=False)
+            print('==============Instances================')
+            print(instances)
             for instance in instances:
                 instance.heading = heading
                 print('==============Instances================')
@@ -38,7 +34,7 @@ def create_top_footer_content(request, pk=None):
             formset.save_m2m()  # Save many-to-many relationships if any
             return redirect('top_footer_view')  # Redirect after successful submission
     else:
-        heading_form = TopFooterHeadingForm(instance=heading, prefix='heading')
+        heading_form = TopFooterHeadingForm(instance=heading, prefix='main')
         formset = HeadingFormSet(instance=heading, prefix='content')
 
     total_form_count = formset.total_form_count()  # Calculate the total number of forms

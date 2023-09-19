@@ -1,0 +1,241 @@
+{% extends 'maindashboard/dashboard_base.html' %}
+{% comment %} displays Write  {% endcomment %}
+
+{% load static %}
+
+{% block title %} Blog List Page {% endblock title %}
+{% block css %}
+{{form.media}}
+<link rel="stylesheet" href="{% static 'css/blogdashboard/author/write_new_article.css' %}"> 
+<style>
+    select {
+         display: block !important;
+    }
+    input {
+        height: fit-content !important;
+        width: -webkit-fill-available;
+    }
+    .infor{
+        color: #8b3b3b;
+    }
+    .infor i{
+        color: red;
+    }
+    legend{
+        float: none;
+        text-align: center;
+    }
+    .e-c,.formset-row{
+        margin: 10px 0;
+        border: 1px;
+        padding: 4px ;
+        padding-right: 25px;
+        border-style: dotted;
+    }
+    .fa{
+        color: red;
+    }
+    .edit-icon {
+        top: 0 !important;
+        right: 0 !important;
+    }
+</style>
+{% endblock css %}
+{% block content %}
+ 
+
+<!-- Write New Articles -->
+<section class="item2 section write-A-page">
+  <div class="write-a-c bg--white">
+        <div id="w-a-heading">
+            <h2> Write New AboutPage List Information</h2>
+            <h6 class="warning">
+                <i class="fa fa-solid fa-triangle-exclamation"></i>
+                Click the (<i class="fa bi bi-x-lg"></i>) button to remove the added content form.
+            </h6>
+        </div> 
+        <div id="w-a-body">
+            
+            <form method="post">
+                {% csrf_token %}
+                <div class="button">
+                    <button type="submit">Save</button>
+                </div>
+                <fieldset class="e-c">
+                    <legend>Choose or Add Category</legend>
+                    <p class="infor">if the category you want is not available, select <i>(Add New Category)</i> from the drop down then, Enter New Category</p>
+                    <table>
+                        <tr>
+                            <td>
+                                <select id="category" name="category">
+                                    <option value="" disabled selected>Select a category</option>
+                                    {% for category in categories %}
+                                        <option value="{{ category.id }}">{{ category.category_name }}</option>
+                                    {% endfor %}
+                                    <option value="add_new">Add New Category</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class='new-label' id="id-category-label" style="display: none;">
+                                <label for="{{ category_form.category_name.id_for_label }}">Category name:</label>
+                            </th>
+                            <td class='new-td-input' id="new-category-input" style="display: none;">
+                                {{ category_form.category_name }}
+                            </td>
+                        </tr>
+                        <!-- IconInput field -->
+                        <tr>
+                            <th class='new-label' id="id-icon-label" style="display: none;">
+                                <label for="{{ category_form.iconInput.id_for_label }}">IconInput:</label>
+                            </th>
+                            <td class='new-td-input' id="new-icon-input" style="display: none;">
+                                {{ category_form.iconInput }}
+                            </td>
+                        </tr>
+                        <!-- Description field -->
+                        <tr>
+                            <th class='new-label' id="id-cat_description-label" style="display: none;">
+                                <label for="{{ category_form.cat_description.id_for_label }}">Description:</label>
+                            </th>
+                            <td class='new-td-input' id="new-cat_description-input" style="display: none;">
+                                {{ category_form.cat_description }}
+                            </td>
+                        </tr>
+                    </table>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            const categorySelect = document.getElementById('category');
+                            const allTdInput = document.querySelectorAll('.new-td-input'); //class is better than id when it comes to select many elements
+                            const allInputField = document.querySelectorAll('.new-input'); //coz id should be unique and should only belong to one element
+                            const allLabels = document.querySelectorAll('.new-label');
+        
+                            categorySelect.addEventListener('change', function () {
+                                if (categorySelect.value === 'add_new') { //checks if selected category says add new
+                                    allTdInput.forEach(function (element) { //helps select all element with same class
+                                        element.style.display = 'table-cell';
+                                    });
+                                    allInputField.forEach(function (element) {
+                                        element.required = true;
+                                    });
+                                    allLabels.forEach(function (element) {
+                                        element.style.display = 'block';
+                                    });
+                                    //for selecting all text inside the tapped input.
+                                    allInputField.forEach(function (element) {
+                                        element.addEventListener('click', function () {
+                                            element.select(); // Select the text inside the input
+                                        });
+                                    });
+                                } else {
+                                    allTdInput.forEach(function (element) {
+                                        element.style.display = 'none';
+                                    });
+                                    allInputField.forEach(function (element) {
+                                        element.required = false;
+                                    });
+                                    allLabels.forEach(function (element) {
+                                        element.style.display = 'none';
+                                    });
+                                }
+                            });
+                        });
+                    </script>
+                </fieldset>
+                
+                <fieldset>
+                    <legend>Enter Services Offered</legend>
+                    <div id="content-item-formset">
+                        {{ formset.management_form }}
+                        {{formset.errors}}
+                        {% for form in formset %}
+                        <div class="formset-row edit-icon-h">
+                            {{ form.id_for_label }}
+                            <table>
+                                {{ form.as_table }}
+                                {{ form.errors }}
+                            </table>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <button type="button" id="add-content-item">
+                        Click to Add Content
+                    </button>
+                </fieldset>
+                <div class="button">
+                    <button type="submit">Save</button>
+                </div>
+            </form>
+            <script>
+                const contentItemFormset = document.getElementById('content-item-formset');
+                const addContentItemButton = document.getElementById('add-content-item');
+                let formIndex = {{ total_form_count|default:0 }}; // Initialize from the total form count
+            
+                addContentItemButton.addEventListener('click', () => {
+                    const newForm = document.createElement('div');
+                    newForm.classList.add('formset-row', 'edit-icon-h');
+            
+                    // Generate unique IDs and 'for' attributes
+                    const prefix = `content-${formIndex}-`;
+                    newForm.innerHTML = `
+                        <!-- Replace this with your provided HTML code and add the prefix -->
+                        <div class="formset-row edit-icon-h">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <th><label for="${prefix}service_name">Service name:</label></th>
+                                        <td>
+                                            <input type="text" name="${prefix}service_name" value="Dental Services" maxlength="100" id="id_${prefix}service_name">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th><label for="${prefix}description">Description:</label></th>
+                                        <td>
+                                            <textarea name="${prefix}description" cols="40" rows="10" id="id_${prefix}description">Lorem ipsum dolor sit amet, consectetur adipisicingpra esentium eveniet eum libero assumenda.</textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th><label for="${prefix}DELETE">Delete:</label></th>
+                                        <td>
+                                            <input type="checkbox" name="${prefix}DELETE" id="id_${prefix}DELETE">
+                                            <input type="hidden" name="${prefix}id" id="id_${prefix}id">
+                                            <input type="hidden" name="${prefix}category" id="id_${prefix}category">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- End of your provided HTML code -->
+                    `;
+            
+                    const removeButton = document.createElement('div');
+                    removeButton.classList.add('remove', 'edit-icon');
+                    removeButton.innerHTML = `<i class="fa bi bi-x-lg"></i>`;
+                    removeButton.addEventListener('click', () => {
+                        // Remove the form on delete button click
+                        contentItemFormset.removeChild(newForm);
+                        formIndex--;
+            
+                        // Update the TOTAL_FORMS input field
+                        const totalFormsInput = document.getElementById('id_content-TOTAL_FORMS');
+                        totalFormsInput.value = formIndex;
+                    });
+            
+                    newForm.appendChild(removeButton);
+                    contentItemFormset.appendChild(newForm);
+                    console.log(formIndex)
+                    formIndex++;
+                    console.log(formIndex)
+            
+                    // Update the TOTAL_FORMS input field
+                    const totalFormsInput = document.getElementById('id_content-TOTAL_FORMS');
+                    totalFormsInput.value = formIndex; // to account for the newly added form
+                });
+            </script>
+            
+        
+        </div><!-- end of ID w-a-body-->
+    </div><!-- End of Write-articles-->
+</section><!-- End Of Write Articles --> 
+
+{% endblock content%}
