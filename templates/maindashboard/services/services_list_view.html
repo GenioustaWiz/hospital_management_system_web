@@ -1,0 +1,70 @@
+{% extends 'maindashboard/dashboard_base.html' %}
+{% load static %}
+
+{% block title %} 
+  Services
+{% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/services.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/blogdashboard/author/write_new_article.css' %}"> 
+
+<style>
+    .services{
+      display: flex !important;
+    }
+    .write-a-c{
+        width: 100%;
+    }
+    .div1{
+        background-color: azure;
+        padding: 20px 25px;
+    }
+    .service{
+        background-color: #c7dfdf;
+        padding: 6px;
+        color: black !important;
+    }
+  </style>
+{% endblock css %}
+
+{% block content %}
+<section class="services item2 section write-A-page"> <!-- s2 -->
+    <div class="write-a-c bg--white">
+        <div id="w-a-heading">
+            <h2> Footer Information</h2>
+            <h6 class="warning">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                Click the edit/add button to edit or save new footer information.
+            </h6>
+        </div>
+        <div class="div1 edit-icon-h">
+            {% if service_categories %}
+            {% for category in service_categories %}
+                <div class="service edit-icon-h">
+                    <div>{{ category.iconInput|safe }}</div>
+                    <h5>{{ category.category_name }}</h5>
+                    <p>
+                        {{ category.cat_description }} 
+                    </p>
+                    <div class="edit-icon">
+                        <a href="{% url 'create_services_category' pk=category.id %}">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+            {% else %}
+                <div class="edit-icon-h">
+                    <p>No Footer information. Click the add button to add new</p>
+                </div>
+                {% endif %}
+                <div class="edit-icon">
+                    <a href="{% url 'create_services_category' %}">
+                    <i class="bi bi-database-fill-add"></i>
+                    </a>
+                </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

@@ -3,10 +3,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from ..models import ServiceCategory, ServiceOffered
 from ..forms import ServiceCategoryForm, ServiceOfferedForm,ServiceOfferedFormSet
 
-def create_services(request, pk=None):
+def create_services_category(request, pk=None):
     # Check if a primary key (pk) is provided in the URL to determine if we are editing an existing instance
     if pk:
         category = get_object_or_404(ServiceCategory, pk=pk)
+        foredit = pk
     else:
         category = ServiceCategory()
     # Define categories outside of the if-else block
@@ -38,7 +39,7 @@ def create_services(request, pk=None):
                     instance.category = category
                     instance.save()
                 
-            return redirect('top_footer_view')  # Redirect to the service list view
+            return redirect('view_service_categories')  # Redirect to the service list view
     else:
         category_form = ServiceCategoryForm(instance=category, prefix='main')
         formset = ServiceOfferedFormSet(instance=category, prefix='content')
@@ -49,6 +50,7 @@ def create_services(request, pk=None):
         'formset': formset,
         'total_form_count': total_form_count,
         'categories': categories,
+        'edit_mode': pk is not None,  # True if in edit mode, False if in create new mode
     }
     return render(request, 'maindashboard/services/create_services.html', context)
 

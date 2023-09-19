@@ -66,6 +66,8 @@
                     <p class="infor">if the category you want is not available, select <i>(Add New Category)</i> from the drop down then, Enter New Category</p>
                     <table>
                         <tr>
+                            {% if not edit_mode %} 
+                            <!--If it's NOT in Edit Mode excute her-->
                             <td>
                                 <select id="category" name="category">
                                     <option value="" disabled selected>Select a category</option>
@@ -74,7 +76,11 @@
                                     {% endfor %}
                                     <option value="add_new">Add New Category</option>
                                 </select>
-                            </td>
+                            </td> 
+                            {% else %}
+                            <!-- Else if in Edit Mode excute here-->
+                            {{category_form.as_table}}
+                            {% endif %}
                         </tr>
                         <tr>
                             <th class='new-label' id="id-category-label" style="display: none;">
