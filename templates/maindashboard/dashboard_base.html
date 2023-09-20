@@ -150,7 +150,7 @@
                 <div class="modal-body">
                     <p id="confirm-message"></p>
                     {% comment %} only displays the reject form if Blog rejected is False {% endcomment %}
-                    {% if not blog.rejected %}
+                    {% if blog.rejected %}
                     <label for="{{ form.rejection_reason.id_for_label }}">Rejection Reason:</label>
                     {{ form.rejection_reason }}
                     {%endif%}

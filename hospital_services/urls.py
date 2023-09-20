@@ -10,4 +10,5 @@ urlpatterns = [
     path('serivces-category-list/', view_service_categories, name='view_service_categories'),
     path('create-services-page/', create_services_category, name='create_services_category'),
     path('create-services-page/<int:pk>/', create_services_category, name='create_services_category'),
+    path('category-delete/<int:pk>/', category_delete, name='category_delete'),
 ]

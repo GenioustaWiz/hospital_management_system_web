@@ -10,6 +10,9 @@
 #w-a-heading h2, #w-a-heading h6{
     text-align: center;
 }
+.w-a-body .infor{
+    display: block !important;
+} 
 
 .edit-icon-h{
     position: relative;

@@ -56,14 +56,18 @@
         </div> 
         <div id="w-a-body">
             
-            <form method="post">
+            <form class="w-a-body" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="button">
                     <button type="submit">Save</button>
                 </div>
-                <fieldset class="e-c">
+                <fieldset class="e-c edit-icon-h">
+                    {% if not edit_mode %}
                     <legend>Choose or Add Category</legend>
                     <p class="infor">if the category you want is not available, select <i>(Add New Category)</i> from the drop down then, Enter New Category</p>
+                    {% else %}
+                    <legend>Edit Category</legend>
+                    {% endif %}
                     <table>
                         <tr>
                             {% if not edit_mode %} 
@@ -109,6 +113,24 @@
                             </td>
                         </tr>
                     </table>
+                    <!--Uses Modal for confirmational of the action-->
+                    {% if edit_mode %} 
+                        <div class="edit-icon">
+                            <a class="dropdown-item confirm-btn" 
+                                data-title="Are you sure you want to delete?"
+                                data-id = "delete"
+                                data-msg="Once you delete this Category, and all components under it, they cannot be recovered." 
+                                data-url="{% url 'category_delete' pk=category_id %}" 
+                                data-button="Delete"
+                                data-bs-toggle="modal">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                            <!--<a href="{% url 'category_delete' pk=category_id %}">
+                                <i class="bi bi-trash"></i>
+                            </a>-->
+                        </div>
+                    {% endif %}
+                    <!-- =============== -->
                     <script>
                         document.addEventListener('DOMContentLoaded', function () {
                             const categorySelect = document.getElementById('category');
@@ -150,7 +172,11 @@
                 </fieldset>
                 
                 <fieldset>
+                    {% if not edit_mode %}
                     <legend>Enter Services Offered</legend>
+                    {% else %}
+                    <legend>Edit/Add Services Offered</legend>
+                    {% endif %}
                     <div id="content-item-formset">
                         {{ formset.management_form }}
                         {{formset.errors}}

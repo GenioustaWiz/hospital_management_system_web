@@ -1,5 +1,7 @@
 from django.forms import inlineformset_factory
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from ..models import ServiceCategory, ServiceOffered
 from ..forms import ServiceCategoryForm, ServiceOfferedForm,ServiceOfferedFormSet
 
@@ -7,9 +9,12 @@ def create_services_category(request, pk=None):
     # Check if a primary key (pk) is provided in the URL to determine if we are editing an existing instance
     if pk:
         category = get_object_or_404(ServiceCategory, pk=pk)
-        foredit = pk
+        edit_mode = True  # Enable edit mode
+        category_id = pk
     else:
         category = ServiceCategory()
+        edit_mode = False  # Disable edit mode
+        category_id = None
     # Define categories outside of the if-else block
     categories = ServiceCategory.objects.all()
     if request.method == 'POST':
@@ -49,11 +54,17 @@ def create_services_category(request, pk=None):
         'category_form': category_form,
         'formset': formset,
         'total_form_count': total_form_count,
-        'categories': categories,
-        'edit_mode': pk is not None,  # True if in edit mode, False if in create new mode
+        'categories': categories, 
+        'edit_mode': edit_mode,
+        'category_id': category_id,
     }
     return render(request, 'maindashboard/services/create_services.html', context)
-
+@login_required
+def category_delete(request, pk):
+    category = get_object_or_404(ServiceCategory, pk=pk)
+    category.delete()
+    messages.success(request, 'The Category and its services were Deleted successfully!')
+    return redirect('view_service_categories')
 # def create_services(request):
 #     # Define categories outside of the if-else block
 #     categories = ServiceCategory.objects.all()
