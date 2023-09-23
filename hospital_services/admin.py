@@ -12,11 +12,11 @@ class AppointmentAdmin(admin.ModelAdmin):
 
 @admin.register(ServiceCategory)
 class ServiceCategoryAdmin(admin.ModelAdmin):
-    list_display = ('category_name', 'cat_description','iconInput')
+    list_display = ('id', 'category_name', 'cat_description','iconInput')
     search_fields = ('category_name',)
 
 @admin.register(ServiceOffered)
 class ServiceOfferedAdmin(admin.ModelAdmin):
-    list_display = ('service_name', 'description', 'category')
+    list_display = ('id', 'service_name', 'description', 'category', 'delete_identifier')
     list_filter = ('category',)
     search_fields = ('service_name', 'category__category_name')

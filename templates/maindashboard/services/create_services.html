@@ -61,6 +61,7 @@
                 <div class="button">
                     <button type="submit">Save</button>
                 </div>
+                <!--Category Fieldset-->
                 <fieldset class="e-c edit-icon-h">
                     {% if not edit_mode %}
                     <legend>Choose or Add Category</legend>
@@ -81,6 +82,45 @@
                                     <option value="add_new">Add New Category</option>
                                 </select>
                             </td> 
+                            <!-- ========JS CODE FOR ADDING NEW CATEGORIES======= -->
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function () {
+                                    const categorySelect = document.getElementById('category');
+                                    const allTdInput = document.querySelectorAll('.new-td-input'); //class is better than id when it comes to select many elements
+                                    const allInputField = document.querySelectorAll('.new-input'); //coz id should be unique and should only belong to one element
+                                    const allLabels = document.querySelectorAll('.new-label');
+                
+                                    categorySelect.addEventListener('change', function () {
+                                        if (categorySelect.value === 'add_new') { //checks if selected category says add new
+                                            allTdInput.forEach(function (element) { //helps select all element with same class
+                                                element.style.display = 'table-cell';
+                                            });
+                                            allInputField.forEach(function (element) {
+                                                element.required = true;
+                                            });
+                                            allLabels.forEach(function (element) {
+                                                element.style.display = 'block';
+                                            });
+                                            //for selecting all text inside the tapped input.
+                                            allInputField.forEach(function (element) {
+                                                element.addEventListener('click', function () {
+                                                    element.select(); // Select the text inside the input
+                                                });
+                                            });
+                                        } else {
+                                            allTdInput.forEach(function (element) {
+                                                element.style.display = 'none';
+                                            });
+                                            allInputField.forEach(function (element) {
+                                                element.required = false;
+                                            });
+                                            allLabels.forEach(function (element) {
+                                                element.style.display = 'none';
+                                            });
+                                        }
+                                    });
+                                });
+                            </script>
                             {% else %}
                             <!-- Else if in Edit Mode excute here-->
                             {{category_form.as_table}}
@@ -130,47 +170,9 @@
                             </a>-->
                         </div>
                     {% endif %}
-                    <!-- =============== -->
-                    <script>
-                        document.addEventListener('DOMContentLoaded', function () {
-                            const categorySelect = document.getElementById('category');
-                            const allTdInput = document.querySelectorAll('.new-td-input'); //class is better than id when it comes to select many elements
-                            const allInputField = document.querySelectorAll('.new-input'); //coz id should be unique and should only belong to one element
-                            const allLabels = document.querySelectorAll('.new-label');
-        
-                            categorySelect.addEventListener('change', function () {
-                                if (categorySelect.value === 'add_new') { //checks if selected category says add new
-                                    allTdInput.forEach(function (element) { //helps select all element with same class
-                                        element.style.display = 'table-cell';
-                                    });
-                                    allInputField.forEach(function (element) {
-                                        element.required = true;
-                                    });
-                                    allLabels.forEach(function (element) {
-                                        element.style.display = 'block';
-                                    });
-                                    //for selecting all text inside the tapped input.
-                                    allInputField.forEach(function (element) {
-                                        element.addEventListener('click', function () {
-                                            element.select(); // Select the text inside the input
-                                        });
-                                    });
-                                } else {
-                                    allTdInput.forEach(function (element) {
-                                        element.style.display = 'none';
-                                    });
-                                    allInputField.forEach(function (element) {
-                                        element.required = false;
-                                    });
-                                    allLabels.forEach(function (element) {
-                                        element.style.display = 'none';
-                                    });
-                                }
-                            });
-                        });
-                    </script>
                 </fieldset>
-                
+                <!--==========================-->
+                <!--====Servces offered Feldset====-->
                 <fieldset>
                     {% if not edit_mode %}
                     <legend>Enter Services Offered</legend>
@@ -187,6 +189,19 @@
                                 {{ form.as_table }}
                                 {{ form.errors }}
                             </table>
+                            {% if edit_mode %}
+                            <div class="edit-icon">
+                                <a class="dropdown-item confirm-btn" 
+                                    data-title="Are you sure you want to delete?"
+                                    data-id = "delete"
+                                    data-msg="Once you delete this Service, it cannot be recovered." 
+                                    data-url="{% url 'delete_service_offered' pk=form.instance.id %}" 
+                                    data-button="Delete"
+                                    data-bs-toggle="modal">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </div>
+                            {% endif %}
                         </div>
                         {% endfor %}
                     </div>
@@ -194,6 +209,7 @@
                         Click to Add Content
                     </button>
                 </fieldset>
+                <!--=======================-->
                 <div class="button">
                     <button type="submit">Save</button>
                 </div>

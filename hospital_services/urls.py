@@ -11,4 +11,6 @@ urlpatterns = [
     path('create-services-page/', create_services_category, name='create_services_category'),
     path('create-services-page/<int:pk>/', create_services_category, name='create_services_category'),
     path('category-delete/<int:pk>/', category_delete, name='category_delete'),
+    #==communicates wth js to handle deletion of individual Services
+    path('delete-service-offered/<int:pk>/', delete_service_offered, name='delete_service_offered'),
 ]
