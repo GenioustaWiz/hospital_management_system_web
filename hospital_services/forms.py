@@ -20,12 +20,8 @@ class ServiceCategoryForm(forms.ModelForm):
 class ServiceOfferedForm(forms.ModelForm):
     class Meta:
         model = ServiceOffered
-        fields = ['service_name', 'description', 'delete_identifier']
-
-    def __init__(self, *args, **kwargs):
-        super(ServiceOfferedForm, self).__init__(*args, **kwargs)
-        self.fields['delete_identifier'].widget = forms.HiddenInput()  # Hide the delete identifier field
-
+        fields = ['service_name', 'description',]
+        
 ServiceOfferedFormSet = forms.inlineformset_factory(
     ServiceCategory,ServiceOffered,
     form=ServiceOfferedForm,

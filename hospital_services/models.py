@@ -36,7 +36,6 @@ class ServiceOffered(models.Model):
         default='Lorem ipsum dolor sit amet, consectetur adipisicingpra esentium eveniet eum libero assumenda.',
         null=False
     )
-    delete_identifier = models.CharField(max_length=50, unique=True, null=True)  # Add this field
     def __str__(self):
         return self.service_name
 

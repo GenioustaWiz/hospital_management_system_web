@@ -34,13 +34,14 @@
         <div id="w-a-heading">
             <h2> Services category Information</h2>
             <h6 class="warning">
-                <i class="fa-solid fa-triangle-exclamation"></i>
+                <i class="fa fa-solid fa-triangle-exclamation"></i>
                 Click the edit/add button to edit or save new Services category information.
             </h6>
         </div>
         <div class="div1 edit-icon-h">
             {% if service_categories %}
             {% for category in service_categories %}
+            <a href="{% url 'services_of_category' category_id=category.id %}">
                 <div class="service edit-icon-h">
                     <div>{{ category.iconInput|safe }}</div>
                     <h5>{{ category.category_name }}</h5>
@@ -53,6 +54,7 @@
                         </a>
                     </div>
                 </div>
+            </a>
             {% endfor %}
             {% else %}
                 <div class="edit-icon-h">

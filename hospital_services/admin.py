@@ -17,6 +17,6 @@ class ServiceCategoryAdmin(admin.ModelAdmin):
 
 @admin.register(ServiceOffered)
 class ServiceOfferedAdmin(admin.ModelAdmin):
-    list_display = ('id', 'service_name', 'description', 'category', 'delete_identifier')
+    list_display = ('id', 'service_name', 'description', 'category', )
     list_filter = ('category',)
     search_fields = ('service_name', 'category__category_name')

@@ -80,17 +80,3 @@ def category_delete(request, pk):
         # Handle the case where there's no previous URL
         return HttpResponse("Previous URL not available")
 
-def delete_service_offered(request, pk):
-    print('Am in================================')
-    service_offered = get_object_or_404(ServiceOffered, pk=pk)
-    service_offered.delete()
-    messages.success(request, 'The service_offered was Deleted successfully!')
-    # return redirect('create_services_category')
-    # Get the previous URL (referer)
-    previous_url = request.META.get('HTTP_REFERER')
-
-    if previous_url:
-        return redirect(previous_url)
-    else:
-        # Handle the case where there's no previous URL
-        return HttpResponse("Previous URL not available")
