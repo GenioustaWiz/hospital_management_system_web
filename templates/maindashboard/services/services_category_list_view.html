@@ -20,11 +20,18 @@
         background-color: azure;
         padding: 20px 25px;
     }
+    a{
+        color: black;
+    }
     .service{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         background-color: #c7dfdf;
         padding: 6px;
         color: black !important;
     }
+    
   </style>
 {% endblock css %}
 
@@ -41,20 +48,22 @@
         <div class="div1 edit-icon-h">
             {% if service_categories %}
             {% for category in service_categories %}
-            <a href="{% url 'services_of_category' category_id=category.id %}">
-                <div class="service edit-icon-h">
-                    <div>{{ category.iconInput|safe }}</div>
-                    <h5>{{ category.category_name }}</h5>
-                    <p>
-                        {{ category.cat_description }} 
-                    </p>
-                    <div class="edit-icon">
-                        <a href="{% url 'create_services_category' pk=category.id %}">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </a>
-                    </div>
+                <div class="service--">
+                    <a href="{% url 'services_of_category' category_id=category.id %}">
+                        <div class="service edit-icon-h">
+                            <div>{{ category.iconInput|safe }}</div>
+                            <h5>{{ category.category_name }}</h5>
+                            <p>
+                                {{ category.cat_description }} 
+                            </p>
+                            <div class="edit-icon">
+                                <a href="{% url 'create_services_category' pk=category.id %}">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-            </a>
             {% endfor %}
             {% else %}
                 <div class="edit-icon-h">
