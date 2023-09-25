@@ -3,11 +3,11 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required 
-from ..hospital_website.models.models import BaseData, ContactSidebarCompanyInfo
+from hospital_website.models.models import BaseData, ContactSidebarCompanyInfo
 from .models import Profile
 # Import User UpdateForm, ProfileUpdatForm
 from .forms import *
-from ..hospital_website.models.information_footer_M import TopFooterHeading, TopFooterContent, SocialMediaLink
+from hospital_website.models.information_footer_M import TopFooterHeading, TopFooterContent, SocialMediaLink
   
 
 # @login_required

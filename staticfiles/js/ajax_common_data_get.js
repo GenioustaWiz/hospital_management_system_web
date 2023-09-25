@@ -54,6 +54,20 @@ $(document).ready(function() {
                         $('#f-socialmedia ul li a:nth-child(3)').attr('href', data.social_media_links.whatsapp_link);
                         $('#f-socialmedia ul li a:nth-child(4)').attr('href', data.social_media_links.linkedIn_link);
                     }
+                    // Display base_data information
+                    if (data.base_data) {
+                        // Display logo image
+                        var logoImageUrl = data.base_data.logo_img;
+                        $('#logo span.logo img').attr('src', logoImageUrl);
+
+                        // Display logo name
+                        var logoName = data.base_data.logo_name;
+                        $('#logo span.logo img').attr('alt', logoName);
+
+                        // Display footer
+                        var footerText = data.base_data.footer;
+                        $('.footer').text('Copyright © ' + footerText);
+                    }
                 }
             },
             error: function(xhr, textStatus, errorThrown) {

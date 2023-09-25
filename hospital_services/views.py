@@ -3,14 +3,14 @@ from django.shortcuts import render,get_object_or_404
 
 from django.http import HttpResponse
 from django.contrib import messages
-from ..hospital_website.models.models import *
+from hospital_website.models.models import *
 from django.contrib.auth.models import User
 from twilio.rest import Client
 # from .forms import ContactForm
 from users.models import Profile  #Importing Profile from Users app to display info on about page
 from .forms import AppointmentForm
 from .models import *
-from ..hospital_website.models.information_footer_M import TopFooterHeading, TopFooterContent, SocialMediaLink
+from hospital_website.models.information_footer_M import TopFooterHeading, TopFooterContent, SocialMediaLink
     
 # Create your views here.
 def services(request):
