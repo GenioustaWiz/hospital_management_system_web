@@ -19,8 +19,13 @@ def get_common_data(request):
             'phone_number': str(contact_info.phone_number)  # Convert PhoneNumber to string
         }
 
-    # if base_data:
-    #     data['base_data'] = base_data.base_data
+    if base_data:
+        data['base_data'] = {
+            'logo_img': str(base_data.logo_img.url),  # Convert ImageField to string
+            'logo_name': base_data.logo_name,
+            'footer': base_data.footer,
+        }
+        
     if top_footer_headings:
             top_footer_data = []
             for heading in top_footer_headings:

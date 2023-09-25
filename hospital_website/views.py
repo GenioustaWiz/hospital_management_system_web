@@ -22,12 +22,8 @@ def main_index(request):
     top_footer_headings = TopFooterHeading.objects.all()
     social_media_links = SocialMediaLink.objects.first()  # Assuming there's only one instance
     context = {
-        'base': base,
         'info': info, 
         'working_hours': working_hours,
-        'top_footer_headings': top_footer_headings,
-        'social_media_links': social_media_links,
-        'company_info': side_info,
         }
 
     # Render the response and send it back!
@@ -43,12 +39,12 @@ def about(request):
     social_media_links = SocialMediaLink.objects.all()
     context = {
         "user":request.user,
-        'base': base,
+        # 'base': base,
         'about': a_display,
         'abtlist': abtlist,
-        'top_footer_headings': top_footer_headings,
-        'social_media_links': social_media_links,
-        'company_info': side_info,
+        # 'top_footer_headings': top_footer_headings,
+        # 'social_media_links': social_media_links,
+        # 'company_info': side_info,
         }
     return render(request, 'about.html', context)
 
