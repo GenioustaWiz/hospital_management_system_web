@@ -222,3 +222,56 @@
 </body>
 
 </html>
+{% comment %}<footer class="top-footer">
+    {% for f_content in top_footer_headings %}
+    <div class="f-company">
+     <h4>{{ f_content.heading }}</h4>
+     <ul>
+        <li>
+            <a href="{{ f_content.url }}">{{ f_content.content }}</a>
+        </li>
+        
+     </ul>
+    </div>
+    {% endfor %}
+    <div class="f-contact">
+        <div id="f-contact">
+            {% if company_info %}
+            <h4>Contact</h4>
+            <ul>
+                <li>
+                    {{ company_info.address }}
+                </li>
+                <li> 
+                    {{ company_info.email }}
+                </li>
+                <li>{{ company_info.phone_number }}</li>
+            </ul>
+            {% endif %}
+        </div>
+        <div id="f-socialmedia">
+            {% if social_media_links %}
+            <h4>Social Media</h4>  
+            <ul>
+                <li>
+                    <a href="{{ social_media_links.facebook_link }}"><i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ social_media_links.twitter_link }}"><i class="fa-brands fa-twitter"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ social_media_links.whatsapp_link }}"><i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ social_media_links.linkedIn_link }}"><i class="fa-brands fa-linkedin"></i>
+                    </a>
+                </li>
+            </ul>
+            {%endif%}
+        </div>
+    </div>
+
+</footer> {% endcomment %}
