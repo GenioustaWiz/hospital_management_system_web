@@ -7,6 +7,8 @@ from hospital_website.models.models import BaseData, ContactSidebarCompanyInfo
 from .models import Profile
 # Import User UpdateForm, ProfileUpdatForm
 from .forms import *
+from hospital_website.models.information_footer_M import TopFooterHeading, TopFooterContent, SocialMediaLink
+  
 
 # @login_required
 # def profile_home(request):
@@ -27,10 +29,16 @@ def Login(request):
     form = loginpage()
     side_info = ContactSidebarCompanyInfo.objects.first()
     base = BaseData.objects.first() #for Base.html
+    top_footer_headings = TopFooterHeading.objects.all()
+    social_media_links = SocialMediaLink.objects.first()  # Assuming there's only one instance
+    
     context = {
+        'top_footer_headings': top_footer_headings,
+        'social_media_links': social_media_links,
         'form': form,
         'base': base,
         'side_info': side_info,
+        'company_info': side_info,
     }
     return render(request, 'registration/login.html', context)
 def register(request):
@@ -43,12 +51,19 @@ def register(request):
             return redirect('login')
     else:
         form = UserRegisterForm()
-        side_info = ContactSidebarCompanyInfo.objects.first()
-        base = BaseData.objects.first() #for Base.html
-        context = {
-            'base': base,
-            'form': form,
-            'side_info': side_info,
+        
+    side_info = ContactSidebarCompanyInfo.objects.first()
+    base = BaseData.objects.first() #for Base.html
+    top_footer_headings = TopFooterHeading.objects.all()
+    social_media_links = SocialMediaLink.objects.first()  # Assuming there's only one instance
+    
+    context = {
+        'top_footer_headings': top_footer_headings,
+        'social_media_links': social_media_links,
+        'base': base,
+        'form': form,
+        'side_info': side_info,
+        'company_info': side_info,
         }
     return render(request, 'registration/register.html', context)
 
@@ -69,13 +84,19 @@ def profile(request):
     else:
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
-        side_info = ContactSidebarCompanyInfo.objects.first()
-        base = BaseData.objects.first() #for Base.html
-        # user_profile = Profile()
+    side_info = ContactSidebarCompanyInfo.objects.first()
+    base = BaseData.objects.first() #for Base.html
+    # user_profile = Profile()
+    top_footer_headings = TopFooterHeading.objects.all()
+    social_media_links = SocialMediaLink.objects.first()  # Assuming there's only one instance
+    
     context = {
+        'top_footer_headings': top_footer_headings,
+        'social_media_links': social_media_links,
         'base': base,
         'u_form': u_form,
         'p_form': p_form,
+        'company_info': side_info,
         # 'user_profile': user_profile,
     }
 

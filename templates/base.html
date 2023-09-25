@@ -163,65 +163,54 @@
 
         {% block content %} {% endblock content %}
 
-
+        <!-- === ajax_common_data_get.js is responsible for Dynamically updating the TOP FOOTER-->
         <footer class="top-footer">
-            {% for f_content in top_footer_headings %}
-            <div class="f-company">
-             <h4>{{ f_content.heading }}</h4>
-             <ul>
-                <li>
-                    <a href="{{ f_content.url }}">{{ f_content.content }}</a>
-                </li>
-                
-             </ul>
-            </div>
-            {% endfor %}
             <div class="f-contact">
+                <!-- =====THE .f-company html code will be appended here by ajax jS======-->
                 <div id="f-contact">
                     <h4>Contact</h4>
                     <ul>
                         <li>
-                            203 Waithaka, Dagoretti, Nairobi 
+                            {{ company_info.address }}
                         </li>
                         <li> 
-                            bettahealth@temporary.com 
+                            {{ company_info.email }}
                         </li>
-                        <li>+254781236749</li>
+                        <li>{{ company_info.phone_number }}</li>
                     </ul>
                 </div>
                 <div id="f-socialmedia">
-                    <h4>Social Media</h4>
+                    <h4>Social Media</h4>  
                     <ul>
-                        {% for links in social_media_links %}
                         <li>
-                            <a href="{{ links.facebook_link }}"><i class="fa-brands fa-facebook-f"></i>
+                            <a href="{{ social_media_links.facebook_link }}"><i class="fa-brands fa-facebook-f"></i>
                             </a>
                         </li>
                         <li>
-                            <a href="{{ links.twitter_link }}"><i class="fa-brands fa-twitter"></i>
+                            <a href="{{ social_media_links.twitter_link }}"><i class="fa-brands fa-twitter"></i>
                             </a>
                         </li>
                         <li>
-                            <a href="{{ links.whatsapp_link }}"><i class="fa-brands fa-whatsapp"></i>
+                            <a href="{{ social_media_links.whatsapp_link }}"><i class="fa-brands fa-whatsapp"></i>
                             </a>
                         </li>
                         <li>
-                            <a href="{{ links.linkedIn_link }}"><i class="fa-brands fa-linkedin"></i>
+                            <a href="{{ social_media_links.linkedIn_link }}"><i class="fa-brands fa-linkedin"></i>
                             </a>
                         </li>
-                        {% endfor %}
                     </ul>
                 </div>
             </div>
-
         </footer>
         <footer class="mt3 text-center footer">
              Copyright © {{base.footer}}  <!--2021 Teknics Technologies -->
         </footer>
     </main>
     <!-- Add your JavaScript and other scripts here -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static 'js/loading.js' %}"></script>
     <script src="{% static 'js/main.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/ajax_common_data_get.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
         crossorigin="anonymous"></script>

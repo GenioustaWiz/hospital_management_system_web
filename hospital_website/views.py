@@ -18,15 +18,16 @@ def main_index(request):
     # tech= main_page_service_details.objects.all()
     base = BaseData.objects.first()
     working_hours = WorkingHours.objects.all()
-
+    side_info = ContactSidebarCompanyInfo.objects.first()
     top_footer_headings = TopFooterHeading.objects.all()
-    social_media_links = SocialMediaLink.objects.all()
+    social_media_links = SocialMediaLink.objects.first()  # Assuming there's only one instance
     context = {
         'base': base,
         'info': info, 
         'working_hours': working_hours,
         'top_footer_headings': top_footer_headings,
         'social_media_links': social_media_links,
+        'company_info': side_info,
         }
 
     # Render the response and send it back!
@@ -37,6 +38,7 @@ def about(request):
     a_display= AboutPage.objects.first()
     abtlist = AboutList.objects.all()
     
+    side_info = ContactSidebarCompanyInfo.objects.first()
     top_footer_headings = TopFooterHeading.objects.all()
     social_media_links = SocialMediaLink.objects.all()
     context = {
@@ -46,6 +48,7 @@ def about(request):
         'abtlist': abtlist,
         'top_footer_headings': top_footer_headings,
         'social_media_links': social_media_links,
+        'company_info': side_info,
         }
     return render(request, 'about.html', context)
 

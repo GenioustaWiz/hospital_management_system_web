@@ -6,7 +6,8 @@ from .forms import ContactForm
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse
 from hospital_website.models.models import BaseData, ContactSidebarCompanyInfo
-
+from hospital_website.models.information_footer_M import TopFooterHeading, TopFooterContent, SocialMediaLink
+  
 # Create your views here.
 
 def contact(request): 
@@ -33,9 +34,15 @@ def contact(request):
     form = ContactForm()
     side_info = ContactSidebarCompanyInfo.objects.first()
     base = BaseData.objects.first() #for Base.html
+    top_footer_headings = TopFooterHeading.objects.all()
+    social_media_links = SocialMediaLink.objects.first()  # Assuming there's only one instance
+    
     context = {
+        'top_footer_headings': top_footer_headings,
+        'social_media_links': social_media_links,
         'form': form,
         'side_info': side_info,
         'base': base,
+        'company_info': side_info,
     }
     return render(request, 'contact.html', context)

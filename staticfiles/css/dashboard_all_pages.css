@@ -1,5 +1,11 @@
+.write-a-c{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .warning .fa-triangle-exclamation{
     font-size: 30px;
+    color: red;
 }
 #w-a-heading, .content-body{
     padding: 20px;
@@ -10,6 +16,9 @@
 #w-a-heading h2, #w-a-heading h6{
     text-align: center;
 }
+.w-a-body .infor{
+    display: block !important;
+} 
 
 .edit-icon-h{
     position: relative;
@@ -22,13 +31,13 @@
     font-weight: 800;
 }
 .edit-icon:hover{
-    background-color: rgb(197, 197, 197);
+    background-color: rgb(197, 197, 197) !important;
     padding: 4px;
     border-radius: 10px;
 }
 .edit-icon a{
-    color: red;
-    display: flex;
+    color: red !important;
+    display: flex !important;
     align-items: center;
     justify-content: center;
 }

@@ -11,12 +11,17 @@ from .admin_views.content_views.aboutP_view import *
 from .admin_views.content_views.ContactSidebarCompanyInfo_view_V import *
 from .admin_views.content_views.homeP_info_view_V import *
 from .admin_views.content_views.top_footer_view_V import *
+from .ajax_common_data_send_V import *
 # from .admin_views.content_views.
 
 urlpatterns = [
     path('', main_index, name='main_index'),
     # path('projects/', projects, name='projects'),
     path('about/', about, name='about'),
+    
+    # AJAX COMMON DATA GET AND SEND
+    path('get-common-data/', get_common_data, name='get_common_data'),
+    # ==========================
 ]
 
 # ++++++++++++ Ulrs for Main Admin +++++++++++++++++

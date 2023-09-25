@@ -12,18 +12,27 @@ from ..models.categories_n_babies_m import Category
 # from ..forms.article_f import BlogForm
 # from ..models.comments_m import Comment
 from ..forms.comments_f import CommentForm
-from hospital_website.models.models import BaseData
+from hospital_website.models.models import *
+from hospital_website.models.information_footer_M import TopFooterHeading, TopFooterContent, SocialMediaLink
+    
 
 def blog_home(request): #displays List of blogs and category
     blogs = Blog.objects.filter(status=Blog.PUBLISHED, hidden=False, approved=True)
     categories = Category.objects.filter(approved=True)
+    side_info = ContactSidebarCompanyInfo.objects.first()
     base = BaseData.objects.first() #for Base.html
-    content = {
+    top_footer_headings = TopFooterHeading.objects.all()
+    social_media_links = SocialMediaLink.objects.first()  # Assuming there's only one instance
+    
+    context = {
+        'top_footer_headings': top_footer_headings,
+        'social_media_links': social_media_links,
         'blogs': blogs,
         'categories' : categories,
         'base': base,
+        'company_info': side_info,
     }
-    return render(request, 'blog/article/blog_home.html', content)
+    return render(request, 'blog/article/blog_home.html', context)
 
 
 def blog_detail(request, slug):
@@ -46,9 +55,15 @@ def blog_detail(request, slug):
             return redirect(reverse('blog:blog_detail', kwargs={'slug': blog.slug}))
             # return redirect('blog:blog_detail', slug=blog.slug)
     else:
-        base = BaseData.objects.first() #for Base.html
         comment_form = CommentForm()
+    side_info = ContactSidebarCompanyInfo.objects.first()
+    base = BaseData.objects.first() #for Base.html
+    top_footer_headings = TopFooterHeading.objects.all()
+    social_media_links = SocialMediaLink.objects.first()  # Assuming there's only one instance
+    
     context = {
+        'top_footer_headings': top_footer_headings,
+        'social_media_links': social_media_links,
         'blog': blog,
         'author_blogs': author_blogs,
         'comments': comments, 
@@ -56,6 +71,7 @@ def blog_detail(request, slug):
         'comment_form': comment_form,
         'categories' : categories,
         'base': base,
+        'company_info': side_info,
     }
     return render(request, 'blog/article/blog_detail.html', context)
 

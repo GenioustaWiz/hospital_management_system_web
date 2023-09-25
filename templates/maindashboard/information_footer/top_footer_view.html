@@ -72,7 +72,7 @@
                             <ul>
                                 {% for content_item in heading.content_items.all %}
                                 <li>
-                                    <a href="http://{{ content_item.url|safe }}">{{ content_item.content }}</a>
+                                    <a href="{{ content_item.url }}">{{ content_item.content }}</a>
                                 </li>
                                 {% endfor %}
                             </ul>

@@ -12,7 +12,7 @@ class TopFooterHeading(models.Model):
 class TopFooterContent(models.Model): 
     heading = models.ForeignKey(TopFooterHeading, on_delete=models.CASCADE, related_name='content_items')
     content = models.CharField(default='default',max_length=200, null=False)
-    url = models.CharField(max_length=1000, null=True, blank=True)
+    url = models.URLField(default='https://..', null=True, blank=True)
     
     def __str__(self):
         return self.content
@@ -20,10 +20,10 @@ class TopFooterContent(models.Model):
         super(TopFooterContent, self).save(*args, **kwargs)
 
 class SocialMediaLink(models.Model):
-    facebook_link = models.URLField()
-    whatsapp_link = models.URLField()
-    linkedIn_link = models.URLField()
-    twitter_link = models.URLField()
+    facebook_link = models.URLField(default='https://www.facebook.com/', null=True, blank=True)
+    whatsapp_link = models.URLField(default='https://web.whatsapp.com', null=True, blank=True)
+    linkedIn_link = models.URLField(default='https://www.linkedin.com/', null=True, blank=True)
+    twitter_link = models.URLField(default='https://twitter.com', null=True, blank=True)
 
     def save(self, *args, **kwargs):
         super(SocialMediaLink, self).save(*args, **kwargs)

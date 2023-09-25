@@ -8,6 +8,7 @@ from .admin_views.service_list_view_V import *
 # app_name = 'services'
 urlpatterns = [
     path('', services, name='services'),
+    path('serives-under/<slug:slug>/', services_offered, name='services_offered'),
     path('serivces-category-list/', view_service_categories, name='view_service_categories'),
     path('category/<int:category_id>/', services_of_category, name='services_of_category'),
 

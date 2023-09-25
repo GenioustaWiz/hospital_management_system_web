@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 
 class Appointment(models.Model):
     name = models.CharField(max_length=100)
@@ -18,17 +19,17 @@ class ServiceCategory(models.Model):
         null=False
     )
     iconInput = models.CharField(default='<i class="fa-icon fa-solid fa-truck-medical"></i>', max_length=200, null=False)
+    slug = models.SlugField(unique=True, blank=True)  # Add a slug field
 
     def __str__(self):
         return self.category_name
 
     def save(self, *args, **kwargs):
+        # Automatically generate the slug based on the category_name
+        if not self.slug:
+            self.slug = slugify(self.category_name)
         super(ServiceCategory, self).save(*args, **kwargs)
-
-    def delete(self, *args, **kwargs):
-        # Perform any necessary cleanup before deleting (if applicable)
-        super(ServiceCategory, self).delete(*args, **kwargs)
-
+        
 class ServiceOffered(models.Model):
     category = models.ForeignKey(ServiceCategory, on_delete=models.CASCADE)
     service_name = models.CharField(default='Dental Services', max_length=100, null=False)

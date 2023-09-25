@@ -14,11 +14,19 @@
 	grid-auto-flow: dense; /*helps rearrange Item to fit well on grid*/
     
 }
+.service--:hover {
+        background-color: rgba(251, 251, 251, 0.1);
+        backdrop-filter: blur(10px); /* Adjust the blur amount as needed */
+    
+}
 .service{
     display: flex;
     flex-direction: column;
     align-items: center;
     color: white;
+}
+.service p{
+    text-align: center;
 }
 .fa-icon{
     font-size: 24px;

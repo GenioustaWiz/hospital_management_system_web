@@ -11,9 +11,10 @@ confirmBtns.forEach(btn => {
     const title = btn.dataset.title;
     // const message = btn.dataset.message;
     const id =btn.dataset.id;
+    const msg = btn.dataset.msg;
     const url = btn.dataset.url;
     const button = btn.dataset.button;
-    const msg = btn.dataset.msg;
+    console.log(msg)
     // Set the message based on the id
     //  it will be easier to set the message from here since many depend on it
     if (id === 'edit') {
@@ -23,7 +24,11 @@ confirmBtns.forEach(btn => {
     } 
     else if(id === 'msg'){ // this one looks for the ones with message set by thnl
       message = msg
-    }else { //looks for the ones that hev no message and no id
+    }
+    else if(id === 'delete'){
+      message = msg
+    }
+    else { //looks for the ones that hev no message and no id
       message = 'Are you sure you want to perform this action?';
     }
 
