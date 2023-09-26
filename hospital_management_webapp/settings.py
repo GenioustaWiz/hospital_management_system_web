@@ -149,13 +149,13 @@ STATICFILES_FINDERS = [
 
 
 STATIC_URL = "/static/"
-# This is where Django will look for static files during development.
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # This is the directory where the collected static files will be stored.
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# This is where Django will look for static files during development.
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'static'),
+# )
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/' # Public URL at the browser
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media',) # Directory where uploaded media is saved.

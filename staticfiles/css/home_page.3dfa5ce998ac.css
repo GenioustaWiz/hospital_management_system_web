@@ -1,0 +1,118 @@
+.description{/* From https://css.glass */
+      /* background: rgba(255, 255, 255, 0.15); */
+      border-radius: 16px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.27);
+      /* height: 100%;  */
+      /* margin-bottom: 50px; */
+      position: initial;
+  }
+  .des-p {
+      display: block;
+      align-items: center;
+      margin:0 auto;
+      padding-top: 0px;
+      }
+  .des-p h1{
+      color: #fef3ff;
+      font-size: 30px;
+      font-weight: bold;
+      margin-top: 40px;
+      margin-bottom: 30px;
+  }
+  .des-p p{
+      color: #000000B0;
+      font-size: 19px;
+      font-weight: 300;
+      line-height: 1.7em;
+      letter-spacing: 0;
+  }
+  .des-p button{
+      color: rgb(246, 255, 252);
+      background: linear-gradient(to right, #0f71c3 0%, #39b49a 100%);
+      border-radius: 30px;
+      box-shadow: 0 0 15px rgba(52, 30, 30, 0.6);
+  }
+  .des-p button:hover{
+    background: linear-gradient(to right, #39b49a 0%, #0f71c3 100%);
+  }
+    /* sticker colors */
+    .green {
+      background-color: #61bd4f;
+    }
+    
+    .purple {
+      background-color: #c377e0;
+    }
+    
+    .yellow {
+      background-color: #f2d600;
+    }
+    
+    .pink {
+      background-color: #eb5a46;
+    }
+    
+    .blue {
+      background-color: #189db1;
+    }
+    .grey {
+      background-color: #808080;
+    }
+    .red {
+      background-color: #a32727;
+    }
+    .card__title {
+      color: #17394d;
+      margin-bottom: .75rem;
+    }
+.frontP-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 320px);
+    gap:1px;
+    justify-content: center;
+    /* padding-bottom: 50px; */
+    grid-auto-flow: dense; /*helps rearrange Item to fit well on grid*/
+    /* background-color: rgb(20, 19, 19); */
+    color: #d9d6d6;
+    padding-top: 20px;
+
+    position: relative;
+    top: -100px;
+  }
+  .f-card1, .f-card2, .f-card3{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    height: fit-content;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow to all cards */
+  }
+   /* Style for .f-card2, giving it a stronger shadow to make it appear lifted */
+  .f-card2 {
+    box-shadow: 0 11px 20px rgba(0, 0, 0, 0.4);
+    min-height: 320px;
+  }
+  .fa-icon{
+    font-size: 50px;
+    color: white;
+  }
+  .frontP-cards h4{
+    font-weight: 800;
+    color: white;
+  }
+@media (min-width: 992px){
+    .des-p h1{
+      font-size: 60px;
+    }
+    #description-page{
+        padding-left: 80px;
+        padding-right: 80px;
+    }
+    .des-p-p{
+        padding-left: 90px;
+        padding-right: 90px;
+    } 
+}    
