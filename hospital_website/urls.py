@@ -9,8 +9,7 @@ from .admin_views.editing_views.ContactSidebarCompanyInfo_edit_V import *
 from .admin_views.editing_views.information_footer_edit_V import *
 from .admin_views.content_views.aboutP_view import *
 from .admin_views.content_views.ContactSidebarCompanyInfo_view_V import *
-from .admin_views.content_views.homeP_info_view_V import *
-# from .admin_views.content_views.homeP_info_view_V import *
+from .admin_views.content_views.homeP_info_view_V import home_page_view
 from .admin_views.content_views.top_footer_view_V import *
 from .ajax_common_data_send_V import *
 # from .admin_views.content_views.
