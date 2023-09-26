@@ -9,6 +9,7 @@ from .admin_views.editing_views.ContactSidebarCompanyInfo_edit_V import *
 from .admin_views.editing_views.information_footer_edit_V import *
 from .admin_views.content_views.aboutP_view import *
 from .admin_views.content_views.ContactSidebarCompanyInfo_view_V import *
+from .admin_views.content_views.homeP_info_view_V import *
 # from .admin_views.content_views.homeP_info_view_V import *
 from .admin_views.content_views.top_footer_view_V import *
 from .ajax_common_data_send_V import *
@@ -28,7 +29,7 @@ urlpatterns = [
 urlpatterns += [
     path('main-dashboard/', main_dashboard_home, name='main_dashboard_home'),
     # ===============EDIT HOMEPAGE CONTENT===============
-    # path('home-page-view/', home_page_view, name='home_page_view'),
+    path('home-page-view/', home_page_view, name='home_page_view'),
     path('edit-home-page/', edit_home_page, name='edit_home_page'),
     path('front-page-card1/', home_page_card1_form, name='home_page_card1_form'),
     path('working-hours/', working_hours_form, name='working_hours_form'),
