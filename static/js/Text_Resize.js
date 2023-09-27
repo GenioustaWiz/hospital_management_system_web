@@ -16,7 +16,7 @@
     if (screenWidth >= 768) {
       baseSize = 14;
     } else {
-      baseSize = 12;
+      baseSize = 13;
     }
   
     // Loop through each element and set its font size
