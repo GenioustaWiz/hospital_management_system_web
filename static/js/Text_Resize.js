@@ -14,9 +14,9 @@
     // Set the base font size based on screen size
     let baseSize;
     if (screenWidth >= 768) {
-      baseSize = 14;
+      baseSize = 16;
     } else {
-      baseSize = 13;
+      baseSize = 14;
     }
   
     // Loop through each element and set its font size
