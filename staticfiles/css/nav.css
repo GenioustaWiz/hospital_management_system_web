@@ -101,7 +101,7 @@ static/
   display: flex;
   align-items: center;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 14px !important;
   text-decoration: none;
   padding: 12px 15px;
   transition: transform 0.3s;
