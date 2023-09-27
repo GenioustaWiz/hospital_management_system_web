@@ -1,5 +1,0 @@
-.navbar-vertical .nav-item .nav-link + .collapse .nav .nav-item > .nav-link, .navbar-vertical .nav-item .nav-link + .collapsing .nav .nav-item > .nav-link {
-
-    padding: 0;
-    margin: 0;
-}

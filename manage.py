@@ -5,8 +5,8 @@ import sys
 
 
 def main():
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'hospital_management_webapp.settings_p')
-    # os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'hospital_management_webapp.settings_d')
+    # os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'hospital_management_webapp.settings_p')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'hospital_management_webapp.settings_d')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
