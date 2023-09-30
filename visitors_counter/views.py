@@ -9,7 +9,7 @@ def record_visit(request):
         ip_address = request.META.get('REMOTE_ADDR')
 
         # Define the threshold for session expiration (e.g., 30 minutes)
-        session_expiration_threshold = timedelta(minutes=30)
+        session_expiration_threshold = timedelta(minutes=10)
 
         try:
             # Retrieve the previous visit for the IP address
