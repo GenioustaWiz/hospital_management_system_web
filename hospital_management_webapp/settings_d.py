@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'contact_us',
     'hospital_services',
     'hospital_blog',
+    'visitors_counter',
     'django_cleanup', # overrides older images
     """"""
     # for changing adm,in app  side..pip install django-admin-soft-dashboard

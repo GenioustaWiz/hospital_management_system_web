@@ -52,8 +52,8 @@ def get_common_data(request):
         }
 
     if data:
-        print('date================')
-        print(data)
+        # print('date================')
+        # print(data)
         return JsonResponse(data)
     else:
         return JsonResponse({'error': 'information not found.'})

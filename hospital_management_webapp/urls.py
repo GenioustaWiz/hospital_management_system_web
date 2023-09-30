@@ -17,6 +17,7 @@ urlpatterns = [
     path('contact_us/', include('contact_us.urls')),
     path('services/', include('hospital_services.urls')),
     path('news/', include('hospital_blog.urls')),
+    path('', include('visitors_counter.urls')),
 
 ]
 
