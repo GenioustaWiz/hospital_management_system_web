@@ -36,7 +36,7 @@
             </div>
             </a>
             {% comment %} END {% endcomment %}       
-            {% comment %} TOTAL NO OF PUBLISHED Articles {% endcomment %}
+            {% comment %} Total published articles {% endcomment %}
             <a href="{% url 'blog:published_article_list' %}">
             <div class="card--item">
                 <div id="card--item" style="margin: 0.8rem;">
@@ -53,91 +53,40 @@
             </div>
             </a>
             {% comment %} end {% endcomment %}
-            {% comment %} total no of Views {% endcomment %}
-            <a href="">
+            {% comment %} Website Total Visitors {% endcomment %}
+            <a href="{% url 'visit_list'%}">
             <div class="card--item">
                 <div id="card--item" style="margin: 0.8rem;">
                     <div class="card-top">
                         <div class="card-title-inf">
-                            <span class="card--title ">Views</span>
-                            <span id="span2">{{ total_views }}</span>
+                            <span class="card--title ">Total visitors</span>
+                            <span id="span2">{{ total_visitors }}</span>
                         </div>
                         <i class="blue d-c-fa fa fa-layer-group"></i>
                     </div>
-                    <p class="card--footer">Total Views for all Articles</p>
+                    <p class="card--footer">Website Total Visitors </p>
                 </div>
                 <div class="card-bar bg--blue"></div>
             </div>
             </a>
             {% comment %} end {% endcomment %}
-            {% comment %} TOTAL NO OF COMMENTS {% endcomment %}
-            <a href="">
+            {% comment %} Total number of visits {% endcomment %}
+            <a href="" style="cursor: default;">
             <div class="card--item">
                 <div id="card--item" style="margin: 0.8rem;">
                     <div class="card-top">
                         <div class="card-title-inf">
-                            <span class="card--title ">Comments</span>
-                            <span id="span2">{{ total_comments }}</span>
+                            <span class="card--title ">Total visits</span>
+                            <span id="span2">{{ total_visits }}</span>
                         </div>
                         <i class="yellow d-c-fa fa fa-layer-group"></i>
                     </div>
-                    <p class="card--footer">Total comments for all articles</p>
+                    <p class="card--footer">Total number of visits</p>
                 </div>
                 <div class="card-bar bg--yellow"></div>
             </div>
             </a>
             {% comment %} END OF COMMENTS {% endcomment %}
-            {% comment %} TOTAL NO FO BLOGS Approved{% endcomment %}
-            <a href="{% url 'blog:approved_article_list' %}">
-            <div class="card--item">
-                <div id="card--item" style="margin: 0.8rem;">
-                    <div class="card-top">
-                        <div class="card-title-inf">
-                            <span class="card--title ">Articles Approved</span>
-                            <span id="span2">{{ total_approved }}</span>
-                        </div>
-                        <i class="green d-c-fa fa fa-layer-group"></i>
-                    </div>
-                    <p class="card--footer">Total approved articles</p>
-                </div>
-                <div class="card-bar bg--green"></div>
-            </div>
-            </a>
-            {% comment %} END {% endcomment %}
-            {% comment %} TOTAL NO FO BLOGS Rejected{% endcomment %}
-            <a href="{% url 'blog:rejected_article_list' %}">
-            <div class="card--item">
-                <div id="card--item" style="margin: 0.8rem;">
-                    <div class="card-top">
-                        <div class="card-title-inf">
-                            <span class="card--title ">Articles Rejected</span>
-                            <span id="span2">{{ total_rejected }}</span>
-                        </div>
-                        <i class="green d-c-fa fa fa-layer-group"></i>
-                    </div>
-                    <p class="card--footer">Total rejected articles</p>
-                </div>
-                <div class="card-bar bg--green"></div>
-            </div>
-            </a>
-            {% comment %} END {% endcomment %}
-            {% comment %} TOTAL NO FO BLOGS Rejected{% endcomment %}
-            <a href="{% url 'blog:hidden_article_list' %}">
-            <div class="card--item">
-                <div id="card--item" style="margin: 0.8rem;">
-                    <div class="card-top">
-                        <div class="card-title-inf">
-                            <span class="card--title ">Articles Hidden</span>
-                            <span id="span2">{{ total_hidden }}</span>
-                        </div>
-                        <i class="green d-c-fa fa fa-layer-group"></i>
-                    </div>
-                    <p class="card--footer">Total hidden articles</p>
-                </div>
-                <div class="card-bar bg--green"></div>
-            </div>
-            </a>
-            {% comment %} END {% endcomment %}
         </div>
     {% comment %} end info cards {% endcomment %}
 
@@ -145,11 +94,11 @@
         {% comment %} VISIT WEBSITE {% endcomment %}
         <div class="bfr-r-a">
             <div id="bfr-r-a">
-                    <i class="fas fa-chart-line "></i>
+                    <!--<i class="fas fa-chart-line "></i>-->
                 <div class="d-inline" style="padding: 0 10px;">
-                    <!--T/B, L/R  -->
+                    <!--T/B, L/R  
                     <h5 style="margin: 0;">Recent Published Articles</h5>
-                    <span>List of your recently published articles.</span>
+                    <span>List of your recently published articles.</span>-->
                 </div>
             </div>
             <div class="visit-website">
@@ -160,7 +109,7 @@
             </div>
         </div>
         {% comment %} END OF VISIT WEBSITE  {% endcomment %}
-
+        {% if recent_blogs %}
         {% comment %} RECENT ARTICLES {% endcomment %}
         <div class="recent-articles">
             <div id="r-a-heading">
@@ -252,6 +201,7 @@
             {% endfor %}
         </div>
         {% comment %} END OF RECENT ARTICLES {% endcomment %}
+        {% endif %}
     {% comment %} |||||||||END COMMON FOR MANY PAGES|||||||||| {% endcomment %}
 </section>
 {% comment %} <!-- end Home --> {% endcomment %}
