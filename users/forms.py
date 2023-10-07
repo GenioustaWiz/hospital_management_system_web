@@ -34,7 +34,7 @@ class UserUpdateForm(forms.ModelForm):
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['phone_number','country','title','desc','image', ]
+        fields = ['phone_number','country','title','image','github','facebook','googleplus','instagram', ]
         widgets = {
             'phone_number': TextInput(attrs={
                 'class': "P-no",
@@ -43,3 +43,9 @@ class ProfileUpdateForm(forms.ModelForm):
                 }),
             
         }    
+    
+# Create a ProfileUpdateForm to update image
+class ProfileUpdateForm_desc(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields =['desc']

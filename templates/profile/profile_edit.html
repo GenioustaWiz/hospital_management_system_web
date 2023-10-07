@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Profile</title>
+{% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/users/profile_home.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/users/profile.css' %}">
+<link rel="stylesheet" href="{% static 'css/users/login.css' %}" type="text/css">
+{% endblock css %}
+
+{% block content %}
+<section class="s2 profile">
+  <div class=" profile-main  container-xl">
+    
+    {% include 'profile/profile_side_bar.html' %}
+    
+    <!--==========SECTION FOR EDITING USER PROFILE============-->
+    <section id="edit-profile" style="justify-items: center;">
+       
+      <div class="form-info">
+        <div class="form" style="margin-bottom: 10px;">
+          
+          <form method="post" style="padding-top: 0;">
+            <h6 class="text-center" style="margin-bottom: 0; color: rgb(117, 117, 228);">
+              Edit profile information here
+            </h6> 
+            {% csrf_token %}
+            <div class=" user-form signup">
+              
+              <!-- User form -->
+              {{ u_form.as_p }}
+              {{p_form.as_p}}
+              {{p_form.errors}}
+            </div>
+            <div class="profile-form signup">
+              {{desc_form.as_p}}
+            </div>
+            <p class="full" style="padding-top: 6px;">
+              <button type="submit" value="register" style=" padding: 5px; width: 120px; margin-left: 40%; 
+              border-radius: 25px;
+              ">Update</button>
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>
+{% endblock content %}

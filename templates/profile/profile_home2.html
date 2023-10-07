@@ -23,6 +23,11 @@
         <div class="info-">
           <h5 class="account-heading">{{ user.username }} </h5>
           <p class="text-secondary">{{ user.email }}</p>
+          {% if profile.user.groups.exists %}
+                    {% for group in profile.user.groups.all %}
+                    <p class="text-secondary">Designation{{ group.name }}</p>
+                    {% endfor %}
+            {% endif %}
         </div>
         <div class="select-">
           <ul>
@@ -80,31 +85,13 @@
         <div class=" info-area-s">
           <div class="user-details">
             <ul>
+                {% for field, value in profile_data.items %}
               <li style=" margin-top: 10px; ">
-                <i class=" U-fixed-details">Name </i>
-                <span class="U-valiable-details">{{ user.first_name }} {{ user.last_name }}</span>
-              </li>
-              <hr class="hr-dashed"> <!-- Creates dashed horizontal lines -->
-              <li>
-                <i class="U-fixed-details">Phone number </i>
-                <span class="U-valiable-details">{{ user.profile.phone_number }}</span>
+                <i class=" U-fixed-details">{{ field }} </i>
+                <span class="U-valiable-details">{{ value }}</span>
               </li>
               <hr class="hr-dashed">
-              <li>
-                <i class="U-fixed-details">Country </i>
-                <span class="U-valiable-details">{{ user.profile.country }}</span>
-              </li>
-              <hr class="hr-dashed">
-              <li>
-                <i class="U-fixed-details">Title </i>
-                <span class="U-valiable-details">{{ user.profile.title }}</span>
-              </li>
-              <hr class="hr-dashed">
-              <li>
-                <i class="U-fixed-details">Description </i>
-                <span class="U-valiable-details" style="font-size: 12px;">{{ user.profile.desc }}</span>
-              </li>
-              <hr class="hr-dashed">
+              {% endfor %}
             </ul>
           </div>
           <div class="current-projects">
@@ -224,17 +211,29 @@
                   <label for="id_image">Image:</label>
                  {{p_form.image}}
                </p>
+               <p>
+                <label for="id_facebook">Facbook link:</label>
+               {{p_form.facebook}}
+              </p>
+              <p>
+                <label for="id_github">Github Link:</label>
+              {{p_form.github}}
+              </p>
+              <p>
+                <label for="id_instagram">Instagram Link:</label>
+              {{p_form.instagram}}
+              </p>
+              <p>
+                <label for="id_googleplus">Google+ Link:</label>
+              {{p_form.googleplus}}
+              </p>
             </div>
             <div class="profile-form signup">
               <p>
                 <label for="id_desc">Desc:</label>
                 {{p_form.desc}}
                </p>
-               
-                
             </div>
-            
-
             <p class="full" style="padding-top: 6px;">
               <button type="submit" value="register" style=" padding: 5px; width: 120px; margin-left: 40%; 
               border-radius: 25px;

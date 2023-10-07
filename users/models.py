@@ -13,10 +13,10 @@ class Profile(models.Model):
     desc_text='Hey, there is a default text description about you that you can change it by clicking "Edit" or going'   
     desc = models.TextField(default=desc_text, max_length=200, null=True)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
-    github = models.CharField(default='input you Github link here.', max_length=1000, null=True, blank=True)
-    facebook = models.CharField(default='input you Facebook link here.', max_length=1000, null=True, blank=True)
-    googleplus = models.CharField(default='input you Google+ link here.', max_length=1000, null=True, blank=True)
-    instagram = models.CharField(default='input you Instagram link here.', max_length=1000, null=True, blank=True)
+    github = models.URLField(default='https://www.github.com/', max_length=1000, null=True, blank=True)
+    facebook = models.URLField(default='https://www.facebook.com/', max_length=1000, null=True, blank=True)
+    googleplus = models.URLField(default='https://www.google.com/', max_length=1000, null=True, blank=True)
+    instagram = models.URLField(default='https://www.instagram.com/', max_length=1000, null=True, blank=True)
     
     def __str__(self):
         return f'{self.user.username} Profile' #show how we want it to be displayed
