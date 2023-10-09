@@ -16,7 +16,7 @@
   }
   .phone-no{
     display: flex;
-    padding-top: 0;
+    padding-top: 0 !important;
   }
   .phone-no select{
     width: 70px;
@@ -26,7 +26,7 @@
     width: fit-content;
   }
   #id_country{
-    padding: 0.35em;
+    padding: 0.36em;
   }
 </style>
 {% endblock css %}
@@ -103,7 +103,7 @@
                           //console.log("Current Index:", currentIndex);
           
                           // You can also replace the text of the current select option with the saved text
-                          //select.options[currentIndex].text = previousOptionText;
+                          select.options[currentIndex].text = previousOptionText;
           
                           // Update the previousOptionText and currentIndex variables
                           updateSelection();
