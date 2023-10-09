@@ -156,6 +156,7 @@ i{
     display: grid;
     grid-template-rows: auto;
     grid-template-columns: auto;
+    margin-bottom: 30px;
   }
   .form-info{
     width: 100%;

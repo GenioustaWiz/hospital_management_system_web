@@ -9,12 +9,28 @@
 <link rel="stylesheet" href="{% static 'css/users/profile_home.css' %}" type="text/css">
 <link rel="stylesheet" href="{% static 'css/users/profile.css' %}">
 <link rel="stylesheet" href="{% static 'css/users/login.css' %}" type="text/css">
-{% endblock css %}
+
 <style>
+  select{
+    border: 1px solid #c9e6ff;
+  }
+  .phone-no{
+    display: flex;
+    padding-top: 0;
+  }
+  .phone-no select{
+    width: 70px;
+    margin-right: 5px;
+  }
   select.P-no{
     width: fit-content;
   }
+  #id_country{
+    padding: 0.35em;
+  }
 </style>
+{% endblock css %}
+
 {% block content %}
 <section class="s2 profile">
   <div class=" profile-main  container-xl">
@@ -35,9 +51,13 @@
             <div class=" user-form signup">
               <!-- User form -->
               {{ u_form.as_p }}
-              <p class="phone-no" id="phone-no">
+              <div id="phone-no" style="padding-top: 10px;">
+                
                 <label for="id_phone_number">Phone number:</label>
+                
+                <p class="phone-no">
                 {{c_form.phone_number}}
+                </p>
                 <script>
                   document.addEventListener("DOMContentLoaded", function () {
                       // Get the select element
@@ -89,7 +109,7 @@
                           updateSelection();
                       });
                   });
-              </script>
+                </script>
                 {% comment %} <script>
                   // Wait for the document to load
                   document.addEventListener("DOMContentLoaded", function() {
@@ -121,7 +141,7 @@
                       updateSelectedOptionText();
                   });
               </script> {% endcomment %}
-              </p>
+            </div>
               <p>
                 <label for="id_country">Country:</label>
                 {{c_form.country}}
