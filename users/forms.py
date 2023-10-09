@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
 from phonenumber_field.formfields import PhoneNumberField
+from phonenumber_field.widgets import PhoneNumberPrefixWidget
 
 class loginpage(forms.Form):
     username = forms.CharField(max_length=63)
@@ -30,19 +31,21 @@ class UserUpdateForm(forms.ModelForm):
                 'placeholder': 'Email'
                 })
         }
-# Create a ProfileUpdateForm to update image
-class ProfileUpdateForm(forms.ModelForm):
+
+class ProfileUpdateForm_c(forms.ModelForm):
+    phone_number = PhoneNumberField(
+            widget=PhoneNumberPrefixWidget(initial='KE', attrs={'class': 'p-no'})
+        )
     class Meta:
         model = Profile
-        fields = ['phone_number','country','title','image','github','facebook','googleplus','instagram', ]
-        widgets = {
-            'phone_number': TextInput(attrs={
-                'class': "P-no",
-                
-                'placeholder': 'Phone number'
-                }),
-            
-        }    
+        fields = ['phone_number','country']
+# Create a ProfileUpdateForm to update image
+class ProfileUpdateForm(forms.ModelForm):
+    
+    class Meta:
+        model = Profile
+        fields = ['title','image','github','facebook','googleplus','instagram', ]
+           
     
 # Create a ProfileUpdateForm to update image
 class ProfileUpdateForm_desc(forms.ModelForm):

@@ -7,7 +7,7 @@ from django_countries.fields import CountryField
 class Profile(models.Model):
     is_staff = models.BooleanField(default=False)
     user = models.OneToOneField(User, on_delete=models.CASCADE) # Delete profile when user is deleted
-    phone_number = PhoneNumberField()
+    phone_number = PhoneNumberField(null=True, blank=True)
     country= CountryField(blank=True)
     title = models.CharField(default='This is the default, title change it in profile.', max_length=200, null=True)
     desc_text='Hey, there is a default text description about you that you can change it by clicking "Edit" or going'   

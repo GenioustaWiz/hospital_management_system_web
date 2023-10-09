@@ -75,7 +75,7 @@ def profile(request):
         'Name': full_name, #profile.user.first_name,
         'Email': profile.user.email,
         'Phone Number': profile.phone_number,
-        'Country': profile.country,
+        'Country': profile.country.name, #this is to make sure it displays the name not the code
         'Description': profile.desc,
         
     }
@@ -100,25 +100,35 @@ def profile_edit( request):
         profile = Profile.objects.create(user=user)
 
     if request.method == 'POST':
-        u_form = UserUpdateForm(request.POST, instance=request.user)
+        u_form = UserUpdateForm(request.POST, instance=user)
+        c_form= ProfileUpdateForm_c(request.POST,instance=profile) #for proccessing phone_number and country selectoptions
         p_form = ProfileUpdateForm(request.POST,
                                    request.FILES,
-                                   instance=request.user.profile) 
+                                   instance=profile) 
+        
         desc_form =  ProfileUpdateForm_desc(request.POST, instance=profile)
-        if u_form.is_valid() and p_form.is_valid() and desc_form.is_valid():
+        if u_form.is_valid() and p_form.is_valid() and desc_form.is_valid() and c_form.is_valid:
             u_form.save()
             p_form.save() 
+            # phone_number = c_form.phone_number
+            # print("=========c-form===========")
+            # print(phone_number)
+            # print(country)
+            c_form.save()
+            profile.save()
             desc_form.save()  # Save the description form
             messages.success(request, f'Your account has been updated!')
             return redirect('profile') # Redirect back to profile page
 
     else:
         u_form = UserUpdateForm(instance=request.user)
-        p_form = ProfileUpdateForm(instance=request.user.profile)
+        c_form = ProfileUpdateForm_c(instance=profile)
+        p_form = ProfileUpdateForm(instance=profile)
         desc_form =  ProfileUpdateForm_desc(instance=profile)
     
     context = {
         'u_form': u_form,
+        'c_form': c_form,
         'p_form': p_form,
         'desc_form': desc_form,
         'profile': profile,
