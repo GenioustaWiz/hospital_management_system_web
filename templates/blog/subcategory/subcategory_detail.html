@@ -1,16 +1,14 @@
 {% extends 'base.html' %}
-{% comment %} helps in displaying the Topics 
-and Blogs Associated with the Subcategory clicked {% endcomment %}
+
+{% comment %} displays blog lists and category lists {% endcomment %}
 
 {% load static %}
 
-{% block title %} Blog List Page {% endblock title %}
+{% block title %} Articles {% endblock title %}
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/blog/blog_list.css' %}">
+<link rel="stylesheet" href="{% static 'css/blog/blog_home.css' %}">
 {% comment %} <link rel="stylesheet" href="{% static 'css/blog/blog_detail.css' %}"> {% endcomment %}
-<style>
- 
-</style>
+
 {% endblock css %}
 
 {% block content %}
@@ -18,25 +16,24 @@ and Blogs Associated with the Subcategory clicked {% endcomment %}
 
     {% comment %} BLOGS LIST DISPLAY {% endcomment %}
     <div class="p-l-main item2 bg-white" id="main" >
+            {% comment %} <div class="article-heading">Available Articles </div>
+         {% endcomment %}
             <div class="article-heading">
-              Available Articles under {{ subcategory.name }} category 
+              Search Results for <i style="color: red;font-weight: 700;"> {{subcategory}} </i>
             </div>
-        
             {% if blogs %}
             <div class="itme2 post-wrapper">
               {% for article in blogs %}
               <div>
                   <div class="post">
-                      <img class="thumbnail" src="{{ article.image.url }}">
-                      
+                      <a href="{{ article.get_absolute_url }}">
+                        <img class="thumbnail" src="{{ article.image.url }}">
+                      </a>
                       <div class="post-preview">
-                          <h6 class="post-title ">
+                          <p class="post-title ">
                             <a href="{{ article.get_absolute_url }}">
-                            <b>{{ article.title }}</b>
-                          </a></h6>
-                          <!-- <p class="post-intro"></p> -->
-                          {{ article.content|safe| truncatechars:50 }}
-                          <a href="{{ article.get_absolute_url }}">Read More</a>
+                            <b>{{ article.title|safe| truncatechars:50 }}</b>
+                          </a></p>
                       </div>
 
                       <ol class="post-footer">
@@ -51,35 +48,10 @@ and Blogs Associated with the Subcategory clicked {% endcomment %}
           </div>
             {% else %}
                     <div class="centered alert alert-warning"><b>No Articles</b></div>
-            {% endif %}
+                {% endif %}
     </div> 
-    {% comment %} END OF BLOGS LIST DISPLAY {% endcomment %}-
-
-    {% comment %} SIDE BAR {% endcomment %}
-    <div class="p-l-side item2" id="side-bar">
-        
-      <hr> 
-      <h6 class="filter-title" > 
-          Categories 
-          <i class="fa fa-hand-down" aria-hidden="true"></i>
-      </h6>
-      <hr>
-      <div class="filter-data">
-          <ul class=" dropend">
-          {% for category in categories %}
-          <li class="filter-item">
-              <p>>></p>
-              <a href="{{category.get_absolute_url }}">{{ category.name }}</a>
-              <label for="">{{ category.blog_count }}</label>
-          </li>
-          {% empty %}
-          <li>No subcategories found.</li>
-          {% endfor %}
-      </ul>
-          
-      </div>
-  </div>
-  {% comment %} END OF SIDE BAR {% endcomment %}
+    {% comment %} END OF BLOGS LIST DISPLAY {% endcomment %}
+    {% include 'blog/article/blog_side_bar.html' %}
 </section>
 {% endblock content %}
 

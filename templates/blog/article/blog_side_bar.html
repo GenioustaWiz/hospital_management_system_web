@@ -1,4 +1,39 @@
 
+{% block css %}
+    <style>
+        .searched-article h3{
+            margin-bottom: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .cate-author{
+            display: flex;
+        }
+        .cate-author p{
+            margin-right: 20px;
+            margin-bottom: 0;
+        }
+        .search-result{
+            padding: 0 4px;
+            cursor: pointer;
+        }
+        /* search-result is the mother and searched-article is the babies*/
+        /* we apply the even to the babies belonging to the mother*/
+        .search-result:nth-child(even) .searched-article {
+            background-color: #bac3d1a1;
+            color: #000;
+        }
+        .search-result .searched-article:hover{
+            background-color: azure;
+        }
+        .blog-item a{
+            text-decoration: none;
+        }
+        .blog-item:hover{
+            background-color: azure;
+        }
+    </style>
+{% endblock css %}
     {% comment %} SIDE BAR {% endcomment %}
     <div class="sidebar " id="side-bar">
         <!--SEARCH-BAR -->
@@ -18,14 +53,15 @@
                 
                                 $.each(data.articles, function (index, article) {
                                     var articleDiv = $('<div class="searched-article"></div>');
+                                    var authCateDiv = $('<div class="cate-author"></div>');
                                     var titleDiv = $('<h3 class="article-title"></h3>').text(article.title);
                                     var authorDiv = $('<p class="article-author"></p>').text('Author: ' + article.author);
                                     var categoryDiv = $('<p class="article-category"></p>').text('Category: ' + article.category);
                 
                                     articleDiv.append(titleDiv);
-                                    articleDiv.append(authorDiv);
-                                    articleDiv.append(categoryDiv);
-                
+                                    authCateDiv.append(authorDiv);
+                                    authCateDiv.append(categoryDiv);
+                                    articleDiv.append(authCateDiv);
                                     var resultItem = $('<div class="search-result" data-slug="' + article.slug + '"></div>');
                                     resultItem.append(articleDiv);
                 
@@ -44,18 +80,6 @@
                         $('#search-results').hide();
                     });
                     //======= end =====
-                    //code is responsible for handling the form submission 
-                    //when the search button is clicked
-                    //it get the value in the query input and sends it to BLOG_search for database quering
-                    //$('#search-form').on('submit', function (e) {
-                    //e.preventDefault();
-                    //var query = $('#search-input').val();
-                    //if (query) { //this one stops any processing if their is no value
-                        //in the query input
-                    //    window.location.href = '/news/blog-search-results/?query=' + query;
-                    //}
-                    //});
-                    //-------end---//
                     // Hide the search results when clicking outside
                     $(document).on('click', function (e) {
                         if (!$(e.target).closest('.search-form').length) {
@@ -76,73 +100,54 @@
         <!--END OF SEARCH-BAR-->
         <!--DISPLAYING LIST OF Categories-->
         <div class="sidebar-block">
+          {% if subcategories %}
+          <h3 class="sidebar-title">Subcategories</h3>
+          {% elif categories %}
           <h3 class="sidebar-title">Categories</h3>
+          {% endif %}
+
           <ul class="categories">
-            <li><a href="#">Food <span>12</span></a></li>
-            <li><a href="#">Dish <span>22</span></a></li>
-            <li><a href="#">Desserts <span>37</span></a></li>
-            <li><a href="#">Drinks <span>42</span></a></li>
-            <li><a href="#">Ocassion <span>14</span></a></li>
+            {% for category in categories %}
+            <li><a href="{{category.get_absolute_url }}">{{ category.name }}
+                <span>{{ category.blog_count }}</span>
+            </a></li>
+            {% empty %}
+            <li>No categories found.</li>
+            {% endfor %}
           </ul>
         </div>
         <!--END OF LIST OF CATEGORIES-->
         <!--FOR DISPLAYING MOST VIEWED BLOGS-->
         <div class="sidebar-block">
           <h3 class="sidebar-title">Recent Blog</h3>
+          {% for article in recent_articles %}
           <div class="blog-item">
-            <a class="post-thumb" href="">
-              <img src="../assets/img/blog/blog_1.jpg" alt="">
+            <a class="post-thumb" href="{{ article.get_absolute_url }}">
+              <img src="{{ article.image.url }}" alt="alt">
             </a>
             <div class="content">
-              <h5 class="post-title"><a href="#">Even the all-powerful Pointing has no control</a></h5>
+              <h3 class="post-title"><a href="{{ article.get_absolute_url }}">{{article.title}}</a></h3>
               <div class="meta">
-                <a href="#"><span class="mai-calendar"></span> July 12, 2018</a>
-                <a href="#"><span class="mai-person"></span> Admin</a>
-                <a href="#"><span class="mai-chatbubbles"></span> 19</a>
+                <a href="{{ article.get_absolute_url }}"><span class="mai-calendar"></span> {{ article.date_published|date:"F j, Y" }}</a>
+                <a href="{{ article.get_absolute_url }}"><span class="mai-person"></span> {{article.author}}</a>
+                <a href="{{ article.get_absolute_url }}"><span class="mai-chatbubbles"></span> {{ article.comment_count  }}</a>
               </div>
             </div>
           </div>
-          <div class="blog-item">
-            <a class="post-thumb" href="">
-              <img src="../assets/img/blog/blog_2.jpg" alt="">
-            </a>
-            <div class="content">
-              <h5 class="post-title"><a href="#">Even the all-powerful Pointing has no control</a></h5>
-              <div class="meta">
-                <a href="#"><span class="mai-calendar"></span> July 12, 2018</a>
-                <a href="#"><span class="mai-person"></span> Admin</a>
-                <a href="#"><span class="mai-chatbubbles"></span> 19</a>
-              </div>
-            </div>
-          </div>
-          
-          <div class="blog-item">
-            <a class="post-thumb" href="">
-              <img src="../assets/img/blog/blog_3.jpg" alt="">
-            </a>
-            <div class="content">
-                <h5 class="post-title"><a href="#">Even the all-powerful Pointing has no control</a></h5>
-                <div class="meta">
-                  <a href="#"><span class="mai-calendar"></span> July 12, 2018</a>
-                  <a href="#"><span class="mai-person"></span> Admin</a>
-                  <a href="#"><span class="mai-chatbubbles"></span> 19</a>
-                </div>
-            </div>
-          </div>
+          {% empty %}
+            <li>No Recent articles found.</li>
+            {% endfor %}
         </div>
           <!--END OF MOST VIEW-->
           <!--FOR DISPLAYING AVAILABLE TAGS-->
           <div class="sidebar-block">
             <h3 class="sidebar-title">Tag Cloud</h3>
             <div class="tagcloud">
-              <a href="#" class="tag-cloud-link">dish</a>
-              <a href="#" class="tag-cloud-link">menu</a>
-              <a href="#" class="tag-cloud-link">food</a>
-              <a href="#" class="tag-cloud-link">sweet</a>
-              <a href="#" class="tag-cloud-link">tasty</a>
-              <a href="#" class="tag-cloud-link">delicious</a>
-              <a href="#" class="tag-cloud-link">desserts</a>
-              <a href="#" class="tag-cloud-link">drinks</a>
+                {% for tag in all_tags %}
+                <a href="{% url 'blog:tag_blogs' tag.slug %}" class="tag-cloud-link">{{ tag.name }}</a>
+                {% empty %}
+                <li class="tag-cloud-link">No tags found.</li>
+                {% endfor %}
             </div>
           </div>
           <!--END OF TAGS-->

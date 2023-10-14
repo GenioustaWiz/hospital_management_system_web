@@ -17,7 +17,7 @@ urlpatterns = [
     path('article view/<slug:slug>/', blog_detail, name='blog_detail'),
     path('category article list/<slug:slug>/', category_detail, name='category_detail'),
     path('subcategory article list/<slug:slug>/', subcategory_detail, name='subcategory_detail'),
-    path('tags list/<slug:tag_slug>/', tag_blogs, name='tag_blogs'),
+    path('artcles/tagged/<slug:tag_slug>/', tag_blogs, name='tag_blogs'),
     
     #Dashboard Views
     # path('<slug:slug>/', article_detail, name='article_detail')

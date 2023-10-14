@@ -13,8 +13,8 @@ from ..models.categories_n_babies_m import Category
 # from ..models.comments_m import Comment
 from ..forms.comments_f import CommentForm
 from hospital_website.models.models import *
-from hospital_website.models.information_footer_M import TopFooterHeading, TopFooterContent, SocialMediaLink
-    
+
+from taggit.models import Tag
 from django.db.models import Q
 def blog_home(request):
     print("am in=======================")
@@ -29,18 +29,24 @@ def blog_home(request):
                 Q(title__icontains=query) | Q(content__icontains=query)| Q(author__username__icontains=query),
                 status=Blog.PUBLISHED,
                 hidden=False,
-                approved=True
+                approved=True,
             )
         else:
             # Otherwise, show all published blogs
             blogs = Blog.objects.filter(status=Blog.PUBLISHED, hidden=False, approved=True)
 
-        categories = Category.objects.filter(approved=True)
+    categories = Category.objects.filter(approved=True)
+    # Query the database for the most recent articles
+    recent_articles = Blog.objects.filter(status=Blog.PUBLISHED, hidden=False, approved=True).order_by('-date_created')[:5]
+    # Get all available tags
+    all_tags = Tag.objects.all()
 
     context = {
         'blogs': blogs,
         'categories': categories,
+        'recent_articles': recent_articles,
         'query': query,
+        'all_tags': all_tags,  # Add this line to the context
     }
     return render(request, 'blog/article/blog_home.html', context)
 
@@ -52,7 +58,11 @@ def blog_detail(request, slug):
     author = blog.author
     author_blogs = Blog.objects.filter(author=author).exclude(slug=slug)
     categories = Category.objects.filter(approved=True)
+    # Query the database for the most recent articles
+    recent_articles = Blog.objects.filter(status=Blog.PUBLISHED, hidden=False, approved=True).order_by('-date_created')[:5]
     comments = blog.comments.filter(active=True)
+     # Get all available tags
+    all_tags = Tag.objects.all()
     new_comment = None
     if request.method == 'POST':
         comment_form = CommentForm(request.POST)
@@ -73,6 +83,8 @@ def blog_detail(request, slug):
         'new_comment': new_comment, 
         'comment_form': comment_form,
         'categories' : categories,
+        'recent_articles': recent_articles,
+        'all_tags': all_tags,  # Add this line to the context
     }
     return render(request, 'blog/article/blog_detail.html', context)
 
