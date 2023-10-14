@@ -8,9 +8,9 @@ $(document).ready(function () {
         headers: { "X-CSRFToken": csrftoken },
         success: function (data) {
             if (data.status === 'active_session') {
-                console.log('User has an active session.');
+                // console.log('User has an active session.');
             }else if (data.status === 'success') {
-                console.log('Visit recorded successfully.');
+                // console.log('Visit recorded successfully.');
             } else {
                 console.error('Error recording visit.');
             }
@@ -24,8 +24,8 @@ $(document).ready(function () {
         var cookieValue = null;
         if (document.cookie && document.cookie !== '') {
             var cookies = document.cookie.split(';');
-            console.log('cookies')
-            console.log(cookies)
+            // console.log('cookies')
+            // console.log(cookies)
             for (var i = 0; i < cookies.length; i++) {
                 var cookie = cookies[i].trim();
                 // Does this cookie string begin with the name we want?
@@ -38,21 +38,3 @@ $(document).ready(function () {
         return cookieValue;
     }
 });
-
-// $(document).ready(function () {
-//     $.ajax({
-//         url: '/record-visit/',
-//         type: 'POST',
-//         dataType: 'json',
-//         success: function (data) {
-//             if (data.status === 'success') {
-//                 console.log('Visit recorded successfully.');
-//             } else {
-//                 console.error('Error recording visit.');
-//             }
-//         },
-//         error: function () {
-//             console.error('AJAX request failed.');
-//         }
-//     });
-// });

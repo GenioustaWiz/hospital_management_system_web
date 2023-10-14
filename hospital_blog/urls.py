@@ -7,11 +7,13 @@ from .views.dashboard.dashboard_article_v import *
 from .views.dashboard.dashboard_many_v import *
 from .views.dashboard.subncategory_d_v import *
 from .views.tags_v import tag_blogs
+from .views.dynamic_search_JS_V import *
+
 
 app_name = 'blog'
 
 urlpatterns = [
-    path('', blog_home, name='blog_home'),
+    path('articles-available/', blog_home, name='blog_home'),
     path('article view/<slug:slug>/', blog_detail, name='blog_detail'),
     path('category article list/<slug:slug>/', category_detail, name='category_detail'),
     path('subcategory article list/<slug:slug>/', subcategory_detail, name='subcategory_detail'),
@@ -55,5 +57,10 @@ urlpatterns = [
     path('written articles/', written_article_list, name='written_article_list'),
     path('approved articles/', approved_article_list, name='approved_article_list'),
     path('rejected articles/', rejected_article_list, name='rejected_article_list'),
+    
+    # Add this URL pattern for search suggestions
+    path('open-dropeddown-article/<slug:articleSlug>/', open_dropdown_article, name='open_dropdown_article'),
+    path('blog-search-results/', blog_search_results, name='blog_search_results'),
+    path('blog_search/ajax_search/', blog_ajax_search, name='blog_ajax_search'),
     
 ]

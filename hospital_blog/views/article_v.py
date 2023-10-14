@@ -15,25 +15,34 @@ from ..forms.comments_f import CommentForm
 from hospital_website.models.models import *
 from hospital_website.models.information_footer_M import TopFooterHeading, TopFooterContent, SocialMediaLink
     
+from django.db.models import Q
+def blog_home(request):
+    print("am in=======================")
+    if request.method == 'GET':
+        print(request.GET)
+        print("am innn========++++++++++++++++++++++")
+        query = request.GET.get('query')
+        print(query)
+        if query:
+            
+            blogs = Blog.objects.filter(
+                Q(title__icontains=query) | Q(content__icontains=query)| Q(author__username__icontains=query),
+                status=Blog.PUBLISHED,
+                hidden=False,
+                approved=True
+            )
+        else:
+            # Otherwise, show all published blogs
+            blogs = Blog.objects.filter(status=Blog.PUBLISHED, hidden=False, approved=True)
 
-def blog_home(request): #displays List of blogs and category
-    blogs = Blog.objects.filter(status=Blog.PUBLISHED, hidden=False, approved=True)
-    categories = Category.objects.filter(approved=True)
-    side_info = ContactSidebarCompanyInfo.objects.first()
-    base = BaseData.objects.first() #for Base.html
-    top_footer_headings = TopFooterHeading.objects.all()
-    social_media_links = SocialMediaLink.objects.first()  # Assuming there's only one instance
-    
+        categories = Category.objects.filter(approved=True)
+
     context = {
-        'top_footer_headings': top_footer_headings,
-        'social_media_links': social_media_links,
         'blogs': blogs,
-        'categories' : categories,
-        'base': base,
-        'company_info': side_info,
+        'categories': categories,
+        'query': query,
     }
     return render(request, 'blog/article/blog_home.html', context)
-
 
 def blog_detail(request, slug):
     blog = get_object_or_404(Blog, slug=slug, date_published__lte=timezone.now())
@@ -56,22 +65,14 @@ def blog_detail(request, slug):
             # return redirect('blog:blog_detail', slug=blog.slug)
     else:
         comment_form = CommentForm()
-    side_info = ContactSidebarCompanyInfo.objects.first()
-    base = BaseData.objects.first() #for Base.html
-    top_footer_headings = TopFooterHeading.objects.all()
-    social_media_links = SocialMediaLink.objects.first()  # Assuming there's only one instance
     
     context = {
-        'top_footer_headings': top_footer_headings,
-        'social_media_links': social_media_links,
         'blog': blog,
         'author_blogs': author_blogs,
         'comments': comments, 
         'new_comment': new_comment, 
         'comment_form': comment_form,
         'categories' : categories,
-        'base': base,
-        'company_info': side_info,
     }
     return render(request, 'blog/article/blog_detail.html', context)
 

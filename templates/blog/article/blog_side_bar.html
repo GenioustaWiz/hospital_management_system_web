@@ -1,0 +1,151 @@
+
+    {% comment %} SIDE BAR {% endcomment %}
+    <div class="sidebar " id="side-bar">
+        <!--SEARCH-BAR -->
+        <div class="sidebar-block">
+            <h3 class="sidebar-title">Search</h3>
+            <!-- ==SCRIPT FOR SEARCHING -->
+            <script>
+                $(document).ready(function () {
+                    $('#search-input').on('input', function () {
+                        var query = $(this).val();
+                        $.ajax({
+                            url: '/news/blog_search/ajax_search/',
+                            data: { 'query': query },
+                            success: function (data) {
+                                var resultsDiv = $('#search-results');
+                                resultsDiv.empty();
+                
+                                $.each(data.articles, function (index, article) {
+                                    var articleDiv = $('<div class="searched-article"></div>');
+                                    var titleDiv = $('<h3 class="article-title"></h3>').text(article.title);
+                                    var authorDiv = $('<p class="article-author"></p>').text('Author: ' + article.author);
+                                    var categoryDiv = $('<p class="article-category"></p>').text('Category: ' + article.category);
+                
+                                    articleDiv.append(titleDiv);
+                                    articleDiv.append(authorDiv);
+                                    articleDiv.append(categoryDiv);
+                
+                                    var resultItem = $('<div class="search-result" data-slug="' + article.slug + '"></div>');
+                                    resultItem.append(articleDiv);
+                
+                                    resultsDiv.append(resultItem);
+                                });
+                
+                                resultsDiv.show();
+                            }
+                        });
+                    });
+                    //when user click on the search results on the list dropdown, 
+                    //the id of the clicked item is retrieved and used to open the blog_detail.
+                    $(document).on('click', '.search-result', function () {
+                        var articleSlug = $(this).data('slug');
+                        window.location.href = '/news/open-dropeddown-article/' + articleSlug; // Redirect to the blog post detail page
+                        $('#search-results').hide();
+                    });
+                    //======= end =====
+                    //code is responsible for handling the form submission 
+                    //when the search button is clicked
+                    //it get the value in the query input and sends it to BLOG_search for database quering
+                    //$('#search-form').on('submit', function (e) {
+                    //e.preventDefault();
+                    //var query = $('#search-input').val();
+                    //if (query) { //this one stops any processing if their is no value
+                        //in the query input
+                    //    window.location.href = '/news/blog-search-results/?query=' + query;
+                    //}
+                    //});
+                    //-------end---//
+                    // Hide the search results when clicking outside
+                    $(document).on('click', function (e) {
+                        if (!$(e.target).closest('.search-form').length) {
+                            $('#search-results').hide();
+                        }
+                    });
+                });
+            </script>
+            <!--==END OF SCRIPT FOR SEARCHING ====-->
+            <form class="search-form"  method="GET" action="/news/articles-available/">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="search-input" name="query" placeholder="Type a keyword and hit enter">
+                    <button type="submit" class="btn"><span class="icon mai-search"></span></button>
+                </div>
+                <div id="search-results" class="search-results"></div>
+            </form>
+        </div>
+        <!--END OF SEARCH-BAR-->
+        <!--DISPLAYING LIST OF Categories-->
+        <div class="sidebar-block">
+          <h3 class="sidebar-title">Categories</h3>
+          <ul class="categories">
+            <li><a href="#">Food <span>12</span></a></li>
+            <li><a href="#">Dish <span>22</span></a></li>
+            <li><a href="#">Desserts <span>37</span></a></li>
+            <li><a href="#">Drinks <span>42</span></a></li>
+            <li><a href="#">Ocassion <span>14</span></a></li>
+          </ul>
+        </div>
+        <!--END OF LIST OF CATEGORIES-->
+        <!--FOR DISPLAYING MOST VIEWED BLOGS-->
+        <div class="sidebar-block">
+          <h3 class="sidebar-title">Recent Blog</h3>
+          <div class="blog-item">
+            <a class="post-thumb" href="">
+              <img src="../assets/img/blog/blog_1.jpg" alt="">
+            </a>
+            <div class="content">
+              <h5 class="post-title"><a href="#">Even the all-powerful Pointing has no control</a></h5>
+              <div class="meta">
+                <a href="#"><span class="mai-calendar"></span> July 12, 2018</a>
+                <a href="#"><span class="mai-person"></span> Admin</a>
+                <a href="#"><span class="mai-chatbubbles"></span> 19</a>
+              </div>
+            </div>
+          </div>
+          <div class="blog-item">
+            <a class="post-thumb" href="">
+              <img src="../assets/img/blog/blog_2.jpg" alt="">
+            </a>
+            <div class="content">
+              <h5 class="post-title"><a href="#">Even the all-powerful Pointing has no control</a></h5>
+              <div class="meta">
+                <a href="#"><span class="mai-calendar"></span> July 12, 2018</a>
+                <a href="#"><span class="mai-person"></span> Admin</a>
+                <a href="#"><span class="mai-chatbubbles"></span> 19</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="blog-item">
+            <a class="post-thumb" href="">
+              <img src="../assets/img/blog/blog_3.jpg" alt="">
+            </a>
+            <div class="content">
+                <h5 class="post-title"><a href="#">Even the all-powerful Pointing has no control</a></h5>
+                <div class="meta">
+                  <a href="#"><span class="mai-calendar"></span> July 12, 2018</a>
+                  <a href="#"><span class="mai-person"></span> Admin</a>
+                  <a href="#"><span class="mai-chatbubbles"></span> 19</a>
+                </div>
+            </div>
+          </div>
+        </div>
+          <!--END OF MOST VIEW-->
+          <!--FOR DISPLAYING AVAILABLE TAGS-->
+          <div class="sidebar-block">
+            <h3 class="sidebar-title">Tag Cloud</h3>
+            <div class="tagcloud">
+              <a href="#" class="tag-cloud-link">dish</a>
+              <a href="#" class="tag-cloud-link">menu</a>
+              <a href="#" class="tag-cloud-link">food</a>
+              <a href="#" class="tag-cloud-link">sweet</a>
+              <a href="#" class="tag-cloud-link">tasty</a>
+              <a href="#" class="tag-cloud-link">delicious</a>
+              <a href="#" class="tag-cloud-link">desserts</a>
+              <a href="#" class="tag-cloud-link">drinks</a>
+            </div>
+          </div>
+          <!--END OF TAGS-->
+        
+    </div>
+    {% comment %} END OF SIDE BAR {% endcomment %}
