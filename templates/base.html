@@ -36,7 +36,23 @@
     <div id="preloader">
         <img class="preloader" src="{% static 'images/loaders/heart-loading2.gif' %}" alt="">
     </div>
-
+    {% comment %} display messages {% endcomment %}
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <script>
+        setTimeout(function() {
+            var messages = document.querySelector('.messages');
+            if (messages) {
+            messages.style.display = 'none';
+            }
+        }, 1000); // 3000 milliseconds = 3 seconds
+    </script>
+{% comment %} END of display messages {% endcomment %}
     <header class="header">
         <button class="header__button" id="btnNav" type="button">
             <a href="#">
@@ -164,7 +180,7 @@
 
     </nav>
     <main class="containerl-xxl">
-
+        
         {% block content %} {% endblock content %}
 
         <!-- === ajax_common_data_get.js is responsible for Dynamically updating the TOP FOOTER-->
@@ -206,6 +222,7 @@
                 </div>
             </div>
         </footer>
+        <!-- ============== end of FOOTER AJAX GET DATA ======================-->
         <footer class="mt3 text-center footer">
              Copyright © {{base.footer}}  <!--2021 Teknics Technologies -->
         </footer>

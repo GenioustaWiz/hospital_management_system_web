@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'taggit',
     'debug_toolbar',
     'tinymce',
+    "bootstrap_datepicker_plus",
 ]
 
 MIDDLEWARE = [

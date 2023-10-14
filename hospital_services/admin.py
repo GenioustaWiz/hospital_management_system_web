@@ -5,9 +5,9 @@ from .models import *
 
 @admin.register(Appointment)
 class AppointmentAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'phone', 'day', 'time', 'department', 'timestamp')
-    list_filter = ('day', 'department', 'timestamp')
-    search_fields = ('name', 'email', 'phone', 'department')
+    list_display = ('name', 'email', 'phone', 'date', 'time', 'service', 'timestamp')
+    list_filter = ('date', 'service', 'timestamp')
+    search_fields = ('name', 'email', 'phone', 'service')
     readonly_fields = ('timestamp',)
 
 @admin.register(ServiceCategory)

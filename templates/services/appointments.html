@@ -1,67 +1,55 @@
-{% extends 'base.html' %}
-{% load static %}
-
-{% block title %}
-<title>Profile</title>
-{% endblock title %}
-
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/users/profile_home.css' %}" type="text/css">
-<link rel="stylesheet" href="{% static 'css/users/profile.css' %}">
-<link rel="stylesheet" href="{% static 'css/users/login.css' %}" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
 
 <style>
-  select{
-    border: 1px solid #c9e6ff;
-  }
-  .phone-no{
-    display: flex;
-    padding-top: 0 !important;
-  }
-  .phone-no select{
-    width: 70px;
-    margin-right: 5px;
-  }
-  select.P-no{
-    width: fit-content;
-  }
-  #id_country{
-    padding: 0.36em;
-  }
+    select{
+        border: 1px solid #c9e6ff;
+      }
+      .phone-no{
+        display: flex;
+        padding-top: 0 !important;
+      }
+      .phone-no select{
+        width: 70px;
+        margin-right: 5px;
+      }
+      select.P-no{
+        width: fit-content;
+      }
+      .date-time{
+        display: flex;
+        justify-content: space-between;
+      }
+      .date-time p{
+        max-width: 115px;
+      }
+      .text-area p{
+        display: flex;
+        flex-direction: column;
+      }
 </style>
 {% endblock css %}
-
-{% block content %}
-<section class="s2 profile">
-  <div class=" profile-main  container-xl">
-    
-    {% include 'profile/profile_side_bar.html' %}
-    
-    <!--==========SECTION FOR EDITING USER PROFILE============-->
-    <section id="edit-profile" style="justify-items: center;">
-       
-      <div class="form-info">
-        <div class="form" style="margin-bottom: 10px;">
-          
-          <form method="post" style="padding-top: 0;">
-            <h6 class="text-center" style="margin-bottom: 0; color: rgb(117, 117, 228);">
-              Edit profile information here
-            </h6> 
+<div class="div2">
+    <div>
+        <h5 >+Book Appointment</h5>
+    </div>
+    <div class="form">
+        <form method="post">
             {% csrf_token %}
-            <div class=" user-form signup">
-              <!-- User form -->
-              {{ u_form.as_p }}
-              <div id="phone-no" style="padding-top: 10px;">
+            {{ form1.as_p }}
+            <div id="phone-no" style="padding-top: 10px;">
                 
                 <label for="id_phone_number">Phone number:</label>
                 
                 <p class="phone-no">
-                {{c_form.phone_number}}
+                 {{form2.phone}}
                 </p>
                 <script>
                   document.addEventListener("DOMContentLoaded", function () {
                       // Get the select element
-                      var select = document.getElementById("id_phone_number_0");
+                      var select = document.getElementById("id_phone_0");
           
                       // Initialize a variable to store the previous selected option text
                       var previousOptionText = "";
@@ -111,25 +99,18 @@
                   });
                 </script>
             </div>
-              <p>
-                <label for="id_country">Country:</label>
-                {{c_form.country}}
-              </p>
-              {{p_form.as_p}}
-              {{p_form.errors}}
+            <div class="date-time">
+                {{ form3.as_p }}
             </div>
-            <div class="profile-form signup">
-              {{desc_form.as_p}}
+            {% comment %} <input type="text" id="id_date" name="date">
+            <input type="text" id="id_time" name="time"> {% endcomment %}
+            <div class="text-area">
+            {{ form4.as_p }}
             </div>
-            <p class="full" style="padding-top: 6px;">
-              <button type="submit" value="register" style=" padding: 5px; width: 120px; margin-left: 40%; 
-              border-radius: 25px;
-              ">Update</button>
-            </p>
-          </form>
-        </div>
-      </div>
-    </section>
-  </div>
-</section>
-{% endblock content %}
+            <div class="form-group button">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+        
+    </div>
+</div>

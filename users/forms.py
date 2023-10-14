@@ -35,7 +35,7 @@ class UserUpdateForm(forms.ModelForm):
 class ProfileUpdateForm_c(forms.ModelForm):
     phone_number = PhoneNumberField(
             widget=PhoneNumberPrefixWidget(initial='KE', attrs={'class': 'p-no'})
-        )
+        ) 
     class Meta:
         model = Profile
         fields = ['phone_number','country']

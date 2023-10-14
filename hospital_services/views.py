@@ -7,106 +7,92 @@ from hospital_website.models.models import *
 from django.contrib.auth.models import User
 from twilio.rest import Client
 # from .forms import ContactForm
+from django.shortcuts import render, redirect
 from users.models import Profile  #Importing Profile from Users app to display info on about page
-from .forms import AppointmentForm
+from .forms import *
 from .models import *
-from hospital_website.models.information_footer_M import TopFooterHeading, TopFooterContent, SocialMediaLink
-    
 # Create your views here.
 def services(request):
-    form = AppointmentForm()
     service_categories = ServiceCategory.objects.all()
+    messages =''
     if request.method == 'POST':
-        form = AppointmentForm(request.POST)
-        if form.is_valid():
-            try:
-                # Create an instance of the Appointment model and save it
-                appointment = Appointment(
-                    name=form.cleaned_data['name'],
-                    email=form.cleaned_data['email'],
-                    phone=form.cleaned_data['phone'],
-                    day=form.cleaned_data['day'],
-                    time=form.cleaned_data['time'],
-                    department=form.cleaned_data['department'],
-                    message=form.cleaned_data['message']
-                )
-                appointment.save()
-                # Send WhatsApp message using Twilio
-                # send_whatsapp_message(appointment)
-                # You can add success messages or other actions here
-                success_message = "Appointment booked successfully."
-            except Exception as e:
-                # Handle exceptions (e.g., database errors)
-                error_message = f"An error occurred: {str(e)}"
+        form1 = AppointmentForm1(request.POST)
+        form2 = AppointmentForm2(request.POST)
+        form3 = AppointmentForm3(request.POST)
+        form4 = AppointmentForm4(request.POST)
+        print('time and date')
+        print(form1)
+        if form1.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid():
+            # Create an instance of the Appointment model and populate it with data
+            appointment = Appointment(
+                name=form1.cleaned_data['name'],
+                email=form1.cleaned_data['email'],
+                phone=form2.cleaned_data['phone'],
+                date=form3.cleaned_data['date'],
+                time=form3.cleaned_data['time'],
+                service=form4.cleaned_data['service'],
+                message=form4.cleaned_data['message']
+            )
+            appointment.save()
+            print(appointment)
+            
+            messages = "Appointment was succefully booked, we will get back to you in due time"
+            # Get the previous URL
+            previous_url = request.META.get('HTTP_REFERER')
+            # return to the previous Url if available
+            return redirect(previous_url)
     
-    # Query database
-    info = HomePage.objects.first()
-    # tech= main_page_service_details.objects.all()
-    side_info = ContactSidebarCompanyInfo.objects.first()
-    base = BaseData.objects.first()
-    top_footer_headings = TopFooterHeading.objects.all()
-    social_media_links = SocialMediaLink.objects.first()  # Assuming there's only one instance
-    
+    else:
+        form1 = AppointmentForm1()
+        form2 = AppointmentForm2()
+        form3 = AppointmentForm3()
+        form4 = AppointmentForm4()
     context = {
-        'top_footer_headings': top_footer_headings,
-        'social_media_links': social_media_links,
-        'form': form,
-        'base': base,
-        'info': info, 
+        'form1': form1,
+        'form2': form2,
+        'form3': form3,
+        'form4': form4,
+        'messages': messages, 
         'service_categories': service_categories,
-        'company_info': side_info,
         }
 
     # Render the response and send it back!
-    return render(request, 'services.html', context)
+    return render(request, 'services/services.html', context)
 
 def services_offered(request, slug):
     category = get_object_or_404(ServiceCategory, slug=slug)
     services = category.serviceoffered_set.all()
-    form = AppointmentForm()
+    form1 = AppointmentForm1()
+    form2 = AppointmentForm2()
+    form3 = AppointmentForm3()
+    form4 = AppointmentForm4()
 
     if request.method == 'POST':
-        form = AppointmentForm(request.POST)
-        if form.is_valid():
+        form1 = AppointmentForm1(request.POST)
+        form2 = AppointmentForm2(request.POST)
+        form3 = AppointmentForm3(request.POST)
+        form4 = AppointmentForm4(request.POST)
+        if form1.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid():
             try:
-                # Create an instance of the Appointment model and save it
-                appointment = Appointment(
-                    name=form.cleaned_data['name'],
-                    email=form.cleaned_data['email'],
-                    phone=form.cleaned_data['phone'],
-                    day=form.cleaned_data['day'],
-                    time=form.cleaned_data['time'],
-                    department=form.cleaned_data['department'],
-                    message=form.cleaned_data['message']
-                )
-                appointment.save()
-                # Send WhatsApp message using Twilio
-                # send_whatsapp_message(appointment)
-                # You can add success messages or other actions here
+                form1.save()
+                form2.save()
+                form3.save()
+                form4.save()
                 success_message = "Appointment booked successfully."
             except Exception as e:
                 # Handle exceptions (e.g., database errors)
                 error_message = f"An error occurred: {str(e)}"
     
-    # Query database
-    info = HomePage.objects.first()
-    side_info = ContactSidebarCompanyInfo.objects.first()
-    base = BaseData.objects.first()
-    top_footer_headings = TopFooterHeading.objects.all()
-    social_media_links = SocialMediaLink.objects.first()  # Assuming there's only one instance
-    
     context = {
-        'top_footer_headings': top_footer_headings,
-        'social_media_links': social_media_links,
-        'form': form,
-        'base': base,
-        'info': info, 
+        'form1': form1,
+        'form2': form2,
+        'form3': form3,
+        'form4': form4,
         'services': services,
-        'company_info': side_info,
         }
 
     # Render the response and send it back!
-    return render(request, 'services_offered.html', context)
+    return render(request, 'services/services_offered.html', context)
 
 
 

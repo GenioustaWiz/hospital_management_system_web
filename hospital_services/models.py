@@ -1,16 +1,16 @@
 from django.db import models
 from django.utils.text import slugify
+from phonenumber_field.modelfields import PhoneNumberField
 
 class Appointment(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
-    phone = models.CharField(max_length=20)
-    day = models.CharField(max_length=20)
-    time = models.CharField(max_length=20)
-    department = models.CharField(max_length=100)
+    phone = PhoneNumberField()
+    date = models.DateField()
+    time = models.TimeField()
+    service = models.ForeignKey('ServiceOffered', on_delete=models.CASCADE)
     message = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
-
 
 class ServiceCategory(models.Model):
     category_name = models.CharField(default='Dental Services Cat-', max_length=200, null=False)
@@ -46,3 +46,4 @@ class ServiceOffered(models.Model):
     def delete(self, *args, **kwargs):
         # Perform any necessary cleanup before deleting (if applicable)
         super(ServiceOffered, self).delete(*args, **kwargs)
+
