@@ -1,4 +1,5 @@
 {% extends 'maindashboard/dashboard_base.html' %}
+{% load admin_filters %}  <!-- Load the custom filter -->
 
 {% comment %} displays blog lists and category lists {% endcomment %}
 
@@ -9,7 +10,18 @@
 <link rel="stylesheet" href="{% static 'css/blogdashboard/dashboard_home.css' %}">
 <link rel="stylesheet" href="{% static 'css/blogdashboard/common.css' %}">
 <style>
- 
+    th{
+        padding-right: 20px;
+      }
+    @media screen and (max-width: 600px) {
+        table {
+            font-size: 11px;
+        }
+    }
+    tr:nth-child(even) {
+        background-color: #bac3d1a1;/* Set the background color for even rows */
+        color: #000;/* Set the text color for even rows (optional) */
+    }
 </style>
 {% endblock css %}
 
@@ -109,99 +121,42 @@
             </div>
         </div>
         {% comment %} END OF VISIT WEBSITE  {% endcomment %}
-        {% if recent_blogs %}
         {% comment %} RECENT ARTICLES {% endcomment %}
         <div class="recent-articles">
             <div id="r-a-heading">
-                <h2> Recent Published Articles
-
+                <h2> Recent Activities </h2>
             </div>
-            {% for blog in recent_blogs %}
+            {% if log_entries %}
             <div id="r-a-body">
-                <div class="r-a-body">
-                    <div class="img" >
-                        <img class="" src="{{ blog.image.url }}" alt="" height="80" width="130">
-                    </div>
-                    <div style="padding-left: 10px;">
-                        <div>
-                            <ol class="post-arthur">
-                                <li><h6>Title:</h6> <span>{{blog.title}}</span> </li>
-                                <li><h6>Arthur<i>:</i></h6> <span>{{ blog.author.username }}</span> </li>
-                            </ol>
-
-                        </div>
-                        <div class="meta mb-1">
-                            <span class="date">
-                            <b>Published:</b> 
-                            <i>{% comment %} {{ blog.date_published|timesince|slice:":9"}} ago {% endcomment %}
-                                {{ blog.date_published|timesince|slice:":20"|add:" ago" }}
-                            </i>
-                            </span>
-                            <span class="date">
-                                <b>Status:</b> 
-                                <i>
-                                    {{ blog.status }}
-                                </i>
-                            </span>
-                            {% comment %} if rected is True {% endcomment %}
-                            {% if blog.rejected %} 
-                                <span class="text-warning date">Rejected <i class="bi bi-x-octagon"></i></span>
-                                {% comment %} if approved is True {% endcomment %}
-                            {% elif blog.approved %}
-                                <span class="text-success date">Approved <i class="bi bi-check2-square"></i></span>
-                                {% comment %} if none of the above is true {% endcomment %}
-                            {% else %}
-                                <span class="text-info date">Not verified <i class="bi bi-app-indicator"></i></span>
-                                {% comment %} end {% endcomment %}
-                            {% endif %}
-                            <span class="time">{{ blog.word_count }} words</span>
-                            <span class="time">{{ blog.read_time }} read</span>
-                            <span class="comment">{{ blog.formatted_views_count }} views</span>
-                            <span class="comment"><a href="#">{{ blog.comment_count }} comments</a></span>
-                            {% comment %} dropdown {% endcomment %}
-                            <div class="dropdown time">
-                                <button class="btn dropdown-toggle" type="button" id="time-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-chevron-down dropdown-btn"></i>
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="time-dropdown">
-                                    <li>
-                                        <a class="dropdown-item confirm-btn" 
-                                        data-title="Are you sure you want to edit {{blog.title}}?"
-                                        data-id = "edit"
-                                        {% comment %} data-message="Once you edit it, original content will be lost."  {% endcomment %}
-                                        data-url="{% url 'blog:blog_edit' slug=blog.slug %}" 
-                                        data-button="Edit"
-                                        data-bs-toggle="modal">
-                                        Edit Article
-                                        </a>
-                                    </li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li>
-                                    <a class="dropdown-item confirm-btn" 
-                                    data-title="Are you sure you want to Hide {{blog.title}}?"
-                                    data-id="hide"
-                                    {% comment %} data-message="Once you hide it will not be available for other."  {% endcomment %}
-                                    data-url="{% url 'blog:blog_hide' slug=blog.slug %}" 
-                                    data-button="Hide"
-                                    data-bs-toggle="modal">
-                                    Hide Article
-                                    </a>
-                                </li>
-                                </ul>
-                            </div>
-                            {% comment %}end of dropdown {% endcomment %}
-                        </div>
-                        <a class="r-a-more-link" href="{% url 'blog:das_article_detail' slug=blog.slug %}">View details →</a>
-                        <hr class="solid" style="height: 6px;margin: 0.5rem 0;"> <!-- Solid divider -->
-                    </div>
-                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Action Time</th>
+                            <th>User</th>
+                            <th>Action</th>
+                            <th>Content Type</th>
+                            <th>Object</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for log_entry in log_entries %}
+                            <tr>
+                                <td>{{ log_entry.action_time }}</td>
+                                <td>{{ log_entry.user }}</td>
+                                <td>{{ log_entry.action_flag|display_action }}</td>
+                                <td>{{ log_entry.content_type }}</td>
+                                <td>{{ log_entry.object_repr }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
-            {% empty %}
+            {% else %}
             <div>No blogs published yet.</div>
-            {% endfor %}
+            {% endif %}
         </div>
         {% comment %} END OF RECENT ARTICLES {% endcomment %}
-        {% endif %}
+        
     {% comment %} |||||||||END COMMON FOR MANY PAGES|||||||||| {% endcomment %}
 </section>
 {% comment %} <!-- end Home --> {% endcomment %}
