@@ -76,6 +76,7 @@ class ContactSidebarCompanyInfo(models.Model):
     phone_number = PhoneNumberField()
     email = models.EmailField(null=False)
     address = models.CharField(max_length=200, null=False)
+    whatsapp = models.URLField(default="https://wa.me/enternumber")
 
     def save(self, *args, **kwargs):
         if ContactSidebarCompanyInfo.objects.count() >= 1:
@@ -84,9 +85,10 @@ class ContactSidebarCompanyInfo(models.Model):
             existing_info.phone_number = self.phone_number
             existing_info.email = self.email
             existing_info.address = self.address
+            existing_info.whatsapp = self.whatsapp
             ContactSidebarCompanyInfo.objects.filter(pk=existing_info.pk).update(
                 name=self.name, phone_number=self.phone_number,
-                email=self.email,address=self.address,
+                email=self.email,address=self.address,whatsapp=self.whatsapp,
             )
         else:
             super(ContactSidebarCompanyInfo, self).save(*args, **kwargs)
