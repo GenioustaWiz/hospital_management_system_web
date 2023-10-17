@@ -45,6 +45,10 @@ $(document).ready(function() {
                             '<li>' + data.contact_info.email + '</li>' +
                             '<li>' + data.contact_info.phone_number + '</li>'
                         );
+                        if (data.contact_info.whatsapp_url) {
+                            // Update the href of the #whatsapp-url link
+                            $('#whatsapp-url').attr('href', data.contact_info.whatsapp_url);
+                        }
                     }
 
                     if (data.social_media_links) {

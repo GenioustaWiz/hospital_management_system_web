@@ -4,6 +4,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
 
 <style>
+    p{
+        margin-bottom: 5px !important;
+    }
     select{
         border: 1px solid #c9e6ff;
       }
@@ -28,6 +31,9 @@
       .text-area p{
         display: flex;
         flex-direction: column;
+      }
+      textarea{
+        height: 70px;
       }
 </style>
 {% endblock css %}
@@ -104,13 +110,16 @@
             </div>
             {% comment %} <input type="text" id="id_date" name="date">
             <input type="text" id="id_time" name="time"> {% endcomment %}
-            <div class="text-area">
+            <div class="text-area" style="padding-top: 10px;">
             {{ form4.as_p }}
             </div>
             <div class="form-group button">
                 <button type="submit">Submit</button>
             </div>
+            <p class="text-center" style="margin-bottom: 0 !important;">or</p>
+            <div class="form-group button" style="margin-top: 5px;">
+              <a href="" id='whatsapp-url' target="_blank" style="font-weight: 700;">Text on Whatsapp</a>
+            </div>
         </form>
-        
     </div>
 </div>

@@ -42,11 +42,11 @@ section{
   }
   
   IDEA:  FORM STYLES */
-  .contact form{
+  /* .contact form{
     display:grid;
     grid-template-columns: 1fr 1fr;
     grid-gap:20px;
-  }
+  } */
   .contact form label{
     display: block;
   }
@@ -221,5 +221,10 @@ section{
     }
     .company-infor h3, .company-info ul, .band{
       text-align: center;
+    }
+    .contact form{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap:20px;
     }
   }

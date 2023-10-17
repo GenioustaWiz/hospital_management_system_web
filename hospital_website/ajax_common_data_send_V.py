@@ -16,7 +16,8 @@ def get_common_data(request):
         data['contact_info'] = {
             'address': contact_info.address,
             'email': contact_info.email,
-            'phone_number': str(contact_info.phone_number)  # Convert PhoneNumber to string
+            'phone_number': str(contact_info.phone_number),  # Convert PhoneNumber to string
+            'whatsapp_url': contact_info.whatsapp,
         }
 
     if base_data:
@@ -47,7 +48,7 @@ def get_common_data(request):
         data['social_media_links'] = {
             'facebook_link': social_media_links.facebook_link,
             'twitter_link': social_media_links.twitter_link,
-            'whatsapp_link': social_media_links.whatsapp_link,
+            'whatsapp_link': contact_info.whatsapp,
             'linkedIn_link': social_media_links.linkedIn_link,
         }
 
