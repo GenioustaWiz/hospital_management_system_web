@@ -30,6 +30,9 @@ ul{
     width: fit-content;
     /* align-items: center; */
 }
+#f-socialmedia .heading, #f-contact .heading {
+    font-size: calc(1.275rem + .3vw) !important;
+}
 #f-socialmedia ul{
     display: flex;
     /* justify-content: space-around; */

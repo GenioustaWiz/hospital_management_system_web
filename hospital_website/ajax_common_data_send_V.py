@@ -46,15 +46,15 @@ def get_common_data(request):
 
     if social_media_links:
         data['social_media_links'] = {
-            'facebook_link': social_media_links.facebook_link,
-            'twitter_link': social_media_links.twitter_link,
-            'whatsapp_link': contact_info.whatsapp,
-            'linkedIn_link': social_media_links.linkedIn_link,
+            'facebook': social_media_links.facebook_link,
+            'twitter': social_media_links.twitter_link,
+            'whatsapp': contact_info.whatsapp,
+            'linkedin': social_media_links.linkedIn_link,
         }
 
     if data:
         # print('date================')
-        # print(data)
+        # print(data)  
         return JsonResponse(data)
     else:
         return JsonResponse({'error': 'information not found.'})

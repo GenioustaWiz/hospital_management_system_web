@@ -8,7 +8,7 @@ $(document).ready(function() {
             type: 'GET',
             dataType: 'json',
             success: function(data) {
-                // console.log(data)
+                console.log(data)
                 if ('error' in data) {
                     console.error(data.error);
                 } else {
@@ -50,14 +50,34 @@ $(document).ready(function() {
                             $('#whatsapp-url').attr('href', data.contact_info.whatsapp_url);
                         }
                     }
-
                     if (data.social_media_links) {
                         $('#f-socialmedia h4').text('Social Media');
-                        $('#f-socialmedia ul li a:nth-child(1)').attr('href', data.social_media_links.facebook_link);
-                        $('#f-socialmedia ul li a:nth-child(2)').attr('href', data.social_media_links.twitter_link);
-                        $('#f-socialmedia ul li a:nth-child(3)').attr('href', data.social_media_links.whatsapp_link);
-                        $('#f-socialmedia ul li a:nth-child(4)').attr('href', data.social_media_links.linkedIn_link);
+                    
+                        const socialMediaLinks = data.social_media_links;
+                    
+                        const $ul = $('#f-socialmedia ul');
+                        $ul.empty(); // Clear the existing list items
+                    
+                        // Create and append list items for each social media link that is not empty
+                        $.each(socialMediaLinks, function (platform, link) {
+                            if (link) { //check list is not empty, then procceed
+                                const $li = $('<li></li>');
+                                const $a = $('<a></a>', {
+                                    href: link,
+                                    style: "font-size: 14px"
+                                });
+                                const $icon = $('<i></i>', {
+                                    class: "fa-brands " + "fa-" + platform,
+                                    style: "font-size: 20px"
+                                });
+                    
+                                $a.append($icon);
+                                $li.append($a);
+                                $ul.append($li);
+                            }
+                        });
                     }
+                    
                     // Display base_data information
                     if (data.base_data) {
                         // Display logo image
