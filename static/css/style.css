@@ -41,6 +41,7 @@ body{
   border-radius: 50px;
   cursor: pointer;
   display: none;
+  z-index: 4;
 }
 .scroll-button:hover {
   background-color: azure;
