@@ -31,14 +31,31 @@ body{
 .s2{
   height: inherit;
 }
-/* @media (max-width: 1053px){
-  main{
-    height: 0;
-  }
-} */
-/* @media (max-width: 900px){
-  main{
-    height: 0;
-  }
-  
-} */
+.scroll-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #0077b6;
+  color: #ffffff;
+  padding: 1px 6px;
+  border-radius: 50px;
+  cursor: pointer;
+  display: none;
+}
+.scroll-button:hover {
+  background-color: azure;
+}
+.scroll-button:hover a{
+  color: #0077b6;
+}
+
+.scroll-button a {
+  text-decoration: none;
+  color: #ffffff;
+}
+.scroll-button a i {
+  font-size: 20px !important;
+}
+#scroll-to-top.show-button {
+  display: block;
+}

@@ -8,7 +8,7 @@ $(document).ready(function() {
             type: 'GET',
             dataType: 'json',
             success: function(data) {
-                console.log(data)
+                // console.log(data)
                 if ('error' in data) {
                     console.error(data.error);
                 } else {

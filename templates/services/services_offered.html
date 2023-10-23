@@ -52,41 +52,6 @@
             </div>
         {% endfor %}
     </div>
-    <div class="div2">
-            <div>
-                <h5 >+Book Appointment</h5>
-            </div>
-            <div class="form">
-                <form method="post">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        {{ form.name }}
-                    </div>
-                    <div class="form-group">
-                        {{ form.email }}
-                    </div>
-                    <div class="form-group">
-                        {{ form.phone }}
-                    </div>
-                    <div style="display: flex;">
-                        <div class="form-group" style="width: 50%;margin-right: 5px;">
-                            {{ form.day }}
-                        </div>
-                        <div class="form-group" style="width: 50%;margin-left: 5px;">
-                            {{ form.time }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        {{ form.department }}
-                    </div>
-                    <div class="form-group">
-                        {{ form.message }}
-                    </div>
-                    <div class="form-group button">
-                        <button type="submit">Submit</button>
-                    </div>
-                </form>
-            </div>
-    </div>
+    {% include 'services/appointments.html' %}
 </section>
 {% endblock content %}

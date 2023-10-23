@@ -1,11 +1,9 @@
 
-{% extends 'base.html' %}
 {% load static %}
 
-
-{% block title %} 
+{% comment %} {% block title %} 
   Services
-{% endblock title %}
+{% endblock title %} {% endcomment %}
 
 {% block css %}
 {{ form.media }}
@@ -42,8 +40,7 @@
   </style>
 {% endblock css %}
 
-{% block content %}
-<section class="services"> <!-- s2 -->
+<section class="services " id="SERVICES"> <!-- s2 -->
     <div class="div1">
         {% for category in service_categories %}
         <div class="service--">
@@ -63,4 +60,3 @@
     </div>
     {% include 'services/appointments.html' %}  
 </section>
-{% endblock content %}

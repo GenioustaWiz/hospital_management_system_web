@@ -23,14 +23,15 @@ static/
   height: var(--header-height) ;
   background: linear-gradient(to right, #2d80c5 0%, #83ddca 100%);
   display: grid; /* IDEA: so that we can fit other stuff in the header. e.g logo */
-  grid-template-columns: repeat(12, 1fr);
+  /* grid-template-columns: repeat(12, 1fr); */
+  grid-template-columns: auto 2fr auto;
   gap: 12px;
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
   z-index: 1000;
 }
 .header__button{
-  grid-column: 1 ;
+  /* grid-column: 1 ; */
   width: var(--header-height);
   flex-shrink: 0; /* IDEA: Making sure it will never be shrinked down by elements from the right */
   background: none;
@@ -44,7 +45,7 @@ static/
   width: 17px;
 }
 #logo{
-  grid-column: 6;
+  /* grid-column: 6; */
   margin: 0 auto;
   font-family: "Open Sans" sans-serif;
   font-size: 30px;
@@ -61,6 +62,10 @@ static/
 .logo span{
   color: #0474bc
 }
+#navbar_d{
+  display: flex;
+  justify-content: flex-end;
+}
 .dashboard .dropdown-menu{
   background: linear-gradient(to right, #2d80c5 0%, #83ddca 100%);
 }
@@ -71,7 +76,7 @@ static/
   color: #0d6efd !important;
 }
 .user{
-  grid-column: 9;
+  /* grid-column: 9; */
   /* padding-right: 10px; */
   display: flex;
   align-items: center;
@@ -79,6 +84,7 @@ static/
 .user a{
   color: azure;
   font-weight: 600;
+  text-decoration: none;
 }
 .user a:hover{
   color: #0d6efd !important;
@@ -172,7 +178,7 @@ static/
   }
   .header{
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    /* grid-template-columns: repeat(12, 1fr); */
     gap: 12px;
     justify-content: start;
     align-items: center;
@@ -185,14 +191,14 @@ static/
     -moz-box-shadow: -1px 4px 5px 0px rgba(209, 205, 209, 1);
     box-shadow: -1px 4px 5px 0px rgba(209, 205, 209, 1);
   }
-  #logo{
+  /* #logo{
     grid-column: 1 /  span 2;
   }
   #navbar_d{
-    grid-column: 4 / span 5;
-  }
+    grid-column: 5 / span 5;
+  } */
   .user{
-    grid-column: 11/ span 2;
+    /* grid-column: 11/ span 2; */
     display: inline-flex;
     justify-content: right;
   }
@@ -210,17 +216,19 @@ static/
   }
   #links{
     display:grid;
-    padding-top: 10px;
+    padding-right: 20px;
     align-items: center;
     grid-auto-flow: column;
     grid-gap: 1em;
     width: fit-content;
+    font-size: 18px !important;
+    font-weight: 700;
     
   }
   #links a{
     color: azure;
-    font-family: "Open Sans" sans-serif;
-    font-size: 18px;
+    font-size: 18px !important;
+    font-weight: 500;
     text-decoration:  none;
   }
   #links a:hover{

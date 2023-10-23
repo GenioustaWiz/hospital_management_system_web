@@ -9,7 +9,7 @@
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/home_page.css' %}" type="text/css">
 <style>
-  #description-page {
+  .description--page {
     /*background-image: url('{{ background_image_url }}'); For dynamic BG image*/ 
     background-image: url("{% static 'images/hospital-img-4-backgrnd.jpg' %}");
     background-size: cover; /* Scale the background image to cover the entire container */
@@ -20,7 +20,7 @@
   }
   
   /*fOR ENFORCING BLUR ON THE IMAGE*/
-  .description-page::before {
+  .description--page::before {
     content: "";
     position: absolute;
     top: 0;
@@ -39,7 +39,7 @@
 
 {% block content %}
 <section class=" description"> <!-- s2 -->
-    <div id="description-page" class="description-page">
+    <div id="description-page" class="description-page description--page">
         <div class="item2 des-p text-center container">
             <div>
               <h1 id="typewriter"> 
@@ -123,5 +123,10 @@
          </p>
       </div>
     </div> 
-</section>
+</section> 
+
+{% include 'home_page_includes/about.html' %} 
+
+{% include 'home_page_includes/services.html' %} 
+
 {% endblock content %}

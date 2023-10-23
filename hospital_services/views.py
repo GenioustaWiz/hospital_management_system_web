@@ -48,16 +48,17 @@ def services(request):
         form3 = AppointmentForm3()
         form4 = AppointmentForm4()
     context = {
+        'service_categories': service_categories,
         'form1': form1,
         'form2': form2,
         'form3': form3,
         'form4': form4,
         'messages': messages, 
-        'service_categories': service_categories,
+        
         }
 
     # Render the response and send it back!
-    return render(request, 'services/services.html', context)
+    return render(request, 'home_page_includes/services.html', context)
 
 def services_offered(request, slug):
     category = get_object_or_404(ServiceCategory, slug=slug)

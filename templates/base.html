@@ -79,8 +79,8 @@
         <div id="navbar_d">
             <div id="links">
                 <a href="{% url 'main_index' %}">Home</a>
-                <a href="{% url 'about' %}">About</a>
-                <a href="{% url 'services' %}">Services</a>
+                <a href="#ABOUT">About</a>
+                <a href="#SERVICES">Services</a>
                 <a href="{% url 'blog:blog_home' %}">News</a>
                 {% comment %} <a href="{% url 'project_list' %}">Projects</a> {% endcomment %}
                 <a href="{% url 'contact' %}">Contact</a>
@@ -129,11 +129,11 @@
                 <i class="fa fa-house"></i>
                 Home
             </a>
-            <a href="{% url 'about' %}" class="nav__link ">
+            <a href="#ABOUT" class="nav__link ">
                 <i class="fa fa-question"></i>
                 About
             </a>
-            <a href="{% url 'services' %}" class="nav__link">
+            <a href="#SERVICES" class="nav__link">
                 <i class="fa-solid fa-truck-fast"></i>
                 Services
             </a>
@@ -211,6 +211,36 @@
             </div>
         </footer>
         <!-- ============== end of FOOTER AJAX GET DATA ======================-->
+        <!-- SCROLL TO THE TOP OF PAGE-->
+        <div id="scroll-to-top" class="scroll-button">
+            <a href="#top">
+                <i class="bi bi-arrow-up-circle-fill"></i>
+            </a>
+            <script>
+                // Get a reference to the scroll-to-top button
+                const scrollButton = document.getElementById('scroll-to-top');
+              
+                // Listen for scroll events
+                window.addEventListener('scroll', () => {
+                  // When the user has scrolled down 100 pixels, show the button
+                  if (window.scrollY > 100) {
+                    scrollButton.classList.add('show-button');
+                  } else {
+                    scrollButton.classList.remove('show-button');
+                  }
+                });
+              
+                // Smooth scroll to the top when the button is clicked
+                scrollButton.addEventListener('click', () => {
+                  window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth' // Smooth scrolling behavior
+                  });
+                });
+            </script>
+              
+        </div>
+        <!-- END OFSCROLL TO THE TOP OF PAGE-->
         <footer class="mt3 text-center footer">
              Copyright © {{base.footer}}  <!--2021 Teknics Technologies -->
         </footer>
@@ -219,6 +249,7 @@
     <script src="{% static 'js/loading.js' %}"></script>
     <script src="{% static 'js/main.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/ajax_common_data_get.js' %}"></script>
+    <script src="{% static 'js/url_State.js' %}"></script>
     <script src="{% static 'js/Text_Resize.js' %}"></script>
     <script src="{% static 'js/visitors_counter.js' %}"></script>
     {% comment %} <script src="{% static 'js/theme.js' %}"></script> {% endcomment %}
