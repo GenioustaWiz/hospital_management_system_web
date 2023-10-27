@@ -35,13 +35,10 @@ INSTALLED_APPS = [
     'users.apps.AccountsConfig',
     'hospital_website',
     'hospital_management',
-    'phonenumber_field',
-    'django_countries',
     'contact_us',
     'hospital_services',
     'hospital_blog',
     'visitors_counter',
-    'django_cleanup', # overrides older images
     """"""
     # for changing adm,in app  side..pip install django-admin-soft-dashboard
     # 'admin_soft.apps.AdminSoftDashboardConfig',
@@ -60,6 +57,9 @@ INSTALLED_APPS = [
     'taggit',
     'debug_toolbar',
     'tinymce',
+    'phonenumber_field',
+    'django_countries',
+    'django_cleanup', # overrides older images
 ]
 
 MIDDLEWARE = [

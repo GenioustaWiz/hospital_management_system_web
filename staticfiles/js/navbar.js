@@ -1,10 +1,7 @@
-// JS FOR removing Preload anfter loading
+
 // LISTENING TO MENU BUTTON CLICKS TO OPEN NAVBAR
 // LISTENING TO OVERLAY CLICKS TO CLOSE NAVBAR
 
-window.addEventListener("load", () => {
-  document.body.classList.remove("preload");
-})
 document.addEventListener("DOMContentLoaded", () => {
   const nav = document.querySelector(".nav");
 
@@ -13,5 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   document.querySelector(".nav__overlay").addEventListener("click", () =>{
       nav.classList.remove("nav--open");
+  });
+  document.querySelector(".nav__link").addEventListener("click", () =>{
+    nav.classList.remove("nav--open");
   });
 });

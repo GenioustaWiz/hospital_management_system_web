@@ -65,13 +65,14 @@
           </div> 
         </div>
         {% endfor %}
-        <div class="edit-icon add-icon">
-          <a href="{% url 'about_list_edit' %}">
-            <i class="bi bi-database-fill-add"></i>
-          </a>
-        </div>
+        
         {% else %}
-            <p> No Imformation Available </p>
+          <div class="edit-icon add-icon">
+            <a href="{% url 'about_list_edit' %}">
+              <i class="bi bi-database-fill-add"></i>
+            </a>
+          </div>
+          <p> No Imformation Available </p>
         {% endif %}
       </div>           
     </div>

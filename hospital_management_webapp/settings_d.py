@@ -35,7 +35,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'users.apps.AccountsConfig',
     'hospital_website',
-    'hospital_management',
+    'hospital_management', 
     'phonenumber_field',
     'django_countries',
     'contact_us',
